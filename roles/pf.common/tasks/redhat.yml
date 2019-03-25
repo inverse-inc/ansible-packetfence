@@ -1,0 +1,30 @@
+---
+# equals to yum update -y
+- name: Make sure system is up to date
+  yum:
+    name: '*'
+    state: latest
+
+- name: install selinux package on hosts for next task
+  yum:
+    name:
+      - libselinux-python
+
+- name: Ensure SELinux is disabled
+  selinux:
+    state: disabled
+  #notify: print reboot warning
+
+- name: Ensure NOZEROCONF is set to yes
+  lineinfile:
+    path: /etc/sysconfig/network
+    regexp: '^NOZEROCONF='
+    line: 'NOZEROCONF=yes'
+
+# Stop firewalld and disabled at reboot
+- name: Ensure firewalld is disabled
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+

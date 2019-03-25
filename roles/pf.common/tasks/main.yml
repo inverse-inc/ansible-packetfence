@@ -1,0 +1,30 @@
+---
+# tasks file for pf.common
+# - name: import distribution specific variables
+#   include_vars: "{{ ansible_os_family|lower }}.yml"
+
+# include in place of import (dynamic evaluation)
+- name: include distribution specific tasks
+  include_tasks: "{{ ansible_os_family|lower }}.yml"
+
+# Stop NetworkManager and disabled at reboot
+# could be replace by echo in NetworkManager.conf
+- name: Ensure NetworkManager is disabled
+  service:
+    name: NetworkManager
+    state: stopped
+    enabled: no
+
+- name: Ensure management IP is in /etc/hosts
+  lineinfile:
+    path: /etc/hosts
+    regexp: '^{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
+    line: '{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
+
+- name: Get /etc/hosts contents
+  command: cat /etc/hosts
+  register: hosts
+
+- name: Print /etc/hosts
+  debug:
+    msg: "{{ hosts.stdout_lines }}"

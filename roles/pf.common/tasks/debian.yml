@@ -1,0 +1,6 @@
+---
+# equals to yum update -y
+- name: Make sure system is up to date
+  apt:
+    name: '*'
+    state: latest
