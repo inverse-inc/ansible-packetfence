@@ -1,0 +1,83 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Require YAML module
+require 'yaml'
+ 
+# Read YAML file with box details
+inventory = YAML.load_file('../inventory/hosts')
+
+Vagrant.configure("2") do |cluster|
+
+  ## Global settings for the cluster
+
+  # disable synced folder for nodes
+  # to avoid guest additions installation (safe time)
+  cluster.vm.synced_folder ".", "/vagrant", disabled: true
+
+  # if vagrant-vbguest plugin install don't try to install VBox additions
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    cluster.vbguest.no_install = true
+  end
+
+  # use same private key on all machines
+  cluster.ssh.insert_key = false
+  
+  # disable default rule
+  cluster.vm.network "forwarded_port", guest: 22, host: 2222, id: "ssh", disabled: true
+
+  # provisionners
+  # Sync timezone with host
+  cluster.vm.provision "shell", inline: "sudo rm /etc/localtime && sudo ln -s /usr/share/zoneinfo/#{inventory['all']['vars']['tz']} /etc/localtime", run: "always"
+
+  # Allow SSH as root with insecure_private_key
+  cluster.vm.provision "ssh", type:"shell", inline: "sudo mkdir -p /root/.ssh && sudo cp /home/vagrant/.ssh/authorized_keys /root/.ssh/"
+
+  # Provision with ansible
+  cluster.vm.provision "ansible" do |ansible|
+    ansible.playbook = "../vagrant.yml"
+    ansible.inventory_path = "../inventory"
+    ansible.become = true
+    ansible.extra_vars = "../extra_config.yml"
+    ansible.tags = ['all', 'vagrant']
+    # only for debug
+    #ansible.verbose = "-v"
+  end
+
+  # maintenance provisioner
+  # run on demand, ignore monit errors
+  cluster.vm.provision "bootstrap", type:"ansible", run: "never" do |maint|
+    maint.playbook = "../changes/maintenance.yml"
+    maint.become = true
+    maint.skip_tags = "monit"
+  end
+
+  # loop on host(s) in standalones group in inventory to create VM(s)  
+  inventory['all']['children']['standalones']['hosts'].each do |server,details|
+    # don't start automatically virtual machines
+    cluster.vm.define server, autostart: false do |srv|
+      srv.vm.box = details['box']
+      srv.vm.hostname = server
+
+      # set new rule for webadmin
+      srv.vm.network "forwarded_port", guest: 1443, host: details['admin_port'], host_ip: "127.0.0.1", auto_correct: true
+
+      # set new rule for ssh
+      srv.vm.network "forwarded_port", guest: 22, host: details['ssh_port'], host_ip: "127.0.0.1", auto_correct: true
+
+      # mgmt
+      srv.vm.network "private_network", ip: details['mgmt_ip']
+      
+      # registration
+      srv.vm.network "private_network", ip: details['reg_ip']
+
+      # isolation
+      srv.vm.network "private_network", ip: details['iso_ip']
+
+      srv.vm.provider "virtualbox" do |v|
+        v.cpus = 2
+        v.memory = "2048"
+      end
+    end
+  end
+end

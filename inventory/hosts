@@ -1,0 +1,101 @@
+---
+# inventory file use by Vagrantfile
+# to create VMs
+# also use as a Ansible inventory file to provision VMs
+all:
+  children:
+    standalones:
+      hosts:
+        pfcendev:
+          box: centos/7
+          admin_port: 1443
+          ssh_port: 2200
+          mgmt_ip: 10.0.0.10
+          reg_ip: 192.168.99.10
+          iso_ip: 192.168.100.10
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+        pfcenstable:
+          box: centos/7
+          admin_port: 1543
+          ssh_port: 2300
+          mgmt_ip: 10.0.0.11
+          reg_ip: 192.168.99.110
+          iso_ip: 192.168.100.110
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+        pfdeb8dev:
+          box: debian/jessie64
+          admin_port: 1643
+          ssh_port: 2400
+          mgmt_ip: 10.0.0.12
+          reg_ip: 192.168.101.10
+          iso_ip: 192.168.102.10
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+        pfdeb8stable:
+          box: debian/jessie64
+          admin_port: 1743
+          ssh_port: 2500
+          mgmt_ip: 10.0.0.13
+          reg_ip: 192.168.101.110
+          iso_ip: 192.168.102.110
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"        
+        pfdeb9dev:
+          box: debian/stretch64
+          admin_port: 1843
+          ssh_port: 2600
+          mgmt_ip: 10.0.0.14
+          reg_ip: 192.168.103.10
+          iso_ip: 192.168.104.10
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+        pfdeb9stable:
+          box: debian/stretch64
+          admin_port: 1943
+          ssh_port: 2700
+          mgmt_ip: 10.0.0.15
+          reg_ip: 192.168.103.110
+          iso_ip: 192.168.104.110
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"  
+    clusters:
+      hosts:
+        pfcen1:
+          box: centos/7
+          admin_port: 1441
+          ssh_port: 2201
+          mgmt_ip: 10.1.0.11
+          reg_ip: 192.168.99.11
+          iso_ip: 192.168.100.11
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+        pfcen2:
+          box: centos/7
+          admin_port: 1442
+          ssh_port: 2202
+          mgmt_ip: 10.1.0.12
+          reg_ip: 192.168.99.12
+          iso_ip: 192.168.100.12
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+        pfcen3:
+          box: centos/7
+          admin_port: 1443
+          ssh_port: 2203
+          mgmt_ip: 10.1.0.13
+          reg_ip: 192.168.99.13
+          iso_ip: 192.168.100.13
+          ansible_host: 127.0.0.1
+          ansible_port: "{{ ssh_port }}"
+    masters:
+      hosts:
+        pfcen1:
+    slaves:
+      hosts:
+        pfcen2:
+        pfcen3:
+          
+  vars:
+    tz: Europe/Paris

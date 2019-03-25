@@ -1,0 +1,17 @@
+# specific to vagrant
+tz: Europe/Paris
+centos:
+  repo: packetfence-devel
+deb:
+  repos:
+    - debian
+    - debian-devel
+
+ansible_user: vagrant
+ansible_ssh_private_key_file: ~/.vagrant.d/insecure_private_key
+
+# # configurator
+# conf_pf_domain: example.lan
+# conf_pf_alerting: foo@example.lan
+# conf_pf_db_password: inverse
+
