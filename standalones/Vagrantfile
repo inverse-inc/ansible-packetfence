@@ -35,7 +35,7 @@ Vagrant.configure("2") do |cluster|
 
   # Provision with ansible
   cluster.vm.provision "ansible" do |ansible|
-    ansible.playbook = "../vagrant.yml"
+    ansible.playbook = "../site.yml"
     ansible.inventory_path = "../inventory"
     ansible.become = true
     ansible.extra_vars = "../extra_config.yml"
