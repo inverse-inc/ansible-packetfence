@@ -1,0 +1,5 @@
+---
+- name: pf.common test suite
+  hosts: test-kitchen
+  roles:
+    - pf.common
