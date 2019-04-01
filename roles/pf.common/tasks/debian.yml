@@ -1,8 +1,10 @@
 ---
 # equals to yum update -y
-- name: install aptitude on hosts for next task and update cache
+- name: install aptitude and apt-utils on hosts for next task and update cache
   apt:
-    name: aptitude
+    name:
+      - aptitude
+      - apt-utils
     state: present
     update_cache: yes
     
