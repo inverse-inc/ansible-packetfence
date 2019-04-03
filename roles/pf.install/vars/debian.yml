@@ -1,0 +1,5 @@
+---
+deb_inverse_key_id: FE9E84327B18FF82B0378B6719CDA6A9810273C4
+deb_sources_dir: /etc/apt/sources.list.d
+deb_pf_packages:
+  - packetfence

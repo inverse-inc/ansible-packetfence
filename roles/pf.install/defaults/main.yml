@@ -1,0 +1,9 @@
+---
+# defaults file for install-pf
+centos:
+  repo: packetfence
+
+# list, see packetfence.list.j2
+deb:
+  repos:
+    - debian

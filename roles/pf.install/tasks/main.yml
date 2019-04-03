@@ -1,0 +1,21 @@
+---
+# tasks file for pf.install
+- name: import distribution specific variables
+  include_vars: "{{ ansible_os_family|lower }}.yml"
+
+# include in place of import (dynamic evaluation)
+- name: include distribution specific tasks
+  include_tasks: "{{ ansible_os_family|lower }}.yml"
+
+# only if configurator step has been finished
+# this is to update simply devel machines
+- name: restart pf services
+  command: "{{ pf_pfcmd }} service pf restart"
+  args:
+    creates: "{{ pf_currently_at_file }}"
+  register: pfcmd_result
+
+- name: print result of pfcmd
+  debug:
+    msg: "{{ pfcmd_result.stdout_lines }}"
+    verbosity: 2
