@@ -14,7 +14,7 @@
 - name: ensure SELinux is disabled
   selinux:
     state: disabled
-  #notify: print reboot warning
+  notify: print reboot warning
   when: ansible_selinux['status'] == 'enabled'
 
 - name: ensure /etc/sysconfig/network exists
