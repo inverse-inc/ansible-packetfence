@@ -19,3 +19,4 @@
   debug:
     msg: "{{ pfcmd_result.stdout_lines }}"
     verbosity: 2
+  when: pfcmd_result is defined
