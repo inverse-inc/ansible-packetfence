@@ -1,6 +1,13 @@
 ---
-- hosts: all
+- hosts: standalones
+  name: install pf on standalones
   become: True
   roles:
-    - role: pf.common
-      
+    - role: pf.install
+
+# - hosts: clusters
+#   name: install pf on clusters
+#   become: True
+#   roles:
+#     - role: pf.cluster
+
