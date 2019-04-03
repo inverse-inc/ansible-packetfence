@@ -51,3 +51,10 @@ verifier:
 suites:
   # use test/integration/{suite_name}/default.yml playbook by default
   - name: pf.common
+  - name: pf.install
+    # use local profile
+    verifier:
+      inspec_tests:
+        - name: pf-install profile
+          path: test/integration/pf.install/pf-install/
+      
