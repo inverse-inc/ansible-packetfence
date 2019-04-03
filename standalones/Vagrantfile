@@ -38,8 +38,8 @@ Vagrant.configure("2") do |cluster|
     ansible.playbook = "../site.yml"
     ansible.inventory_path = "../inventory"
     ansible.become = true
-    ansible.extra_vars = "../extra_config.yml"
-    ansible.tags = ['all', 'vagrant']
+    # ansible.extra_vars = "../extra_config.yml"
+    # ansible.tags = ['all', 'vagrant']
     # only for debug
     #ansible.verbose = "-v"
   end
