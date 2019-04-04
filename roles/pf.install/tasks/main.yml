@@ -12,7 +12,7 @@
 - name: restart pf services
   command: "{{ pf_pfcmd }} service pf restart"
   args:
-    creates: "{{ pf_currently_at_file }}"
+    removes: "{{ pf_currently_at_file }}"
   register: pfcmd_result
 
 - name: print result of pfcmd
