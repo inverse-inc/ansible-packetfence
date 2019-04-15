@@ -17,7 +17,7 @@
     enablerepo: "{{ centos['repo'] }}"
     state: latest
     update_cache: yes
-  register: yum_result
+  register: pkg_update
 
 # to be replaced by InSpec tests
 # - name: Check PF package
