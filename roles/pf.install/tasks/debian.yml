@@ -20,4 +20,4 @@
   apt:
     name: "{{ deb_pf_packages }}"
     state: latest
-  register: apt_result
+  register: pkg_update
