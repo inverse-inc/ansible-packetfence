@@ -14,6 +14,7 @@
   args:
     removes: "{{ pf_currently_at_file }}"
   register: pfcmd_result
+  when: (apt_result or yum_result) is changed
 
 - name: print result of pfcmd
   debug:
