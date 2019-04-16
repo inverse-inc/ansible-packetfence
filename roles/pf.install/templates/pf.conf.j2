@@ -32,10 +32,8 @@ pass={{ pf_database_pass }}
 ip={{ interface['ip'] }}
 mask={{ interface['mask'] }}
 type={{ interface['type'] }}
-{% if enforcement is defined %}
+{% if interface['enforcement'] is defined %}
 enforcement={{ interface['enforcement'] }}
-{% else %}
-interface['enforcement'] is not defined
 {% endif %}
 {# keep space below #}
 
