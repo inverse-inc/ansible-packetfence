@@ -8,6 +8,7 @@
       export CONF=$PF/conf
       export PFBIN=$PF/bin
       export LOGS=$PF/logs
+      export PATH=$PFBIN:$PATH
       export SSL=$CONF/ssl
       export HISTCONTROL=ignorespace
       alias pfstatus='$PFBIN/pfcmd service pf status'
