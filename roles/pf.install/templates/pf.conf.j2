@@ -1,25 +1,4 @@
 {{ ansible_managed | comment }}
-[general]
-#
-# general.domain
-#
-# Domain name of PacketFence system.
-domain={{ pf_domain }}
-#
-# general.hostname
-#
-# Hostname of PacketFence system.  This is concatenated with the domain in Apache rewriting rules and therefore must be resolvable by clients.
-hostname={{ pf_hostname }}
-
-[alerting]
-#
-# alerting.emailaddr
-#
-# Email address to which notifications of rogue DHCP servers, violations with an action of "email", or any other 
-# PacketFence-related message goes to.
-emailaddr={{ pf_emailaddr }}
-fromaddr={{ pf_fromaddr }}
-
 [database]
 #
 # database.pass
