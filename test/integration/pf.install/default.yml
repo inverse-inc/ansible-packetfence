@@ -1,0 +1,5 @@
+---
+- name: pf.install test suite
+  hosts: test-kitchen
+  roles:
+    - pf.install
