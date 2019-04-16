@@ -23,3 +23,7 @@
 - name: include configurator tasks
   include_tasks: configurator.yml
   tags: configurator
+
+- name: include database tasks
+  include_tasks: db.yml
+  tags: db

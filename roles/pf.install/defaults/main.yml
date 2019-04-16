@@ -10,6 +10,9 @@ deb:
 
 shell_rc_file: /root/.bashrc
 
+### database
+pf_database_root_user: root
+pf_database_root_pass: secret
 
 ### configurator
 # database
@@ -21,3 +24,4 @@ pf_interfaces:
     ip: "{{ ansible_default_ipv4['address'] }}"
     mask: "{{ ansible_default_ipv4['netmask'] }}"
     type: management,portal
+

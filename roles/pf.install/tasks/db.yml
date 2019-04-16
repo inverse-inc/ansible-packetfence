@@ -1,0 +1,79 @@
+---
+# code from ansible-role-openio-galera (secure_install.yml)
+- name: check password
+  command: mysql -e ';'
+  register: _check_password
+  changed_when: false
+  failed_when: false
+
+- name: set the mariadb root password
+  command: 'mysqladmin -u root password "{{ pf_database_root_pass }}"'
+  changed_when: false
+  when: _check_password.rc == 0
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: delete anonymous connections
+  mysql_user:
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_password }}"
+    name: ""
+    state: absent
+    login_unix_socket: "{{ pf_database_socket }}"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: secure the mariadb root user for localhost
+  mysql_user:
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_password }}"
+    name: "{{ pf_database_root_user }}"
+    host: "{{ item }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+  loop:
+    - ::1
+    - 127.0.0.1
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: remove the mariadb test database
+  mysql_db:
+    db: test
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_password }}"
+    state: absent
+    login_unix_socket: "{{ pf_database_socket }}"
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: create pf db
+  mysql_db:
+    db: pf
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_password }}"
+    state: present
+    login_unix_socket: "{{ pf_database_socket }}"
+
+- name: create pf user in db
+  mysql_user:
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_password }}"
+    name: "{{ pf_user }}"
+    password: "{{ pf_database_pass }}"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
+    host: "{{ item }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    state: present
+  loop:
+    - localhost
+    - "%"
+
+# add missing privileges    
+# - name: create pf tables
+# see https://github.com/open-io/ansible-role-openio-galera/blob/19.04/tasks/postinstall.yml
+#   mysql_db:
+#     db: pf
+#     login_user: "{{ pf_database_root_user }}"
+#     login_password: "{{ pf_database_root_password }}"
+#     state: present
+#     login_unix_socket: "{{ pf_database_socket }}"
+
+# not mandatory for now but todo
+#- name: change admin password in db
+  
