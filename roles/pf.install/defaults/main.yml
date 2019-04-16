@@ -28,7 +28,7 @@ pf_interfaces:
   - id: "{{ ansible_default_ipv4['interface'] }}"
     ip: "{{ ansible_default_ipv4['address'] }}"
     mask: "{{ ansible_default_ipv4['netmask'] }}"
-    type: management, portal
+    type: management,portal
   - id: "{{ ansible_default_ipv4['interface'] }}.155"
     ip: 182.168.155.1
     mask: 255.255.255.0
