@@ -9,3 +9,28 @@ deb:
     - debian
 
 shell_rc_file: /root/.bashrc
+
+
+### configurator
+# general
+pf_domain: example.lan
+pf_hostname: pf
+
+# alerting
+pf_emailaddr: "pf@{{ pf_domain }}"
+pf_fromaddr: "root@{{ pf_domain }}"
+
+# database
+pf_database_pass: secret
+
+# interfaces
+pf_interfaces:
+  - id: "{{ ansible_default_ipv4['interface'] }}"
+    ip: "{{ ansible_default_ipv4['address'] }}"
+    mask: "{{ ansible_default_ipv4['netmask'] }}"
+    type: management, portal
+  - id: "{{ ansible_default_ipv4['interface'] }}.155"
+    ip: 182.168.155.1
+    mask: 255.255.255.0
+    type: internal
+    enforcement: vlan

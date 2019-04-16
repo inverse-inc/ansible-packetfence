@@ -1,0 +1,11 @@
+---
+- name: show templating results
+  debug: msg="{{ lookup('template', 'pf.conf.j2') }}
+
+- name: install pf.conf
+  template:
+    src: pf.conf.j2
+    dest: "{{ pf_conf_dir }}/pf.conf"
+    mode: 0640
+    owner: "{{ pf_user }}"
+    group: "{{ pf_group }}"

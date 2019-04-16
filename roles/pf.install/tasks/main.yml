@@ -22,6 +22,10 @@
     verbosity: 2
   when: pfcmd_result is defined
 
-- name: include utils
+- name: include utils tasks
   include_tasks: utils.yml
   tags: utils
+
+- name: include configurator tasks
+  include_tasks: configurator.yml
+  tags: configurator
