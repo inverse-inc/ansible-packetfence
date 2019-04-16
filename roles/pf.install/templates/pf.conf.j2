@@ -27,7 +27,7 @@ fromaddr={{ pf_fromaddr }}
 # Password for the mysql database used by PacketFence. Changing this parameter after the initial configuration will *not* change it in the database it self, only in the configuration.
 pass={{ pf_database_pass }}
 
-{% for int in pf_interfaces %}
+{% for interface in pf_interfaces %}
 [interface {{ interface['id'] }}]
 ip={{ interface['ip'] }}
 mask={{ interface['mask'] }}
