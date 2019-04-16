@@ -16,12 +16,6 @@
   register: pfcmd_result
   when: pkg_update is changed
 
-- name: print result of pfcmd
-  debug:
-    msg: "{{ pfcmd_result.stdout_lines }}"
-    verbosity: 2
-  when: pfcmd_result is defined
-
 - name: include utils tasks
   include_tasks: utils.yml
   tags: utils
