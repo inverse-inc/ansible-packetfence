@@ -1,9 +1,17 @@
 ---
 # tasks file for pf.common
+- name: import distribution specific variables
+  include_vars: "{{ ansible_os_family|lower }}.yml"
+
 # include in place of import (dynamic evaluation)
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
 
+- name: ensure iproute package is installed for next task
+  package:
+    name: "{{ iproute_pkg }}"
+    state: present
+  
 - name: Ensure management IP is in /etc/hosts
   lineinfile:
     path: /etc/hosts
