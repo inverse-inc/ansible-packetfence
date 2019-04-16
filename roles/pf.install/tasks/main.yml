@@ -21,3 +21,7 @@
     msg: "{{ pfcmd_result.stdout_lines }}"
     verbosity: 2
   when: pfcmd_result is defined
+
+- name: include utils
+  include_tasks: utils.yml
+  tags: utils

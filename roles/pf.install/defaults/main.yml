@@ -7,3 +7,5 @@ centos:
 deb:
   repos:
     - debian
+
+shell_rc_file: /root/.bashrc

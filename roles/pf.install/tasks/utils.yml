@@ -1,0 +1,32 @@
+---
+- name: add vars and alias in {{ shell_rc_file }}
+  blockinfile:
+    path: "{{ shell_rc_file }}"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    block: |
+      export PF=/usr/local/pf
+      export CONF=$PF/conf
+      export PFBIN=$PF/bin
+      export LOGS=$PF/logs
+      export SSL=$CONF/ssl
+      export HISTCONTROL=ignorespace
+      alias pfstatus='$PFBIN/pfcmd service pf status'
+      alias pfstart='$PFBIN/pfcmd service pf start'
+      alias pfrestart='$PFBIN/pfcmd service pf restart'
+      alias pfstop='$PFBIN/pfcmd service pf stop'
+      alias pfreload='$PFBIN/pfcmd configreload hard'
+      alias pfmaint='$PF/addons/pf-maint.pl'
+      alias pfsync='$PFBIN/cluster/sync --as-master'
+      alias clstate='mysql -u root -p -e "show status like 'wsrep%'"'
+      alias authdbg='raddebug -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd.sock -t 300'
+      alias acctdbg='raddebug -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd-acct.sock -t 300'
+      alias radmin='radmin -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd.sock'
+
+- name: install pfsql in {{ pf_bin_dir }}
+  copy:
+    src: pfsql
+    dest: "{{ pf_bin_dir }}/pfsql"
+    mode: 0766
+    owner: "{{ pf_user }}"
+    group: "{{ pf_group }}"
+    
