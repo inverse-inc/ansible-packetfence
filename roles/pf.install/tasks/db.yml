@@ -15,7 +15,7 @@
 - name: delete anonymous connections
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
-    login_password: "{{ pf_database_root_password }}"
+    login_password: "{{ pf_database_root_pass }}"
     name: ""
     state: absent
     login_unix_socket: "{{ pf_database_socket }}"
@@ -24,7 +24,7 @@
 - name: secure the mariadb root user for localhost
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
-    login_password: "{{ pf_database_root_password }}"
+    login_password: "{{ pf_database_root_pass }}"
     name: "{{ pf_database_root_user }}"
     host: "{{ item }}"
     login_unix_socket: "{{ pf_database_socket }}"
@@ -37,7 +37,7 @@
   mysql_db:
     db: test
     login_user: "{{ pf_database_root_user }}"
-    login_password: "{{ pf_database_root_password }}"
+    login_password: "{{ pf_database_root_pass }}"
     state: absent
     login_unix_socket: "{{ pf_database_socket }}"
   ignore_errors: "{{ ansible_check_mode }}"
@@ -46,14 +46,14 @@
   mysql_db:
     db: pf
     login_user: "{{ pf_database_root_user }}"
-    login_password: "{{ pf_database_root_password }}"
+    login_password: "{{ pf_database_root_pass }}"
     state: present
     login_unix_socket: "{{ pf_database_socket }}"
 
 - name: create pf user in db
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
-    login_password: "{{ pf_database_root_password }}"
+    login_password: "{{ pf_database_root_pass }}"
     name: "{{ pf_user }}"
     password: "{{ pf_database_pass }}"
     priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
@@ -70,7 +70,7 @@
 #   mysql_db:
 #     db: pf
 #     login_user: "{{ pf_database_root_user }}"
-#     login_password: "{{ pf_database_root_password }}"
+#     login_password: "{{ pf_database_root_pass }}"
 #     state: present
 #     login_unix_socket: "{{ pf_database_socket }}"
 
