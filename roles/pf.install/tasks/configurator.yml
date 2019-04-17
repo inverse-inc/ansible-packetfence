@@ -15,7 +15,7 @@
       - "{{ pf_perlapi_cmd }}"
       - get
       - "-M"
-      - PACTH
+      - PATCH
       - "{{ pf_api_user }}/{{ pf_admin_user['pid'] }}/password"
       - "-c"
       - "{{ pf_admin_user | to_json }}"
