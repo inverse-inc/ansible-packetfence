@@ -11,12 +11,14 @@
   package:
     name: "{{ iproute_pkg }}"
     state: present
+  register: iproute_install
 
 - name: recall setup module to refresh facts
   setup:
     filter: ansible_default_ipv4*
+  when: iproute_install is changed
     
-- name: Ensure management IP is in /etc/hosts
+- name: ensure management IP is in /etc/hosts
   lineinfile:
     path: /etc/hosts
     regexp: '^{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
