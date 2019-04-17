@@ -12,7 +12,7 @@ pf_currently_at_file: "{{ pf_conf_dir }}/currently-at"
 
 ## commands
 pf_pfcmd: "{{ pf_bin_dir }}/pfcmd"
-pf_pfperlapi_cmd: "{{ pf_sbin_dir }}/pfperl-api"
+pf_perlapi_cmd: "{{ pf_sbin_dir }}/pfperl-api"
 
 ## users
 pf_user: pf
