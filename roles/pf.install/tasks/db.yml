@@ -21,21 +21,25 @@
     state: absent
   ignore_errors: "{{ ansible_check_mode }}"
 
+# strange
 - name: secure the mariadb root user for localhost
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
     login_unix_socket: "{{ pf_database_socket }}"
     name: "{{ pf_database_root_user }}"
+    password: "{{ pf_database_root_pass }}"
     host: "{{ item }}"
+    state: present
   loop:
     - ::1
     - 127.0.0.1
+    - localhost
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: remove the mariadb test database
   mysql_db:
-    db: test
+    name: test
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
     login_unix_socket: "{{ pf_database_socket }}"
@@ -44,12 +48,22 @@
 
 - name: create pf db
   mysql_db:
-    db: pf
+    name: "{{ pf_database_db }}"
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
     login_unix_socket: "{{ pf_database_socket }}"
     state: present
 
+- name: create pf tables
+  mysql_db:
+    name: "{{ pf_database_db }}"
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    state: import
+    target: "{{ pf_db_dir }}/pf-schema.sql"
+    
+# user need to be create after tables
 - name: create pf user in db
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
@@ -63,15 +77,6 @@
     state: present
   loop: "{{ pf_database_users }}"
 
-# - name: create pf tables
-# see https://github.com/open-io/ansible-role-openio-galera/blob/19.04/tasks/postinstall.yml
-#   mysql_db:
-#     db: pf
-#     login_user: "{{ pf_database_root_user }}"
-#     login_password: "{{ pf_database_root_pass }}"
-#     state: present
-#     login_unix_socket: "{{ pf_database_socket }}"
-
-# not mandatory for now but todo
-#- name: change admin password in db
+  
+  
   
