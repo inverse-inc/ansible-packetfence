@@ -17,4 +17,4 @@
       - -M PATCH
       - "{{ pf_api_user }}/{{ pf_admin_user['pid'] }}/password }}"
       - -c
-      - "{{ pf_admin_user['password']  | to_json }}"
+      - "{{ pf_admin_user | to_json }}"
