@@ -14,7 +14,12 @@
     argv:
       - "{{ pf_perlapi_cmd }}"
       - get
-      - -M PATCH
-      - "{{ pf_api_user }}/{{ pf_admin_user['pid'] }}/password }}"
-      - -c
+      - "-M"
+      - PACTH
+      - "{{ pf_api_user }}/{{ pf_admin_user['pid'] }}/password"
+      - "-c"
       - "{{ pf_admin_user | to_json }}"
+  register: api_user_result
+  # failed when status is different from 200
+  # pfperl-api always return rc=0
+  failed_when: (api_user_result['stdout'] | from_json ).status != 200
