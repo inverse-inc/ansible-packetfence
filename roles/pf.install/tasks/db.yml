@@ -1,12 +1,12 @@
 ---
 # code from ansible-role-openio-galera (secure_install.yml)
-- name: check password
+- name: check if root password has already be set
   command: mysql -e ';'
   register: _check_password
   changed_when: false
   failed_when: false
 
-- name: set the mariadb root password
+- name: set the mariadb root password if not set
   command: 'mysqladmin -u root password "{{ pf_database_root_pass }}"'
   changed_when: false
   when: _check_password.rc == 0
@@ -21,7 +21,6 @@
     state: absent
   ignore_errors: "{{ ansible_check_mode }}"
 
-# strange
 - name: secure the mariadb root user for localhost
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
@@ -75,8 +74,5 @@
     append_privs: "{{ item.append_privs }}"
     host: "{{ item.host }}"
     state: present
-  loop: "{{ pf_database_users }}"
-
-  
-  
+  loop: "{{ pf_database_users }}"  
   
