@@ -52,6 +52,7 @@
     login_password: "{{ pf_database_root_pass }}"
     login_unix_socket: "{{ pf_database_socket }}"
     state: present
+  register: create_pf_db_result
 
 - name: create pf tables
   mysql_db:
@@ -61,6 +62,7 @@
     login_unix_socket: "{{ pf_database_socket }}"
     state: import
     target: "{{ pf_db_dir }}/pf-schema.sql"
+  when: create_pf_db_result is changed
     
 # user need to be create after tables
 - name: create pf user in db
