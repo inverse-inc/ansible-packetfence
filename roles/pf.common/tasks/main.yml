@@ -21,11 +21,3 @@
     path: /etc/hosts
     regexp: '^{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
     line: '{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
-
-- name: Get /etc/hosts contents
-  command: cat /etc/hosts
-  register: hosts
-
-- name: Print /etc/hosts
-  debug:
-    msg: "{{ hosts.stdout_lines }}"
