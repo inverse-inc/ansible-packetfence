@@ -20,21 +20,10 @@
   include_tasks: utils.yml
   tags: utils
 
-- name: include configurator tasks
-  include_tasks: configurator.yml
-  tags: configurator
-
 - name: include database tasks
   include_tasks: db.yml
   tags: db
-
-- name: change default admin password in db through API
-  command:
-  args:
-    argv:
-      - "{{ pf_perlapi_cmd }}"
-      - get
-      - -M PATCH
-      - "{{ pf_api_user }}/{{ pf_users[0]['pid'] }}/password }}"
-      - -c
-      - "{{ pf_users[0]['password']  | to_json }}"
+  
+- name: include configurator tasks
+  include_tasks: configurator.yml
+  tags: configurator
