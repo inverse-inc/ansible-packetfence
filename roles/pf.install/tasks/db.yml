@@ -16,18 +16,18 @@
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
     name: ""
     state: absent
-    login_unix_socket: "{{ pf_database_socket }}"
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: secure the mariadb root user for localhost
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
     name: "{{ pf_database_root_user }}"
     host: "{{ item }}"
-    login_unix_socket: "{{ pf_database_socket }}"
   loop:
     - ::1
     - 127.0.0.1
@@ -38,8 +38,8 @@
     db: test
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
-    state: absent
     login_unix_socket: "{{ pf_database_socket }}"
+    state: absent
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: create pf db
@@ -47,24 +47,22 @@
     db: pf
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
-    state: present
     login_unix_socket: "{{ pf_database_socket }}"
+    state: present
 
 - name: create pf user in db
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
-    name: "{{ pf_user }}"
-    password: "{{ pf_database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
-    host: "{{ item }}"
     login_unix_socket: "{{ pf_database_socket }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+    append_privs: "{{ item.append_privs }}"
+    host: "{{ item.host }}"
     state: present
-  loop:
-    - localhost
-    - "%"
+  loop: "{{ pf_database_users }}"
 
-# add missing privileges    
 # - name: create pf tables
 # see https://github.com/open-io/ansible-role-openio-galera/blob/19.04/tasks/postinstall.yml
 #   mysql_db:
