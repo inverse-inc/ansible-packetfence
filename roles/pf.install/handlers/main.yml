@@ -1,4 +1,2 @@
 ---
 # handlers file for pf.install
-- name: reload pf configuration
-  command: "{{ pf_pfcmd }} configreload hard"
