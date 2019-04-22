@@ -10,8 +10,7 @@ platforms:
       use_sudo: true # docker commands use sudo (necessary for local socket)
       run_command: /usr/lib/systemd/systemd
       privileged: true
-      # use random forwarded port
-      forward: 80
+      forward: 1443:1443
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro # required by systemd
       
@@ -23,7 +22,7 @@ platforms:
       use_sudo: true # docker commands use sudo (necessary for local socket)
       run_command: /bin/systemd
       privileged: true
-      forward: 80
+      forward: 2443:1443 # forward public port 2443 to 1443
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
@@ -35,7 +34,7 @@ platforms:
       use_sudo: true # docker commands use sudo (necessary for local socket)
       run_command: /bin/systemd
       privileged: true
-      forward: 80
+      forward: 3443:1443
       volume:
         - /sys/fs/cgroup:/sys/fs/cgroup:ro
   
