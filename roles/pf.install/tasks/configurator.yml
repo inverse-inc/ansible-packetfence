@@ -56,6 +56,6 @@
     follow_redirects: safe
     validate_certs: no
   register: webadmin_homepage
-  until: "Administrator - PacketFence" in webadmin_homepage['content']
+  until: "'Administrator - PacketFence' in webadmin_homepage['content']"
   retries: 6
   delay: 10
