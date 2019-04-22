@@ -3,7 +3,7 @@
   template:
     src: pf.conf.j2
     dest: "{{ pf_conf_dir }}/pf.conf"
-    mode: 0640
+    mode: 0664
     owner: "{{ pf_user }}"
     group: "{{ pf_group }}"
   diff: true
