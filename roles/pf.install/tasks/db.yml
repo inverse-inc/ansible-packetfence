@@ -45,7 +45,7 @@
     state: absent
   ignore_errors: "{{ ansible_check_mode }}"
 
-- name: create pf db
+- name: ensure pf db is present
   mysql_db:
     name: "{{ pf_database_db }}"
     login_user: "{{ pf_database_root_user }}"
@@ -54,7 +54,7 @@
     state: present
   register: create_pf_db_result
 
-- name: create pf tables
+- name: ensure pf tables are present
   mysql_db:
     name: "{{ pf_database_db }}"
     login_user: "{{ pf_database_root_user }}"
@@ -65,7 +65,7 @@
   when: create_pf_db_result is changed
     
 # user need to be create after tables
-- name: create pf user in db
+- name: ensure pf user created with rights on db
   mysql_user:
     login_user: "{{ pf_database_root_user }}"
     login_password: "{{ pf_database_root_pass }}"
@@ -76,5 +76,5 @@
     append_privs: "{{ item.append_privs }}"
     host: "{{ item.host }}"
     state: present
-  loop: "{{ pf_database_users }}"  
+  loop: "{{ pf_database_users }}"
   
