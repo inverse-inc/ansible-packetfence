@@ -72,7 +72,6 @@
     login_unix_socket: "{{ pf_database_socket }}"
     name: "{{ item.name }}"
     password: "{{ item.password }}"
-    encrypted: "{{ item.encrypted }}"
     priv: "{{ item.priv }}"
     append_privs: "{{ item.append_privs }}"
     host: "{{ item.host }}"
