@@ -22,7 +22,7 @@ pf_group: pf
 pf_webadmin_port: 1443
 
 ## api routes
-pf_api_base_path: /api/v1
+pf_api_base_path: api/v1
 pf_api_config: "{{ pf_api_base_path }}/config"
 pf_api_config_interface: "{{ pf_api_config }}/interface"
 pf_api_user: "{{ pf_api_base_path }}/user"

@@ -58,7 +58,7 @@
       - get
       - "-M"
       - PATCH
-      - "{{ pf_api_user }}/{{ pf_admin_user['pid'] }}/password"
+      - "/{{ pf_api_user }}/{{ pf_admin_user['pid'] }}/password"
       - "-c"
       - "{{ pf_admin_user | to_json }}"
   register: api_user_result
