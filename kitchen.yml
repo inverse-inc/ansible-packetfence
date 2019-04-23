@@ -28,9 +28,9 @@ platforms:
 
 provisioner:
   name: ansible_playbook
-  # usage: ANSIBLE_EXTRA_FLAGS='--start-at-task="myrole | name of last working instruction"' kitchen converge
+  # hack to pass options on command line: ANSIBLE_EXTRA_FLAGS='-vv --start-at-task="task name"' kitchen converge
   ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
-  hosts: test-kitchen # add 'test-kitchen' host in inventory file
+  hosts: test-kitchen # add 'test-kitchen' group in inventory file
   require_chef_for_busser: false # don't install Chef for Busser tests
   
 verifier:
