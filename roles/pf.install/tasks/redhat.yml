@@ -1,4 +1,18 @@
 ---
+- name: add epel repository disabled
+  yum_repository:
+     name: epel
+     description: EPEL YUM repo
+     baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+     enabled: no
+     gpgcheck: no
+     
+- name: install package to use ansible mysql_user module
+  yum:
+    name: "{{ centos_python_mysql_pkg }}"
+    enablerepo: epel
+    state: latest
+    
 - name: Install the PacketFence repo
   yum:
     name: "{{ centos_pf_release_rpm }}"

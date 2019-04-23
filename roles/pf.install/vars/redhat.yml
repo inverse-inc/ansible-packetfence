@@ -4,3 +4,7 @@ centos_pf_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/x86_6
 centos_pf_packages:
   - packetfence
   - packetfence-ntlm-wrapper
+
+centos_python_mysql_pkg: python2-PyMySQL
+
+pf_database_socket: /var/lib/mysql/mysql.sock

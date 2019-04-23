@@ -1,0 +1,80 @@
+---
+# code from ansible-role-openio-galera (secure_install.yml)
+- name: check if root password has already be set
+  command: mysql -e ';'
+  register: _check_password
+  changed_when: false
+  failed_when: false
+
+- name: set the mariadb root password if not set
+  command: 'mysqladmin -u root password "{{ pf_database_root_pass }}"'
+  changed_when: false
+  when: _check_password.rc == 0
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: delete anonymous connections
+  mysql_user:
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    name: ""
+    state: absent
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: secure the mariadb root user for localhost
+  mysql_user:
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    name: "{{ pf_database_root_user }}"
+    password: "{{ pf_database_root_pass }}"
+    host: "{{ item }}"
+    state: present
+  loop:
+    - ::1
+    - 127.0.0.1
+    - localhost
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: remove the mariadb test database
+  mysql_db:
+    name: test
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    state: absent
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: ensure pf db is present
+  mysql_db:
+    name: "{{ pf_database_db }}"
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    state: present
+  register: create_pf_db_result
+
+- name: ensure pf tables are present
+  mysql_db:
+    name: "{{ pf_database_db }}"
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    state: import
+    target: "{{ pf_db_dir }}/pf-schema.sql"
+  when: create_pf_db_result is changed
+    
+# user need to be create after tables
+- name: ensure pf user created with rights on db
+  mysql_user:
+    login_user: "{{ pf_database_root_user }}"
+    login_password: "{{ pf_database_root_pass }}"
+    login_unix_socket: "{{ pf_database_socket }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+    append_privs: "{{ item.append_privs }}"
+    host: "{{ item.host }}"
+    state: present
+  loop: "{{ pf_database_users }}"
+  

@@ -1,0 +1,19 @@
+{{ ansible_managed | comment }}
+[database]
+#
+# database.pass
+#
+# Password for the mysql database used by PacketFence. Changing this parameter after the initial configuration will *not* change it in the database it self, only in the configuration.
+pass={{ pf_database_pass }}
+
+{% for interface in pf_interfaces %}
+[interface {{ interface['id'] }}]
+ip={{ interface['ip'] }}
+mask={{ interface['mask'] }}
+type={{ interface['type'] }}
+{% if interface['enforcement'] is defined %}
+enforcement={{ interface['enforcement'] }}
+{% endif %}
+{# keep space below #}
+
+{% endfor %}

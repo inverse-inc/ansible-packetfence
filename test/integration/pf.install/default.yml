@@ -1,0 +1,13 @@
+---
+- name: pf.install test suite
+  hosts: test-kitchen
+  roles:
+    - role: pf.install
+      # we always test latest builds
+      vars:
+        centos:
+          repo: packetfence-devel
+        deb:
+          repos:
+            - debian
+            - debian-devel

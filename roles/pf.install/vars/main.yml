@@ -1,9 +1,28 @@
 ---
 # vars file for pf.install
+## dirs
 pf_root_dir: /usr/local/pf
 pf_conf_dir: "{{ pf_root_dir }}/conf"
 pf_bin_dir: "{{ pf_root_dir }}/bin"
-pf_pfcmd: "{{ pf_bin_dir }}/pfcmd"
+pf_sbin_dir: "{{ pf_root_dir }}/sbin"
+pf_db_dir: "{{ pf_root_dir }}/db"
+
+## files
 pf_currently_at_file: "{{ pf_conf_dir }}/currently-at"
+
+## commands
+pf_pfcmd: "{{ pf_bin_dir }}/pfcmd"
+pf_perlapi_cmd: "{{ pf_sbin_dir }}/pfperl-api"
+
+## users
 pf_user: pf
 pf_group: pf
+
+## ports
+pf_webadmin_port: 1443
+
+## api routes
+pf_api_base_path: /api/v1
+pf_api_config: "{{ pf_api_base_path }}/config"
+pf_api_config_interface: "{{ pf_api_config }}/interface"
+pf_api_user: "{{ pf_api_base_path }}/user"
