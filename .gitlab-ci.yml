@@ -1,0 +1,24 @@
+stages:
+  - test
+
+kitchen_centos7:
+  stage: test
+  script:
+    - kitchen converge pfinstall-centos-7
+  tags:
+    - futura
+
+kitchen_debian9:
+  stage: test
+  script:
+    - kitchen converge pfinstall-debian-9
+  tags:
+    - futura
+    
+kitchen_debian8:
+  stage: test
+  script:
+    - kitchen converge pfinstall-debian-8
+  tags:
+    - futura
+
