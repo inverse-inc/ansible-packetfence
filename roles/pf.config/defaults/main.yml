@@ -1,0 +1,7 @@
+---
+# defaults file for pf.config
+
+# will try to reuse vars from pf.install role
+pf_api_user:
+  username: "{{ pf_admin_user['pid'] }}"
+  password: "{{ pf_admin_user['password'] }}"
