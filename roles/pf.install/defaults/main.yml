@@ -18,37 +18,31 @@ pf_database_pass: secret
 pf_database_users:
   - name: pf
     password: "{{ pf_database_pass }}"
-    encrypted: yes
     priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
     append_privs: no
     host: "localhost"
   - name: pf
     password: "{{ pf_database_pass }}"
-    encrypted: yes
     priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
     append_privs: no
     host: "%"
   - name: pf
     password: "{{ pf_database_pass }}"
-    encrypted: yes
     priv: "mysql.proc:SELECT"
     append_privs: yes
     host: "localhost"
   - name: pf
     password: "{{ pf_database_pass }}"
-    encrypted: yes
     priv: "mysql.proc:SELECT"
     append_privs: yes
     host: "%"
   - name: pf
     password: "{{ pf_database_pass }}"
-    encrypted: yes
     priv: "pf.radius_nas:DROP"
     append_privs: yes
     host: "localhost"
   - name: pf
     password: "{{ pf_database_pass }}"
-    encrypted: yes
     priv: "pf.radius_nas:DROP"
     append_privs: yes
     host: "%"
