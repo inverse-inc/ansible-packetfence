@@ -28,6 +28,8 @@ platforms:
 
 provisioner:
   name: ansible_playbook
+  # usage: ANSIBLE_EXTRA_FLAGS='--start-at-task="myrole | name of last working instruction"' kitchen converge
+  ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
   hosts: test-kitchen # add 'test-kitchen' host in inventory file
   require_chef_for_busser: false # don't install Chef for Busser tests
   
