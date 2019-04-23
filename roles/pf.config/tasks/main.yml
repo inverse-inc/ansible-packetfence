@@ -8,7 +8,7 @@
     validate_certs: no
     return_content: yes
     body_format: json                     # automatically set Content-Type header to JSON
-    body: "{{ pf_api_user | to_json }}"
+    body: "{{ pf_admin_credentials | to_json }}"
   register: api_login
 
 - name: debug
