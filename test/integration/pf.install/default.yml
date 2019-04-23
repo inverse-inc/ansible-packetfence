@@ -11,3 +11,4 @@
           repos:
             - debian
             - debian-devel
+    - role: pf.config
