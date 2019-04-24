@@ -14,7 +14,7 @@
   set_fact:
     pf_api_token: "{{ api_token_result.json.token }}"
   
-- name: "{{ item.method }} {{ item.route }}"
+- name: POST {{ item.route }}
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ item.route }}"
     method: "{{ item.method }}"
@@ -22,6 +22,7 @@
     validate_certs: no
     return_content: yes
     body_format: json
-    HEADER_Authorization: "{{ pf_api_token }}"
+    headers:
+      Authorization: "{{ pf_api_token }}"
     body: "{{ item.body | to_json }}"
   loop: "{{ pf_api_calls }}"

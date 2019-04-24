@@ -21,3 +21,4 @@
 
 - name: include api_config tasks
   include_tasks: api_config.yml
+  tags: api_config
