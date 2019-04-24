@@ -21,6 +21,9 @@
     follow_redirects: safe
     validate_certs: no
     return_content: yes
+    status_code:
+      - 200
+      - 201
     body_format: json
     headers:
       Authorization: "{{ pf_api_token }}"
