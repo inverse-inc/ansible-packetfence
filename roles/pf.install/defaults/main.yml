@@ -107,5 +107,19 @@ pf_api_calls:
       # tenant_id: 0
       # title: string
       # work_phone: string
+  - route: "{{ pf_api_user }}/foo1/password"
+    method: POST
+    body:
+      # access_duration:
+      access_level: ALL_PF_ONLY
+      # category: 
+      expiration: 2019-05-01 00:00:00
+      # login_remaining: 0
+      password: foo1
+      pid: foo1
+      sponsor: true
+      unregdate: 0000-00-00 00:00:00
+      valid_from: 2019-04-01 00:00:00
+
 
 # next ..
