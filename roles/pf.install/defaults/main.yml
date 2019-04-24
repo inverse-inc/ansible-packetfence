@@ -118,7 +118,7 @@ pf_api_calls:
       password: foo1
       pid: foo1
       sponsor: true
-      unregdate: 0000-00-00 00:00:00
+      #unregdate: 0000-00-00 00:00:00
       valid_from: 2019-04-01 00:00:00
 
 
