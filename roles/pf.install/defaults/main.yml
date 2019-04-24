@@ -71,10 +71,8 @@ pf_api_calls:
   - route: "{{ pf_api_users }}"
     method: POST
     body:
-      - pid: foo1
-        email: foo1@foo.com
-      - pid: foo2
-        email: foo2@foo.com
+      pid: foo1
+      email: foo1@foo.com
       # address: string
       # anniversary: string
       # apartment_number: string
