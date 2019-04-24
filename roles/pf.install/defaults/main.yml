@@ -60,10 +60,10 @@ pf_admin_credentials:
 
 
 pf_api_calls:
-  - route: "{{ pf_api_config['base'] }}/general"
+  - route: "{{ pf_api_config['base'] }}/{{ pf_api_config_base_items['general'] }}"
     method: PATCH
     body:
-      id: general
+      id: "{{ pf_api_config_base_items['general'] }}"
       dhcpservers: 10.0.0.1,192.168.122.1
       domain: example.lan
       hostname: myhostname

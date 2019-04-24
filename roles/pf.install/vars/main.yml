@@ -29,3 +29,6 @@ pf_api_login: "{{ pf_api_base_path }}/login"
 pf_api_config:
     interface: "{{ pf_api_base_path }}/config/interface"
     base: "{{ pf_api_base_path }}/config/base"
+
+pf_api_config_base_items:
+  general: general
