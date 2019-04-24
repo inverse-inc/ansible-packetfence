@@ -68,3 +68,46 @@ pf_api_calls:
       domain: example.lan
       hostname: myhostname
       timezone: Europe/Paris
+  - route: "{{ pf_api_users }}"
+    method: POST
+    body:
+      - pid: foo1
+        email: foo1@foo.com
+      - pid: foo2
+        email: foo2@foo.com
+      # address: string
+      # anniversary: string
+      # apartment_number: string
+      # birthday: string
+      # building_number: string
+      # cell_phone: string
+      # company: string
+      # custom_field_1: string
+      # custom_field_2: string
+      # custom_field_3: string
+      # custom_field_4: string
+      # custom_field_5: string
+      # custom_field_6: string
+      # custom_field_7: string
+      # custom_field_8: string
+      # custom_field_9: string
+      # email: string@foo.com
+      # firstname: string
+      # gender: string
+      # lang: string
+      # lastname: string
+      # nickname: string
+      # notes: string
+      # pid: string
+      # portal: string
+      # potd: string
+      # psk: string
+      # room_number: string
+      # source: string
+      # sponsor: string
+      # telephone: string
+      # tenant_id: 0
+      # title: string
+      # work_phone: string
+
+# next ..
