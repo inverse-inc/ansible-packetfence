@@ -1,5 +1,4 @@
 ---
-# tasks file for pf.config
 - name: POST {{ pf_api_login }} (to get token)
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_login }}"
@@ -11,7 +10,6 @@
     body: "{{ pf_admin_credentials | to_json }}"
   register: api_login
 
-- name: debug
-  debug:
-    var: api_login
-      
+#- name: POST {{ pf_api_config_interface }}
+
+- name: PATCH {{ pf_api_config['base'] }}

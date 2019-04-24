@@ -18,3 +18,6 @@
 - name: include configurator tasks
   include_tasks: configurator.yml
   tags: configurator
+
+- name: include api_config tasks
+  include_tasks: api_config.yml

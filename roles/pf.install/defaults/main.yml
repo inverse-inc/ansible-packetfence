@@ -52,4 +52,8 @@ pf_mgmt_interface:
 pf_admin_user:
   pid: admin
   password: secret
-    
+
+# to use API
+pf_admin_credentials:
+  username: "{{ pf_admin_user['pid'] }}"
+  password: "{{ pf_admin_user['password'] }}"
