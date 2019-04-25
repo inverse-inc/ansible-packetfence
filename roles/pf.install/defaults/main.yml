@@ -70,7 +70,7 @@ pf_api_calls:
       timezone: Europe/Paris
   - route: "{{ pf_api_users }}"
     method: POST
-    body:
+    body: 
       pid: foo1
       email: foo1@foo.com
       # address: string
@@ -112,14 +112,15 @@ pf_api_calls:
     body:
       # access_duration:
       access_level: ALL_PF_ONLY
-      # category: 
-      expiration: 2019-05-01 00:00:00
+      # category:
+      ## Date need quotes
+      expiration: "2019-05-01 00:00:00"
       # login_remaining: 0
       password: foo1
       pid: foo1
       sponsor: true
       #unregdate: 0000-00-00 00:00:00
-      valid_from: 2019-04-01 00:00:00
+      valid_from: "2019-04-01 00:00:00"
 
 
 # next ..

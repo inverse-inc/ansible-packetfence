@@ -14,7 +14,7 @@
   set_fact:
     pf_api_token: "{{ api_token_result.json.token }}"
   
-- name: POST {{ item.route }}
+- name: configure pf through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ item.route }}"
     method: "{{ item.method }}"
