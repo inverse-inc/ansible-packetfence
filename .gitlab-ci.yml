@@ -16,7 +16,7 @@ kitchen_debian9:
   # run job only on master branch
   only:
     - master
-    script:
+  script:
     - kitchen converge pfinstall-debian-9
   tags:
     - futura
