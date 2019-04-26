@@ -13,7 +13,8 @@
 - name: register token in a fact
   set_fact:
     pf_api_token: "{{ api_token_result.json.token }}"
-  
+
+# loop on {{ pf_api_calls }} vars
 - name: configure pf through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ item.route }}"
@@ -29,3 +30,6 @@
       Authorization: "{{ pf_api_token }}"
     body: "{{ item.body | to_json }}"
   loop: "{{ pf_api_calls }}"
+  # display only method and route on CLI for each call
+  loop_control:
+    label: "{{ item.method }} {{ item.route }}"
