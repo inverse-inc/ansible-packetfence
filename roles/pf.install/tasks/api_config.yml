@@ -32,4 +32,4 @@
   loop: "{{ pf_api_calls }}"
   # display only method and route on CLI for each call
   loop_control:
-    label: "{{ item.method }} {{ item.route }}"
+    label: "{{ item.method }} /{{ item.route }}"
