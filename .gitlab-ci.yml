@@ -20,14 +20,3 @@ kitchen_debian9:
     - kitchen converge pfinstall-debian-9
   tags:
     - futura
-    
-kitchen_debian8:
-  stage: test
-  # run job only on master branch
-  only:
-    - master
-  script:
-    - kitchen converge pfinstall-debian-8
-  tags:
-    - futura
-
