@@ -7,8 +7,9 @@
       export PF=/usr/local/pf
       export CONF=$PF/conf
       export PFBIN=$PF/bin
+      export PFSBIN=$PF/sbin
       export LOGS=$PF/logs
-      export PATH=$PFBIN:$PATH
+      export PATH=$PFBIN:$PFSBIN:$PATH
       export SSL=$CONF/ssl
       export HISTCONTROL=ignorespace
       alias pfstatus='$PFBIN/pfcmd service pf status'
