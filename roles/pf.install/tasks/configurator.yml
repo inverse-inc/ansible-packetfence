@@ -47,7 +47,7 @@
   when: pkg_update is changed
 
 - name: restart pf services
-  command: /usr/local/pf/bin/pfcmd service pf restart
+  command: "{{ pf_pfcmd }} service pf restart"
   when: pkg_update is changed
 
 # copy pf-release to currently-at
