@@ -31,33 +31,13 @@ pf_database_pass: secret
 pf_database_users:
   - name: pf
     password: "{{ pf_database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
     host: "localhost"
   - name: pf
     password: "{{ pf_database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
-    host: "%"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "mysql.proc:SELECT"
-    append_privs: yes
-    host: "localhost"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "mysql.proc:SELECT"
-    append_privs: yes
-    host: "%"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "pf.radius_nas:DROP"
-    append_privs: yes
-    host: "localhost"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "pf.radius_nas:DROP"
-    append_privs: yes
     host: "%"
 
 ### configurator
