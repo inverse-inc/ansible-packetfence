@@ -1,2 +1,6 @@
 ---
 # handlers file for pf.install
+- name: restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
