@@ -7,7 +7,14 @@
     owner: "{{ pf_user }}"
     group: "{{ pf_group }}"
   diff: true
-  notify: restart packetfence-config # to take new DB password into account
+  register: pf_conf_result
+
+# to take new DB password into account
+- name: restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
+  when: pf_conf_result is changed
   
 - name: update default admin password in db through pfperl-api
   command:
