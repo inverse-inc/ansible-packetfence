@@ -7,7 +7,7 @@ kitchen_centos7:
   only:
     - master
   script:
-    - kitchen converge pfinstall-centos-7
+    - kitchen test pfinstall-centos-7
   tags:
     - futura
 
@@ -17,6 +17,6 @@ kitchen_debian9:
   only:
     - master
   script:
-    - kitchen converge pfinstall-debian-9
+    - kitchen test pfinstall-debian-9
   tags:
     - futura
