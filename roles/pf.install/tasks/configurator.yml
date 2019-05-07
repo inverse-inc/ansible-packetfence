@@ -27,17 +27,21 @@
 
 - name: fix permissions on pf files
   command: "{{ pf_pfcmd }} fixpermissions"
+  when: pkg_update is changed
 
 - name: clear the backend of pfconfig
   command: "{{ pf_pfcmd }} pfconfig clear_backend"
+  when: pkg_update is changed
 
 - name: restart packetfence-config service
   service:
     name: packetfence-config
     state: restarted
+  when: pkg_update is changed
 
 - name: restart pf services
   command: /usr/local/pf/bin/pfcmd service pf restart
+  when: pkg_update is changed
 
 # copy pf-release to currently-at
 - name: ensure currently-at file is set
