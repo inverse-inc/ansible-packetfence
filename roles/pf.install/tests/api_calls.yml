@@ -20,7 +20,11 @@ pf_api_calls:
       smtp_verifyssl: "{{ pf_config_alerting['smtp_verifyssl'] }}"
       subjectprefix: "{{ pf_config_alerting['subjectprefix'] }}"
       smtp_timeout: "{{ pf_config_alerting['smtp_timeout'] }}"
-  # TODO: set fingerbank API_key
+  - route: "{{ pf_api_config_endpoints['fingerbank_setting'] }}/upstream"
+    method: PATCH
+    body:
+      id: upstream
+      api_key: 123456
   - route: "{{ pf_api_config_endpoints['base'] }}/advanced"
     method: PATCH
     body:
