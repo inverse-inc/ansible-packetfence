@@ -25,7 +25,7 @@ pf_api_calls:
     method: PATCH
     body:
       id: advanced
-      hashpasswords: ntlm
+      hash_passwords: ntlm
   # create new admin user
   - route: "{{ pf_api_users }}"
     method: POST
