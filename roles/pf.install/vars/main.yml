@@ -31,7 +31,7 @@ pf_api_config_endpoints:
     connection_profile: "{{ pf_api_config }}/connection_profile"
     device_registration: "{{ pf_api_config }}/device_registration"
     domain: "{{ pf_api_config }}/domain"
-    fingerbank_setting: {{ pf_api_config }}/fingerbank_setting"
+    fingerbank_setting: "{{ pf_api_config }}/fingerbank_setting"
     firewall: "{{ pf_api_config }}/firewall"
     floating_device: "{{ pf_api_config }}/floating_device"
     interface: "{{ pf_api_config }}/interface"
