@@ -11,3 +11,19 @@
           repos:
             - debian
             - debian-devel
+        pf_config:
+          general:
+            hostname: "{{ ansible_os_distribution|lower }}"
+            domain: example.lan
+            dhcpservers: 10.0.0.1,192.168.122.1
+            timezone: Europe/Paris
+          alerting:
+            smtpserver: glauca.inverse
+            fromaddr: "{{ pf_config['general']['hostname'] }}@{{ pf_config['general']['domain'] }}"
+            emailaddr: alerting@inverse.ca
+            smtp_port: 1025
+            smtp_verifyssl: disabled
+            subjectprefix: PF UNDER TEST
+            smtp_timeout: 30
+      vars_file:
+        - api_calls.yml
