@@ -36,7 +36,7 @@ pf_api_calls:
     body: 
       pid: admin2
       email: "admin2@{{ pf_config_general['domain'] }}"
-      address: 
+      address: "7000 Park Avenue, Montreal"
       anniversary: "1988-01-01"
       apartment_number: 104
       birthday: "1988-01-02"
@@ -54,7 +54,7 @@ pf_api_calls:
       custom_field_9: custom_field
       firstname: admin
       gender: string
-      lang: string
+      lang: FR
       lastname: 2
       nickname: adm
       notes: This user rocks
@@ -65,6 +65,8 @@ pf_api_calls:
       telephone: "+33789898989"
       title: IT
       work_phone: "+33789898989"
+      login_remaining: null
+      can_sponsor: 1
   - route: "{{ pf_api_user }}/admin2/password"
     method: POST
     body:
