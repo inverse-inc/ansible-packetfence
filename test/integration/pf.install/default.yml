@@ -25,5 +25,5 @@
             smtp_verifyssl: disabled
             subjectprefix: PF UNDER TEST
             smtp_timeout: 30
-      vars_file:
+      vars_files:
         - api_calls.yml
