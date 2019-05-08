@@ -1,3 +1,4 @@
+---
 pf_api_calls:
   # finish configurator through API
   - route: "{{ pf_api_config_endpoints['base'] }}/general"
