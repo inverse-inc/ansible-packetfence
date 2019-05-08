@@ -1,0 +1,77 @@
+pf_api_calls:
+  # finish configurator through API
+  - route: "{{ pf_api_config_endpoints['base'] }}/general"
+    method: PATCH
+    body:
+      id: general
+      dhcpservers: "{{ pf_config_general['dhcpservers'] }}"
+      domain: "{{ pf_config_general['domain'] }}"
+      hostname: "{{ pf_config_general['hostname'] }}"
+      timezone: "{{ pf_config_general['timezone'] }}"
+  - route: "{{ pf_api_config_endpoints['base'] }}/alerting"
+    method: PATCH
+    body:
+      id: alerting
+      smtpserver: "{{ pf_config_alerting['smtpserver'] }}"
+      fromaddr: "{{ pf_config_alerting['fromaddr'] }}"
+      emailaddr: "{{ pf_config_alerting['emailaddr'] }}"
+      smtp_port: "{{ pf_config_alerting['smtp_port'] }}"
+      smtp_verifyssl: "{{ pf_config_alerting['smtp_verifyssl'] }}"
+      subjectprefix: "{{ pf_config_alerting['subjectprefix'] }}"
+      smtp_timeout: "{{ pf_config_alerting['smtp_timeout'] }}"
+#   - route: "{{ pf_api_users }}"
+#     method: POST
+#     body: 
+#       pid: foo1
+#       email: foo1@foo.com
+#       # address: string
+#       # anniversary: string
+#       # apartment_number: string
+#       # birthday: string
+#       # building_number: string
+#       # cell_phone: string
+#       # company: string
+#       # custom_field_1: string
+#       # custom_field_2: string
+#       # custom_field_3: string
+#       # custom_field_4: string
+#       # custom_field_5: string
+#       # custom_field_6: string
+#       # custom_field_7: string
+#       # custom_field_8: string
+#       # custom_field_9: string
+#       # email: string@foo.com
+#       # firstname: string
+#       # gender: string
+#       # lang: string
+#       # lastname: string
+#       # nickname: string
+#       # notes: string
+#       # pid: string
+#       # portal: string
+#       # potd: string
+#       # psk: string
+#       # room_number: string
+#       # source: string
+#       # sponsor: string
+#       # telephone: string
+#       # tenant_id: 0
+#       # title: string
+#       # work_phone: string
+#   - route: "{{ pf_api_user }}/foo1/password"
+#     method: POST
+#     body:
+#       # access_duration:
+#       access_level: ALL_PF_ONLY
+#       # category:
+#       ## Date need quotes
+#       expiration: "2019-05-01 00:00:00"
+#       # login_remaining: 0
+#       password: foo1
+#       pid: foo1
+#       sponsor: true
+#       #unregdate: 0000-00-00 00:00:00
+#       valid_from: "2019-04-01 00:00:00"
+
+
+# # next ..

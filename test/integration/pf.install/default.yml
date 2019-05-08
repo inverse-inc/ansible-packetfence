@@ -1,6 +1,8 @@
 ---
 - name: pf.install test suite
   hosts: test-kitchen
+  vars_files:
+    - roles/pf.install/tests/api_calls.yml
   roles:
     - role: pf.install
       # we always test latest builds
@@ -11,19 +13,16 @@
           repos:
             - debian
             - debian-devel
-        pf_config:
-          general:
-            hostname: "{{ ansible_os_distribution|lower }}"
+        pf_config_general:
+            hostname: "{{ ansible_distribution|lower }}"
             domain: example.lan
             dhcpservers: 10.0.0.1,192.168.122.1
             timezone: Europe/Paris
-          alerting:
+        pf_config_alerting:
             smtpserver: glauca.inverse
-            fromaddr: "{{ pf_config['general']['hostname'] }}@{{ pf_config['general']['domain'] }}"
+            fromaddr: "{{ pf_config_general['hostname'] }}@{{ pf_config_general['domain'] }}"
             emailaddr: alerting@inverse.ca
             smtp_port: 1025
             smtp_verifyssl: disabled
             subjectprefix: PF UNDER TEST
             smtp_timeout: 30
-      vars_files:
-        - api_calls.yml
