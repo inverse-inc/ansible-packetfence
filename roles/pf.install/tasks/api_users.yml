@@ -17,7 +17,7 @@
 
 - name: create password for users through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ user['body_user']['pid' }}/password"
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ user['body_user']['pid'] }}/password"
     method: POST
     follow_redirects: safe
     validate_certs: no
