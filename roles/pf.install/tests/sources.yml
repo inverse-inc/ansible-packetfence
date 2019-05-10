@@ -1,0 +1,39 @@
+---
+# Sample
+###### common parameters
+# - id: htpasswd
+#   description: htpasswd source
+#   realms:
+#     - null
+#   type: Htpasswd
+#   # add here source specific
+#   # [..]
+#   #
+#   ## common parameters
+#   authentication_rules:
+#   administration_rules:
+#     id: admins
+#     description: All admins
+#     conditions:
+#       match: all
+#     actions:
+#     - type: set_access_level
+#       value: ALL
+
+pf_sources:
+- id: htpasswd
+  description: htpasswd source
+  realms:
+    - null
+  type: Htpasswd
+  path: /usr/local/pf/conf/htpasswd.conf
+  authentication_rules:
+  administration_rules:
+    id: admins
+    description: All admins
+    conditions:
+      match: all
+    actions:
+    - type: set_access_level
+      value: ALL
+  

@@ -30,3 +30,11 @@
   loop_control:
     loop_var: user
   tags: api_users
+
+- name: include api_sources tasks
+  include_tasks: api_sources.yml
+  when: pf_sources is defined
+  loop: "{{ pf_sources }}"
+  loop_control:
+    loop_var: source
+  tags: api_sources
