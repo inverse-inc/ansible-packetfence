@@ -16,7 +16,7 @@
     headers:
       Authorization: "{{ pf_api_token }}"
     body: "{{ source | to_json }}"
-    register: create_source
+  register: create_source
 
 # update source only if it was already created (409 from previous task)
 - name: update {{ source['id'] }} source through API calls
