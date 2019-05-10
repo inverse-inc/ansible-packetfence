@@ -1,5 +1,20 @@
 ---
-- name: create/update source through API calls
+- name: create source through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['source'] }}"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+    body_format: json
+    headers:
+      Authorization: "{{ pf_api_token }}"
+    body: "{{ source | to_json }}"
+
+- name: update source through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['source'] }}/{{ source['id'] }}"
     method: PUT
