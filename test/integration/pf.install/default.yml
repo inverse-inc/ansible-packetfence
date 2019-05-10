@@ -26,3 +26,12 @@
             smtp_verifyssl: disabled
             subjectprefix: PF UNDER TEST
             smtp_timeout: 30
+        pf_users:
+          - body:
+              pid: user1
+              email: user1@foo.com
+              password: user1
+          - body:
+              pid: user2
+              email: user2@foo.com
+              password: user2

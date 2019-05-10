@@ -22,3 +22,11 @@
 - name: include api_config tasks
   include_tasks: api_config.yml
   tags: api_config
+
+- name: include api_users tasks
+  include_tasks: api_users.yml
+  when: pf_users is defined
+  loop: "{{ pf_users }}"
+  loop_control:
+    loop_var: user
+  tags: api_users

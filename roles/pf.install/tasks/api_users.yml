@@ -1,0 +1,37 @@
+---
+- name: create/update users through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_users }}"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+      - 409 # duplicate
+    body_format: json
+    headers:
+      Authorization: "{{ pf_api_token }}"
+    body: "{{ user.body | to_json }}"
+
+- name: create password for users through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ item.body.pid }}/password"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+      - 409 # duplicate
+    body_format: json
+    headers:
+      Authorization: "{{ pf_api_token }}"
+    body: "{{ user.body | to_json }}"    
+
+  # loop: "{{ pf_api_calls }}"
+  # # display only method and route on CLI for each call
+  # loop_control:
+  #   label: "{{ item.method }} /{{ item.route }}"
