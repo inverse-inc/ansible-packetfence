@@ -1,7 +1,7 @@
 ---
 # create source if it doesn't exist
 # don't fail if it already exist
-- name: create {{ source }} through API calls
+- name: create {{ source['id'] }} through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['sources'] }}"
     method: POST
@@ -19,7 +19,7 @@
     register: create_source
 
 # update source only if it was already created (409 from previous task)
-- name: update {{ source }} through API calls
+- name: update {{ source['id'] }} through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['source'] }}/{{ source['id'] }}"
     method: PATCH
