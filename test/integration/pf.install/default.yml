@@ -27,15 +27,19 @@
             subjectprefix: PF UNDER TEST
             smtp_timeout: 30
         pf_users:
-          - body:
+          - body_user:
               pid: user1
               email: user1@foo.com
+            body_user_password:
+              pid: user1
               password: user1
-          - body:
+          - body_user:
               pid: user2
               email: user2@foo.com
+            body_user_password:
+              pid: user2
               password: user2
-          - body:
+          - body_user:
               pid: admin2
               email: "admin2@{{ pf_config_general['domain'] }}"
               address: "7000 Park Avenue, Montreal"
@@ -68,7 +72,7 @@
               title: IT
               work_phone: "+33789898989"
               login_remaining: null
-              can_sponsor: 1
+            body_user_password:
               access_level: ALL
               expiration: "2038-01-01 00:00:00"
               password: admin2

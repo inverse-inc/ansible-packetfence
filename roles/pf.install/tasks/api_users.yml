@@ -13,11 +13,11 @@
     body_format: json
     headers:
       Authorization: "{{ pf_api_token }}"
-    body: "{{ user.body | to_json }}"
+    body: "{{ user['body_user'] | to_json }}"
 
 - name: create password for users through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ user.body.pid }}/password"
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ user['body_user']['pid' }}/password"
     method: POST
     follow_redirects: safe
     validate_certs: no
@@ -29,9 +29,4 @@
     body_format: json
     headers:
       Authorization: "{{ pf_api_token }}"
-    body: "{{ user.body | to_json }}"    
-
-  # loop: "{{ pf_api_calls }}"
-  # # display only method and route on CLI for each call
-  # loop_control:
-  #   label: "{{ item.method }} /{{ item.route }}"
+    body: "{{ user['body_user_password'] | to_json }}"
