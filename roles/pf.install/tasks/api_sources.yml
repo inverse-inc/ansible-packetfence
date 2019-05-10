@@ -1,7 +1,7 @@
 ---
 - name: create/update source through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_users }}"
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['source'] }}"
     method: PUT
     follow_redirects: safe
     validate_certs: no
@@ -9,8 +9,7 @@
     status_code:
       - 200
       - 201
-      - 409 # duplicate
     body_format: json
     headers:
       Authorization: "{{ pf_api_token }}"
-    body: "{{ user['body_user'] | to_json }}"
+    body: "{{ source | to_json }}"
