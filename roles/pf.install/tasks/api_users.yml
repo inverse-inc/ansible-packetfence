@@ -1,5 +1,6 @@
 ---
-- name: create/update users through API calls
+# only create, not update
+- name: create users through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_users }}"
     method: POST
@@ -15,10 +16,13 @@
       Authorization: "{{ pf_api_token }}"
     body: "{{ user['body_user'] | to_json }}"
 
-- name: create password for users through API calls
+# TODO: get result from previous task, if 409, use PUT /user/{user_id} to update user
+# if it's already created
+    
+- name: update password for users through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ user['body_user']['pid'] }}/password"
-    method: POST
+    method: PUT
     follow_redirects: safe
     validate_certs: no
     return_content: yes
