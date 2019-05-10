@@ -1,4 +1,6 @@
 ---
+# Important: create_source variable is overrided by each loop iteration
+
 # create source if it doesn't exist
 # don't fail if it already exist
 - name: create {{ source['id'] }} source through API calls
