@@ -29,7 +29,6 @@
     status_code:
       - 200
       - 201
-      - 409 # duplicate
     body_format: json
     headers:
       Authorization: "{{ pf_api_token }}"

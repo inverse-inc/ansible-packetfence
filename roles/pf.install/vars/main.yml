@@ -43,6 +43,7 @@ pf_api_config_endpoints:
     role: "{{ pf_api_config }}/role"
     scan: "{{ pf_api_config }}/scan"
     source: "{{ pf_api_config }}/source"
+    sources: "{{ pf_api_config }}/sources"
     switch: "{{ pf_api_config }}/switch"
     switch_group: "{{ pf_api_config }}/switch_group"
     syslog_parser: "{{ pf_api_config }}/syslog_parser"
