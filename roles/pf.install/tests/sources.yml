@@ -36,4 +36,17 @@ pf_sources:
     actions:
     - type: set_access_level
       value: ALL
+- id: potd
+  description: password of the day source
+  realms:
+    - null
+    - default
+    - local
+  type: Potd
+  password_email_update: foo@inverse.ca
+  password_length: 8
+  password_rotation:
+    interval: 10
+    unit: m
+
   

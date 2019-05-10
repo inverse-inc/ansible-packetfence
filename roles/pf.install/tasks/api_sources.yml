@@ -33,4 +33,4 @@
     headers:
       Authorization: "{{ pf_api_token }}"
     body: "{{ source | to_json }}"
-  when: (create_source['stdout'] | from_json).status == 409
+  when: create_source['status'] == 409
