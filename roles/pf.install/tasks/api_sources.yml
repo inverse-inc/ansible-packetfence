@@ -1,5 +1,7 @@
 ---
-- name: create source through API calls
+# create source if it doesn't exist
+# don't fail if it already exist
+- name: create {{ source }} through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['sources'] }}"
     method: POST
@@ -9,12 +11,15 @@
     status_code:
       - 200
       - 201
+      - 409 # duplicate
     body_format: json
     headers:
       Authorization: "{{ pf_api_token }}"
     body: "{{ source | to_json }}"
+    register: create_source
 
-- name: update source through API calls
+# update source only if it was already created (409 from previous task)
+- name: update {{ source }} through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['source'] }}/{{ source['id'] }}"
     method: PATCH
@@ -28,3 +33,4 @@
     headers:
       Authorization: "{{ pf_api_token }}"
     body: "{{ source | to_json }}"
+  when: (create_source['stdout'] | from_json).status = 409
