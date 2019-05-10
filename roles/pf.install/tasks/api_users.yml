@@ -22,7 +22,7 @@
 - name: update password for users through API calls
   uri:
     url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_user }}/{{ user['body_user']['pid'] }}/password"
-    method: PUT
+    method: PATCH
     follow_redirects: safe
     validate_certs: no
     return_content: yes
