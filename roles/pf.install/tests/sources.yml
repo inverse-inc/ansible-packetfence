@@ -3,7 +3,7 @@
 # null need to be quoted
 
 pf_sources:
-- id: htpasswd
+- id: htpasswd_source
   description: htpasswd source
   realms:
     - "null"
@@ -18,7 +18,7 @@ pf_sources:
     actions:
     - type: set_access_level
       value: ALL
-- id: potd
+- id: potd_source
   description: password of the day source
   realms:
     - "null"
@@ -30,5 +30,7 @@ pf_sources:
   password_rotation:
     interval: 10
     unit: m
-
-  
+- id: null_source
+  description: null source
+  type: "Null"
+  email_required: yes
