@@ -37,3 +37,19 @@ pf_sources:
   description: null source
   type: "Null"
   email_required: yes
+- id: email_source
+  description: email source
+  type: Email
+  banned_domains: foo.inverse.ca, bar.inverse.ca
+  allowed_domains: "*.inverse.ca, *foo.ca, bar.ca"
+  activation_domain:
+  allow_localdomain:
+  create_local_account: yes
+  password_length: 15
+  hash_passwords: ntlm
+  local_account_logins: 0
+  email_activation_timeout:
+    interval: 10
+    unit: m
+  authentication_rules:
+  administration_rules:
