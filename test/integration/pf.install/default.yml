@@ -82,7 +82,9 @@
           - body_user:
               pid: user_manager
               email: "user_manager@{{ pf_config_general['domain'] }}"
+              address: "Avenue Saint-André"
               sponsor: admin2@example.lan
+              firstname: Émile
             body_user_password:
               access_level: User Manager
               expiration: "2038-01-01 00:00:00"
