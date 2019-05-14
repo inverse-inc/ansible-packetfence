@@ -3,7 +3,7 @@
 
 - name: ensure {{ source['path'] }} is created before calling API
   htpasswd:
-    path: "{{ pf_conf_dir  }}/{{ source['path'] }}"
+    path: "{{ source['path'] }}"
     name: "{{ source['user'] }}"
     password: "{{ source['password'] }}"
     mode: 0640
