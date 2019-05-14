@@ -9,7 +9,7 @@ pf_sources:
     - "null"
   type: Htpasswd
   path: /usr/local/pf/conf/htpasswd.conf
-  # extra fiels to create file
+  # extra fields to create file
   user: inverse
   password: secret
   authentication_rules:

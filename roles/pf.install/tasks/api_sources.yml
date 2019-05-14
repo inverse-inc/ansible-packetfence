@@ -9,7 +9,7 @@
     mode: 0640
     owner: root
     group: "{{ pf_group }}"
-  when: source['type'] == Htpasswd
+  when: source['type'] == 'Htpasswd'
 
 # create source if it doesn't exist
 # don't fail if it already exist
