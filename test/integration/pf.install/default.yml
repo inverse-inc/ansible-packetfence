@@ -79,24 +79,24 @@
               password: admin2
               sponsor: true
               valid_from: "{{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}"
-            - body_user:
-                pid: user_manager
-                email: "user_manager@{{ pf_config_general['domain'] }}"
-                sponsor: admin2@example.lan
-              body_user_password:
-                access_level: User Manager
-                expiration: "2038-01-01 00:00:00"
-                password: user_manager
-                sponsor: false
-                valid_from: "{{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}"
-            - body_user:
-                pid: node_manager
-                email: "node_manager@{{ pf_config_general['domain'] }}"
-                sponsor: admin2@example.lan
-              body_user_password:
-                access_level: User Manager
-                expiration: "2038-01-01 00:00:00"
-                password: node_manager
-                sponsor: false
-                valid_from: "{{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}"
+          - body_user:
+              pid: user_manager
+              email: "user_manager@{{ pf_config_general['domain'] }}"
+              sponsor: admin2@example.lan
+            body_user_password:
+              access_level: User Manager
+              expiration: "2038-01-01 00:00:00"
+              password: user_manager
+              sponsor: false
+              valid_from: "{{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}"
+          - body_user:
+              pid: node_manager
+              email: "node_manager@{{ pf_config_general['domain'] }}"
+              sponsor: admin2@example.lan
+            body_user_password:
+              access_level: User Manager
+              expiration: "2038-01-01 00:00:00"
+              password: node_manager
+              sponsor: false
+              valid_from: "{{ ansible_date_time['date'] }} {{ ansible_date_time['time'] }}"
 
