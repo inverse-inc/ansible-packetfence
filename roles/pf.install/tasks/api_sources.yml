@@ -1,7 +1,7 @@
 ---
 # Important: create_source variable is overrided by each loop iteration
 
-- name: ensure {{ source['path'] }} is created before calling API
+- name: ensure {{ source['path'] }} is created before calling API (only Htpasswd source)
   htpasswd:
     path: "{{ source['path'] }}"
     name: "{{ source['user'] }}"
