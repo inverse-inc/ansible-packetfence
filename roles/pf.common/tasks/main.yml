@@ -17,6 +17,11 @@
   setup:
     filter: ansible_default_ipv4*
   when: iproute_install is changed
+
+- name: ensure python-passlib package is installed for htpasswd sources
+  package:
+    name: "{{ passlib_pkg }}"
+    state: present
     
 - name: ensure management IP is in /etc/hosts
   lineinfile:

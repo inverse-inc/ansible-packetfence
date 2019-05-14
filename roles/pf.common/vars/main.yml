@@ -1,2 +1,3 @@
 ---
 # vars file for pf.common
+passlib_pkg: python-passlib
