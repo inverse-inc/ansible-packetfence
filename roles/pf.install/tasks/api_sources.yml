@@ -1,6 +1,16 @@
 ---
 # Important: create_source variable is overrided by each loop iteration
 
+- name: ensure {{ source['path'] }} is created before calling API
+  htpasswd:
+    path: "{{ pf_conf_dir  }}/{{ source['path'] }}"
+    name: "{{ source['user'] }}"
+    password: "{{ source['password'] }}"
+    mode: 0640
+    owner: root
+    group: "{{ pf_group }}"
+  when: source['type'] == Htpasswd
+
 # create source if it doesn't exist
 # don't fail if it already exist
 - name: create {{ source['id'] }} source through API calls
