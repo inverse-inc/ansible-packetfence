@@ -36,7 +36,7 @@ pf_sources:
 - id: null_source
   description: null source
   type: "Null"
-  email_required: yes
+  email_required: "yes" # quote to avoid boolean
 - id: email_source
   description: email source
   type: Email
