@@ -20,7 +20,7 @@
 
 - name: Update the PacketFence repo
   yum:
-    name: "{{ centos_pf_release_pkg }}"
+    name: "{{ centos_pf_release_pkg }}-{{ centos_pkg_version | default() }}"
     enablerepo: "{{ centos['repo'] }}"
     state: latest
 
