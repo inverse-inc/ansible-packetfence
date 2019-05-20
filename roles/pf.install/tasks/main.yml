@@ -21,6 +21,7 @@
 
 - name: include api_config tasks
   include_tasks: api_config.yml
+  when: pf_api_calls is defined
   tags: api_config
 
 - name: include api_users tasks
