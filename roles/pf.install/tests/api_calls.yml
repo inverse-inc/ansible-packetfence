@@ -24,7 +24,7 @@ pf_api_calls:
     method: PATCH
     body:
       id: upstream
-      api_key: 123456
+      api_key:
   - route: "{{ pf_api_config_endpoints['base'] }}/advanced"
     method: PATCH
     body:
