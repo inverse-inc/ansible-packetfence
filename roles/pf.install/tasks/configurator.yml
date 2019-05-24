@@ -56,7 +56,7 @@
 
 - name: check end of configurator
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_webadmin_port}}"
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_webadmin_port }}"
     return_content: yes
     follow_redirects: safe
     validate_certs: no
