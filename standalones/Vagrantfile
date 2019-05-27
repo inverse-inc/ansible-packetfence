@@ -33,9 +33,6 @@ Vagrant.configure("2") do |cluster|
   # Allow SSH as root with insecure_private_key
   cluster.vm.provision "ssh", type:"shell", inline: "sudo mkdir -p /root/.ssh && sudo cp /home/vagrant/.ssh/authorized_keys /root/.ssh/"
 
-  # Disable systemd-resolved to start pfdns
-  cluster.vm.provision "dns", type:"shell", inline: "sudo systemctl stop systemd-resolved && sudo systemctl disable systemd-resolved"
-
   # Provision with ansible
   cluster.vm.provision "ansible" do |ansible|
     ansible.playbook = "../site.yml"
@@ -86,7 +83,6 @@ Vagrant.configure("2") do |cluster|
       srv.vm.provider "virtualbox" do |v|
         v.cpus = 2
         v.memory = "4096"
-      end
       end
     end
   end
