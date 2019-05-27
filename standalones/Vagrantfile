@@ -74,13 +74,15 @@ Vagrant.configure("2") do |cluster|
       # isolation
       srv.vm.network "private_network", ip: details['iso_ip']
 
+      srv.vm.provider "libvirt" do |v|
+        v.cpus = 2
+        v.memory = "4096"
+      end
+      
       srv.vm.provider "virtualbox" do |v|
         v.cpus = 2
         v.memory = "4096"
-
-     srv.vm.provider "libvirt" do |v|
-        v.cpus = 2
-        v.memory = "4096"
+      end
       end
     end
   end
