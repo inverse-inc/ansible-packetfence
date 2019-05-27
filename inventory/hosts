@@ -24,24 +24,24 @@ all:
           iso_ip: 192.168.100.110
           ansible_host: 127.0.0.1
           ansible_port: "{{ ssh_port }}"
-        pfdeb8dev:
-          box: debian/jessie64
-          admin_port: 1643
-          ssh_port: 2400
-          mgmt_ip: 10.0.0.12
-          reg_ip: 192.168.101.10
-          iso_ip: 192.168.102.10
-          ansible_host: 127.0.0.1
-          ansible_port: "{{ ssh_port }}"
-        pfdeb8stable:
-          box: debian/jessie64
-          admin_port: 1743
-          ssh_port: 2500
-          mgmt_ip: 10.0.0.13
-          reg_ip: 192.168.101.110
-          iso_ip: 192.168.102.110
-          ansible_host: 127.0.0.1
-          ansible_port: "{{ ssh_port }}"        
+        # pfdeb8dev:
+        #   box: debian/jessie64
+        #   admin_port: 1643
+        #   ssh_port: 2400
+        #   mgmt_ip: 10.0.0.12
+        #   reg_ip: 192.168.101.10
+        #   iso_ip: 192.168.102.10
+        #   ansible_host: 127.0.0.1
+        #   ansible_port: "{{ ssh_port }}"
+        # pfdeb8stable:
+        #   box: debian/jessie64
+        #   admin_port: 1743
+        #   ssh_port: 2500
+        #   mgmt_ip: 10.0.0.13
+        #   reg_ip: 192.168.101.110
+        #   iso_ip: 192.168.102.110
+        #   ansible_host: 127.0.0.1
+        #   ansible_port: "{{ ssh_port }}"        
         pfdeb9dev:
           box: debian/stretch64
           admin_port: 1843
