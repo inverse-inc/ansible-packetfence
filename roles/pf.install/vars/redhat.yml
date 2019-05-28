@@ -1,10 +1,2 @@
 ---
-centos_pf_release_pkg: packetfence-release
-centos_pf_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/x86_64/RPMS/{{ centos_pf_release_pkg }}-1.2-7.el7.noarch.rpm"
-centos_pf_packages:
-  - packetfence
-  - packetfence-ntlm-wrapper
-
-centos_python_mysql_pkg: python2-PyMySQL
-
 pf_database_socket: /var/lib/mysql/mysql.sock
