@@ -7,15 +7,6 @@
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
 
-# only if configurator step has been finished
-# this is to update simply devel machines
-- name: restart pf services
-  command: "{{ pf_pfcmd }} service pf restart"
-  args:
-    removes: "{{ pf_currently_at_file }}"
-  register: pfcmd_result
-  when: pkg_update is changed
-
 - name: include utils tasks
   include_tasks: utils.yml
   tags: utils
