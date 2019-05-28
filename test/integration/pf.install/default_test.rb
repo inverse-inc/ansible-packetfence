@@ -2,3 +2,4 @@
 
 describe package('packetfence') do
   it { should be_installed }
+end
