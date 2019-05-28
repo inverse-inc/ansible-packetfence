@@ -31,42 +31,22 @@ pf_database_pass: secret
 pf_database_users:
   - name: pf
     password: "{{ pf_database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
     host: "localhost"
   - name: pf
     password: "{{ pf_database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
-    host: "%"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "mysql.proc:SELECT"
-    append_privs: yes
-    host: "localhost"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "mysql.proc:SELECT"
-    append_privs: yes
-    host: "%"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "pf.radius_nas:DROP"
-    append_privs: yes
-    host: "localhost"
-  - name: pf
-    password: "{{ pf_database_pass }}"
-    priv: "pf.radius_nas:DROP"
-    append_privs: yes
     host: "%"
 
 ### configurator
 # interfaces
-pf_interfaces:
-  - id: "{{ ansible_default_ipv4['interface'] }}"
-    ip: "{{ ansible_default_ipv4['address'] }}"
-    mask: "{{ ansible_default_ipv4['netmask'] }}"
-    type: management,portal
+pf_mgmt_interface:
+  id: "{{ ansible_default_ipv4['interface'] }}"
+  ip: "{{ ansible_default_ipv4['address'] }}"
+  mask: "{{ ansible_default_ipv4['netmask'] }}"
+  type: management
 
 ### users
 pf_admin_user:
