@@ -18,6 +18,6 @@
 # Only one package
 - name: Install PacketFence from the repo
   apt:
-    name: "{{ deb_pf_packages }}={{ deb_pkg_version | default() }}"
+    name: "{{ deb_pf_packages }}"
     state: latest
   register: pkg_update
