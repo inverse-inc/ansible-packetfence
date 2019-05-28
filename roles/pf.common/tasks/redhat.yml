@@ -1,10 +1,4 @@
 ---
-# equals to yum update -y
-- name: make sure system is up to date
-  yum:
-    name: '*'
-    state: latest
-
 - name: install selinux package on hosts for next task
   yum:
     name:
