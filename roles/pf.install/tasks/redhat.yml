@@ -27,7 +27,7 @@
 # NLTM wrapper is not a dependence of packetfence
 - name: Install PacketFence and NTLM wrapper from the repo
   yum:
-    name: "{{ centos_pf_packages }}-{{ centos_pkg_version | default() }}"
+    name: "{{ centos_pf_packages }}"
     enablerepo: "{{ centos['repo'] }}"
     state: latest
     update_cache: yes
