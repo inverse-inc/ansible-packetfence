@@ -11,6 +11,7 @@
       export LOGS=$PF/logs
       export PATH=$PFBIN:$PFSBIN:$PATH
       export SSL=$CONF/ssl
+      export ADDS=$PF/addons
       export HISTCONTROL=ignorespace
       alias pfstatus='$PFBIN/pfcmd service pf status'
       alias pfstart='$PFBIN/pfcmd service pf start'
