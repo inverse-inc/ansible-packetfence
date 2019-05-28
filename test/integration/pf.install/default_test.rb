@@ -1,4 +1,4 @@
 # # encoding: utf-8
 
-describe package('hello-doc-ng') do
+describe package('packetfence') do
   it { should be_installed }
