@@ -46,7 +46,7 @@ pf_mgmt_interface:
   - id: "{{ ansible_default_ipv4['interface'] }}"
     ip: "{{ ansible_default_ipv4['address'] }}"
     mask: "{{ ansible_default_ipv4['netmask'] }}"
-    type: management,portal
+    type: management
 
 ### users
 pf_admin_user:
