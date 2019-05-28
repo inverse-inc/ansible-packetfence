@@ -1,20 +1,74 @@
 ---
-- name: install pf.conf
-  template:
-    src: pf.conf.j2
-    dest: "{{ pf_conf_dir }}/pf.conf"
+- name: set packetfence password in db in pf.conf
+  ini_file:
+    path: "{{ pf_conf_dir }}/pf.conf"
+    section: database
+    option: pass
+    value: "{{ pf_database_pass }}"
+    state: present
     mode: 0664
     owner: "{{ pf_user }}"
     group: "{{ pf_group }}"
-  diff: true
-  register: pf_conf_result
+    no_extra_spaces: yes
+  register: pf_password_result
 
+- name: set packetfence password in db in pfconfig.conf
+  ini_file:
+    path: "{{ pf_conf_dir }}/pfconfig.conf"
+    section: mysql
+    option: pass
+    value: "{{ pf_database_pass }}"
+    state: present
+    mode: 0664
+    owner: "{{ pf_user }}"
+    group: "{{ pf_group }}"
+    no_extra_spaces: yes
+  register: pfconfig_password_result
+  
+- name: define network interfaces in pf.conf
+  blockinfile:
+    path: "{{ pf_conf_dir }}/pf.conf"
+    block: |
+      {% for interface in pf_interfaces %}
+      [interface {{ interface['id'] }}]
+      ip={{ interface['ip'] }}
+      mask={{ interface['mask'] }}
+      type={{ interface['type'] }}
+      {% if interface['enforcement'] is defined %}
+      enforcement={{ interface['enforcement'] }}
+      {% endif %}
+      {# keep space below #}
+      
+      {% endfor %}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK"
+    mode: 0664
+    owner: "{{ pf_user }}"
+    group: "{{ pf_group }}"
+
+- name: define mgmt interface in pf.conf
+  ini_file:
+    path: "{{ pf_conf_dir }}/pf.conf"
+    section: "interface {{ pf_mgmt_interface['id'] }}"
+    option: "{{ item.name }}"
+    value: "{{ item.value }}"
+    mode: 0664
+    owner: "{{ pf_user }}"
+    group: "{{ pf_group }}"
+    no_extra_spaces: yes
+  loop:
+    - name: ip
+      value: "{{ pf_mgmt_interface['ip'] }}"
+    - name: mask
+      value: "{{ pf_mgmt_interface['mask'] }}"
+    - name: type
+      value: "{{ pf_mgmt_interface['type'] }}"
+    
 # to take new DB password into account
 - name: restart packetfence-config service
   service:
     name: packetfence-config
     state: restarted
-  when: pf_conf_result is changed
+  when: (pf_password_result or pfconfig_password_result) is changed
   
 - name: update default admin password in db through pfperl-api
   command:
