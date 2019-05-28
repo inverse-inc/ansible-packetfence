@@ -7,7 +7,8 @@ kitchen_centos7:
   only:
     - master
   script:
-    - kitchen test pfinstall-centos-7
+    - kitchen test pfinstall-centos-7 --destroy=never
+    - kitchen test pfinstall-centos-7 --destroy=passing
   tags:
     - futura
 
@@ -17,6 +18,7 @@ kitchen_debian9:
   only:
     - master
   script:
-    - kitchen test pfinstall-debian-9
+    - kitchen test pfinstall-debian-9 --destroy=never
+    - kitchen test pfinstall-debian-9 --destroy=passing
   tags:
     - futura
