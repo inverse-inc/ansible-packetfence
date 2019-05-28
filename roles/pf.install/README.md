@@ -1,38 +1,72 @@
-Role Name
-=========
+# Role Name
 
-A brief description of the role goes here.
+Install and manage a PacketFence instance with Ansible.
 
-Requirements
-------------
+# Requirements
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+See Dependencies section below.
 
-Role Variables
---------------
+# Role Variables
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+### RedHat
 
-Dependencies
-------------
+| Variable                | Default                                  | Comments (type)                                                      |
+| ---                     | ---                                      | ---                                                                  |
+| `centos['repo']`        | `packetfence`                            | CentOS repo to use                                                   |
+| `centos_pf_release_pkg` | `packetfence-release`                    | Package containing CentOS repo                                       |
+| `centos_pf_release_rpm` | `"http://packetfence.org/downloads/PacketFence/RHEL7/x86_64/RPMS/{{ centos_pf_release_pkg }}-1.2-7.el7.noarch.rpm"` | URL to install `centos_pf_release_pkg` |
+| `centos_pf_packages`    | `[packetfence,packetfence-ntlm-wrapper]` | List of CentOS packages to install, `packetfence-8.3` syntax allowed |
+| `deb['repos']`          | `[debian]`                               | List of Debian repos to use                                          |
+| `deb_sources_dir`       | `/etc/apt/sources.list.d`                | Directory to store packetfence.list                                  |
+| `deb_pf_packages`       | `[packetfence]`                          | List of Debian packages to install, `packetfence=8.3` syntax allowed |
+| `pf_database_db`        | `pf`                                     | Database name                                                        |
+| `pf_database_root_user` | `root`                                   | `root` user of DB                                                    |
+| `pf_database_root_pass` | `secret`                                 | Default password for `pf_database_root_user`                         |
+| `pf_database_pass`      | `secret`                                 | Default password for `pf` user                                       |
+| `pf_database_users`     | FIXME                                    | FIXME                                                                |
+| `pf_database_socket`    | Distribution specific, see `vars/` dir   | Local socket to use                                                  |
+| `pf_interfaces`         | FIXME                                    | List of network interfaces to configure in PacketFence               |
+| `pf_admin_user`         | `{pid: admin, password: secret }`        | Dict with username and password for default admin user               |
+| `shell_rc_file`         | `/root/.bashrc`                          | File where to add common PacketFence aliases                         |
+| `pf_root_dir`           | `/usr/local/pf`                          | Root dir of PacketFence install                                      |
+| `pf_conf_dir`           | `{{ pf_root_dir }}/conf`                 |                                                                      |
+| `pf_bin_dir`            | `{{ pf_root_dir }}/bin`                  |                                                                      |
+| `pf_sbin_dir`           | `{{ pf_root_dir }}/sbin`                 |                                                                      |
+| `pf_db_dir`             | `{{ pf_root_dir }}/db`                   |                                                                      |
+| `pf_currently_at_file`  | `{{ pf_conf_dir }}/currently-at`         | File to set current PF version after install or upgrade              |
+| `pf_pfcmd`              | `{{ pf_bin_dir }}/pfcmd`                 | `pfcmd` command                                                      |
+| `pf_perlapi_cmd`        | `{{ pf_sbin_dir }}/pfperl-api`           | `pfperl-api` command                                                 |
+| `pf_user`               | `pf`                                     | `pf` UNIX user                                                       |
+| `pf_group`              | `pf`                                     | `pf` UNIX group                                                      |
+| `pf_webadmin_port`      | `1443`                                   | Listening port for web admin                                         |
+| `pf_api_base_path`      | `/api/v1`                                | Base path for REST API                                               |
+|                         |                                          |                                                                      |
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
-Example Playbook
-----------------
+# Dependencies
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+Role pf.common
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+# Example Playbook
 
-License
--------
 
-BSD
+```yaml
+---
+- hosts: pfservers
+  roles:
+     - pf.install
+     vars:
+       pf_database_root_user: root
+       pf_database_root_pass: mysecretpassword
+       pf_database_pass: anothersecretpassword
+```
 
-Author Information
-------------------
+# License
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+
+GPL v2.0
+
+# Author Information
+
+
+Inverse inc. <info@inverse.ca>
