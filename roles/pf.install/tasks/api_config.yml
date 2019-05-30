@@ -1,7 +1,7 @@
 ---
 - name: POST {{ pf_api_login }}
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_login }}"
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port }}/{{ pf_api_login }}"
     method: POST
     follow_redirects: safe
     validate_certs: no
