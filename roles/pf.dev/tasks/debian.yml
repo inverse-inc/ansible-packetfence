@@ -1,0 +1,21 @@
+---
+- name: install debian build dependencies
+  apt:
+    name: "{{ dev__deb_build_pkgs }}"
+    state: latest
+
+- name: remove config file to install locales
+  file:
+    path: "{{ dev__apt_config_file }}"
+    state: absent
+
+- name: install all locales
+  apt:
+    name: "{{ dev__deb_locale_pkgs }}"
+    state: latest
+    update_cache: yes
+
+- name: install utils
+  apt:
+    name: "{{ dev__deb_utils_pkgs }}"
+    

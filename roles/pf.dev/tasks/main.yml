@@ -1,0 +1,10 @@
+---
+# tasks file for pf.dev
+- name: include distribution specific tasks
+  include_tasks: "{{ ansible_os_family|lower }}.yml"
+
+- name: install utils
+  package:
+    name: "{{ dev__utils_pkgs }}"
+    state: latest
+    
