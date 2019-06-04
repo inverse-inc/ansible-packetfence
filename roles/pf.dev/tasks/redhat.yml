@@ -1,0 +1,20 @@
+---
+- name: install centos build dependencies
+  yum:
+    name: "{{ dev__centos_build_pkgs }}"
+    state: latest
+
+- name: add epel repository disabled
+  yum_repository:
+     name: epel
+     description: EPEL YUM repo
+     baseurl: "{{ dev__centos_epel_url }}"
+     enabled: no
+     gpgcheck: no
+
+# Enable epel temporarily
+- name: install utils
+  yum:
+    name: "{{ dev__centos_utils_pkgs }}"
+    state: present
+    enablerepo: epel
