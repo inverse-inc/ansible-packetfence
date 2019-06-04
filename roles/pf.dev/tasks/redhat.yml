@@ -18,3 +18,4 @@
     name: "{{ dev__centos_utils_pkgs }}"
     state: present
     enablerepo: epel
+    
