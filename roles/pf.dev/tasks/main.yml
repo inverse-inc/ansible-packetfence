@@ -23,6 +23,7 @@
 - name: patch config files only for debian
   patch:
     src: "{{ dev__pf_deb_patch }}"
+    remote_src: yes
     basedir: "{{ dev__pf_dir }}"
     strip: 1
   when: ansible_os_family == 'Debian'
