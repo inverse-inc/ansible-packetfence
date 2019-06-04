@@ -40,6 +40,11 @@ dev__centos_utils_pkgs:
 
 
 ## Common
+dev__pfcmd: /usr/local/pf/bin/pfcmd
+dev__services_unmanaged:
+  - packetfence-config
+  - packetfence-mariadb
+  - packetfence-redis-cache
 dev__pf_pkg_dir: /usr/local/pf-pkg
 dev__pf_dir: /usr/local/pf
 dev__pf_deb_patch: "{{ dev__pf_dir }}/debian/patches/debianize.patch"
