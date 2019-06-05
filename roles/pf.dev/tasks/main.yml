@@ -19,6 +19,7 @@
   git:
     repo: https://github.com/inverse-inc/packetfence.git
     dest: "{{ dev__pf_dir }}"
+    version: feature/dev-ci-env
 
 - name: patch config files only for debian
   patch:
@@ -27,7 +28,3 @@
     basedir: "{{ dev__pf_dir }}"
     strip: 1
   when: ansible_os_family == 'Debian'
-
-- name: run setup-dev-env.sh script
-  script: scripts/setup-dev-env.sh
-  run_once: True
