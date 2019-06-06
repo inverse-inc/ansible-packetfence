@@ -1,0 +1,19 @@
+---
+# defaults file for pf.gitlab
+## Debian
+gitlab__apt_sources_dir: /etc/apt/sources.list.d
+gitlab__deb_pkgs:
+  - apt-transport-https
+  - gnupg
+
+## CentOS
+gitlab__rpm_pkgs:
+  - gnupg2
+  
+## Common
+gitlab__ci_pages_url: '{{ lookup("env"), "CI_PAGES_URL" }}'
+gitlab__project_gpg_key_url: "{{ gitlab__ci_pages_url }}/GPG_PUBLIC_KEY"
+#gitlab__project_namespace: '{{ lookup("env"), "CI_PROJECT_NAMESPACE" }}'
+gitlab__project_name: '{{ lookup("env"), "CI_PROJECT_NAME" }}'
+#gitlab__pages_host: '{{ lookup("env"), "PAGES_HOST" }}'
+gitlab__built_pkg: ""

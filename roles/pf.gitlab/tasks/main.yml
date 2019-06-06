@@ -1,0 +1,4 @@
+---
+# tasks file for pf.gitlab
+- name: include distribution specific tasks
+  include_tasks: "{{ ansible_os_family|lower }}.yml"
