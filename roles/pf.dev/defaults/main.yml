@@ -6,6 +6,7 @@ dev__deb_build_pkgs:
   - libipset-dev
   - pkg-config
   - gettext
+  - asciidoctor
 dev__apt_config_file: /etc/apt/apt.conf.d/99translations
 dev__deb_locale_pkgs:
   - locales-all
@@ -25,6 +26,7 @@ dev__deb_utils_pkgs:
 dev__centos_build_pkgs:
   - "@Development tools"
   - ipset-devel
+  - asciidoctor
 dev__centos_epel_url: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/  
 dev__centos_utils_pkgs:
   - lnav
