@@ -11,9 +11,9 @@ gitlab__rpm_pkgs:
   - gnupg2
   
 ## Common
+# variables defined for CI
+# can be override by inventory to use outside CI
 gitlab__ci_pages_url: '{{ lookup("env"), "CI_PAGES_URL" }}'
-gitlab__project_gpg_key_url: "{{ gitlab__ci_pages_url }}/GPG_PUBLIC_KEY"
-#gitlab__project_namespace: '{{ lookup("env"), "CI_PROJECT_NAMESPACE" }}'
-gitlab__project_name: '{{ lookup("env"), "CI_PROJECT_NAME" }}'
-#gitlab__pages_host: '{{ lookup("env"), "PAGES_HOST" }}'
-gitlab__built_pkg: ""
+gitlab__ci_pages_gpgkey_url: "{{ gitlab__ci_pages_url }}/GPG_PUBLIC_KEY"
+gitlab__ci_project_name: '{{ lookup("env"), "CI_PROJECT_NAME" }}'
+gitlab__ci_built_pkg: '{{ lookup("env"), "PACKAGE_NAME" }}'
