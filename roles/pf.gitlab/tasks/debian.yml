@@ -12,7 +12,7 @@
 - name: install {{ gitlab__project_name }} repo from gitlab pages
   template:
     src: gitlab-pages.j2
-    dest: "{{ apt_sources_dir }}/gitlab-pages.list"
+    dest: "{{ gitlab__apt_sources_dir }}/gitlab-pages.list"
     
 # to take new key and repo(s) into account
 - name: install package from repo
