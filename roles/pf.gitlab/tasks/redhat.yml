@@ -17,7 +17,7 @@
     enabled: yes
     gpgcheck: yes
     gpgkey: "{{ gitlab__project_gpg_key_url }}"
-    metadata_expire: 900
+    metadata_expire: "900"
     skip_if_unavailable: no
     repo_gpgcheck: no
 
