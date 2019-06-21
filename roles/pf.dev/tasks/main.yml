@@ -3,8 +3,29 @@
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
 
-- name: install utils
-  package:
-    name: "{{ dev__utils_pkgs }}"
-    state: latest
-    
+- name: stop all pf services
+  command: "{{ dev__pfcmd }} service pf stop"
+
+- name: stop services not managed by pfcmd
+  service:
+    name: "{{ item }}"
+    state: stopped
+  loop: "{{ dev__services_unmanaged }}"
+
+- name: move pf dir to another location
+  command: "mv {{ dev__pf_dir }} {{ dev__pf_pkg_dir }}"
+
+- name: clone git repo
+  git:
+    repo: https://github.com/inverse-inc/packetfence.git
+    dest: "{{ dev__pf_dir }}"
+    version: feature/dev-ci-env
+
+- name: patch config files only for debian
+  patch:
+    src: "{{ dev__pf_deb_patch }}"
+    remote_src: yes
+    basedir: "{{ dev__pf_dir }}"
+    strip: 1
+  when: ansible_os_family == 'Debian'
+  tags: [ 'debian' ]
