@@ -1,0 +1,28 @@
+---
+- name: install dependencies to install packages from repo
+  yum:
+    name: "{{ gitlab__rpm_pkgs }}"
+    state: latest
+
+- name: add public key
+  rpm_key: 
+    state: present
+    key: "{{ gitlab__ci_pages_gpgkey_url }}"
+
+- name: install {{ gitlab__ci_project_name }} repo from gitlab pages
+  yum_repository:
+    name: "{{ gitlab__ci_project_name }}"
+    description: "{{ gitlab__ci_project_name }} repo"
+    baseurl: "{{ gitlab__ci_pages_url }}/centos/$releasever/$basearch"
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "{{ gitlab__ci_pages_gpgkey_url }}"
+    metadata_expire: "900"
+    skip_if_unavailable: no
+    repo_gpgcheck: no
+
+- name: install package from repo
+  yum:
+    name: "{{ gitlab__ci_built_pkg }}"
+    update_cache: yes
+    state: latest

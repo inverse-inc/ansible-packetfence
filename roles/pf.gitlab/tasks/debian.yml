@@ -1,0 +1,22 @@
+---
+- name: install dependencies to install packages from repo
+  apt:
+    name: "{{ gitlab__deb_pkgs }}"
+    state: latest
+    
+- name: add public key
+  apt_key:
+    url: "{{ gitlab__ci_pages_gpgkey_url }}"
+    state: present
+    
+- name: install {{ gitlab__ci_project_name }} repo from gitlab pages
+  template:
+    src: gitlab-pages.j2
+    dest: "{{ gitlab__apt_sources_dir }}/gitlab-pages.list"
+    
+# to take new key and repo(s) into account
+- name: install package from repo
+  apt:
+    name: "{{ gitlab__ci_built_pkg }}"
+    update_cache: yes
+    state: latest
