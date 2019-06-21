@@ -18,3 +18,24 @@
 - name: include configurator tasks
   include_tasks: configurator.yml
   tags: configurator
+
+- name: include api_config tasks
+  include_tasks: api_config.yml
+  when: pf_api_calls is defined
+  tags: api_config
+
+- name: include api_users tasks
+  include_tasks: api_users.yml
+  when: pf_users is defined
+  loop: "{{ pf_users }}"
+  loop_control:
+    loop_var: user
+  tags: api_users
+
+- name: include api_sources tasks
+  include_tasks: api_sources.yml
+  when: pf_sources is defined
+  loop: "{{ pf_sources }}"
+  loop_control:
+    loop_var: source
+  tags: api_sources

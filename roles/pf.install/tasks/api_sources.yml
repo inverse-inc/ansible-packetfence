@@ -1,0 +1,48 @@
+---
+# Important: create_source variable is overrided by each loop iteration
+
+- name: ensure {{ source['path'] }} is created before calling API (only Htpasswd source)
+  htpasswd:
+    path: "{{ source['path'] }}"
+    name: "{{ source['user'] }}"
+    password: "{{ source['password'] }}"
+    mode: 0640
+    owner: root
+    group: "{{ pf_group }}"
+  when: source['type'] == 'Htpasswd'
+
+# create source if it doesn't exist
+# don't fail if it already exist
+- name: create {{ source['id'] }} source through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['sources'] }}"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+      - 409 # duplicate
+    body_format: json
+    headers:
+      Authorization: "{{ pf_api_token }}"
+    body: "{{ source | to_json }}"
+  register: create_source
+
+# update source only if it was already created (409 from previous task)
+- name: update {{ source['id'] }} source through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ pf_api_port}}/{{ pf_api_config_endpoints['source'] }}/{{ source['id'] }}"
+    method: PATCH
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+    body_format: json
+    headers:
+      Authorization: "{{ pf_api_token }}"
+    body: "{{ source | to_json }}"
+  when: create_source['status'] == 409

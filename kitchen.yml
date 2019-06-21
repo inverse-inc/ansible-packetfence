@@ -28,7 +28,9 @@ platforms:
 
 provisioner:
   name: ansible_playbook
-  hosts: test-kitchen # add 'test-kitchen' host in inventory file
+  # hack to pass options on command line: ANSIBLE_EXTRA_FLAGS='-vv --start-at-task="task name"' kitchen converge
+  ansible_extra_flags: <%= ENV['ANSIBLE_EXTRA_FLAGS'] %>
+  hosts: test-kitchen # add 'test-kitchen' group in inventory file
   require_chef_for_busser: false # don't install Chef for Busser tests
   
 verifier:
@@ -44,4 +46,4 @@ suites:
     #   inspec_tests:
     #     - name: pf-install profile
     #       path: test/integration/pf.install/pf-install/
-      
+

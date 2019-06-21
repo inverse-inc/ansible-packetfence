@@ -20,9 +20,37 @@ pf_group: pf
 
 ## ports
 pf_webadmin_port: 1443
+pf_api_port: 9999
 
 ## api routes
-pf_api_base_path: /api/v1
+pf_api_base_path: api/v1
 pf_api_config: "{{ pf_api_base_path }}/config"
-pf_api_config_interface: "{{ pf_api_config }}/interface"
+pf_api_config_endpoints:
+    base: "{{ pf_api_config }}/base"
+    certificate: "{{ pf_api_config }}/certificate"
+    connection_profile: "{{ pf_api_config }}/connection_profile"
+    device_registration: "{{ pf_api_config }}/device_registration"
+    domain: "{{ pf_api_config }}/domain"
+    fingerbank_setting: "{{ pf_api_config }}/fingerbank_setting"
+    firewall: "{{ pf_api_config }}/firewall"
+    floating_device: "{{ pf_api_config }}/floating_device"
+    interface: "{{ pf_api_config }}/interface"
+    maintenance_task: "{{ pf_api_config }}/maintenance_task"
+    pki_provider: "{{ pf_api_config }}/pki_provider"
+    portal_module: "{{ pf_api_config }}/portal_module"
+    provisioning: "{{ pf_api_config }}/provisioning"
+    realm: "{{ pf_api_config }}/realm"
+    role: "{{ pf_api_config }}/role"
+    scan: "{{ pf_api_config }}/scan"
+    source: "{{ pf_api_config }}/source"
+    sources: "{{ pf_api_config }}/sources"
+    switch: "{{ pf_api_config }}/switch"
+    switch_group: "{{ pf_api_config }}/switch_group"
+    syslog_parser: "{{ pf_api_config }}/syslog_parser"
+    traffic_shaping_policy: "{{ pf_api_config }}/traffic_shaping_policy"
+    wmi_rule: "{{ pf_api_config }}/wmi_rule"
+
+pf_api_login: "{{ pf_api_base_path }}/login"
+pf_api_nodes: "{{ pf_api_base_path }}/nodes"
 pf_api_user: "{{ pf_api_base_path }}/user"
+pf_api_users: "{{ pf_api_base_path }}/users"
