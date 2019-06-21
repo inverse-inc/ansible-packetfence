@@ -28,3 +28,4 @@
     basedir: "{{ dev__pf_dir }}"
     strip: 1
   when: ansible_os_family == 'Debian'
+  tags: [ 'debian' ]
