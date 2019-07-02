@@ -1,0 +1,21 @@
+---
+- name: install debian build dependencies
+  apt:
+    name: "{{ packetfence_dev__deb_build_pkgs }}"
+    state: latest
+
+- name: remove config file to install locales
+  file:
+    path: "{{ packetfence_dev__deb_apt_config_file }}"
+    state: absent
+
+- name: install all locales
+  apt:
+    name: "{{ packetfence_dev__deb_locale_pkgs }}"
+    state: present
+    update_cache: yes
+
+- name: install utils
+  apt:
+    name: "{{ packetfence_dev__deb_utils_pkgs }}"
+    state: present

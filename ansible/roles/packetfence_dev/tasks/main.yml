@@ -1,0 +1,30 @@
+---
+- name: include distribution specific tasks
+  include_tasks: "{{ ansible_os_family|lower }}.yml"
+
+- name: stop all pf services
+  command: "{{ packetfence_dev__pfcmd }} service pf stop"
+
+- name: stop services not managed by pfcmd
+  service:
+    name: "{{ item }}"
+    state: stopped
+  loop: "{{ packetfence_dev__services_unmanaged }}"
+
+- name: move pf dir to another location
+  command: "mv {{ packetfence_dev__pf_dir }} {{ packetfence_dev__pf_pkg_dir }}"
+
+- name: clone git repo
+  git:
+    repo: https://github.com/inverse-inc/packetfence.git
+    dest: "{{ packetfence_dev__pf_dir }}"
+    version: feature/dev-ci-env
+
+- name: patch config files only for debian
+  patch:
+    src: "{{ packetfence_dev__pf_deb_patch }}"
+    remote_src: yes
+    basedir: "{{ packetfence_dev__pf_dir }}"
+    strip: 1
+  when: ansible_os_family == 'Debian'
+  tags: [ 'debian' ]

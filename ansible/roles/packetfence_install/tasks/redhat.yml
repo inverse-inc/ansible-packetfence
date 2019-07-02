@@ -1,0 +1,36 @@
+---
+- name: add epel repository disabled
+  yum_repository:
+     name: epel
+     description: EPEL YUM repo
+     baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
+     enabled: no
+     gpgcheck: no
+     
+- name: install package to use ansible mysql_user module
+  yum:
+    name: "{{ packetfence_install__centos_python_mysql_pkg }}"
+    enablerepo: epel
+    state: present
+    
+- name: Install the PacketFence repo
+  yum:
+    name: "{{ packetfence_install__centos_release_rpm }}"
+    state: present
+
+- name: Update the PacketFence repo
+  yum:
+    name: "{{ packetfence_install__centos_release_pkg }}"
+    enablerepo: "{{ packetfence_install__centos['repo'] }}"
+    state: present
+
+# NLTM wrapper is not a dependence of packetfence
+- name: Install PacketFence and NTLM wrapper from the repo
+  yum:
+    name: "{{ packetfence_install__centos_packages }}"
+    enablerepo: "{{ packetfence_install__centos['repo'] }}"
+    state: present
+    update_cache: yes
+  register: packetfence_install__register_packages
+
+  

@@ -1,0 +1,32 @@
+---
+pf_api_calls:
+  # finish configurator through API
+  - route: "{{ pf_api_config_endpoints['base'] }}/general"
+    method: PATCH
+    body:
+      id: general
+      dhcpservers: "{{ pf_config_general['dhcpservers'] }}"
+      domain: "{{ pf_config_general['domain'] }}"
+      hostname: "{{ pf_config_general['hostname'] }}"
+      timezone: "{{ pf_config_general['timezone'] }}"
+  - route: "{{ pf_api_config_endpoints['base'] }}/alerting"
+    method: PATCH
+    body:
+      id: alerting
+      smtpserver: "{{ pf_config_alerting['smtpserver'] }}"
+      fromaddr: "{{ pf_config_alerting['fromaddr'] }}"
+      emailaddr: "{{ pf_config_alerting['emailaddr'] }}"
+      smtp_port: "{{ pf_config_alerting['smtp_port'] }}"
+      smtp_verifyssl: "{{ pf_config_alerting['smtp_verifyssl'] }}"
+      subjectprefix: "{{ pf_config_alerting['subjectprefix'] }}"
+      smtp_timeout: "{{ pf_config_alerting['smtp_timeout'] }}"
+  - route: "{{ pf_api_config_endpoints['fingerbank_setting'] }}/upstream"
+    method: PATCH
+    body:
+      id: upstream
+      api_key:
+  - route: "{{ pf_api_config_endpoints['base'] }}/advanced"
+    method: PATCH
+    body:
+      id: advanced
+      hash_passwords: ntlm

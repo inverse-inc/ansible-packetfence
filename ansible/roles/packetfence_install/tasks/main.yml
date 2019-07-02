@@ -1,0 +1,41 @@
+---
+# tasks file for pf.install
+- name: import distribution specific variables
+  include_vars: "{{ ansible_os_family|lower }}.yml"
+
+# include in place of import (dynamic evaluation)
+- name: include distribution specific tasks
+  include_tasks: "{{ ansible_os_family|lower }}.yml"
+
+- name: include utils tasks
+  include_tasks: utils.yml
+  tags: utils
+
+- name: include database tasks
+  include_tasks: db.yml
+  tags: db
+  
+- name: include configurator tasks
+  include_tasks: configurator.yml
+  tags: configurator
+
+- name: include api_config tasks
+  include_tasks: api_config.yml
+  when: packetfence_install__api_calls is defined
+  tags: api_config
+
+- name: include api_users tasks
+  include_tasks: api_users.yml
+  when: packetfence_install__users is defined
+  loop: "{{ packetfence_install__users }}"
+  loop_control:
+    loop_var: user
+  tags: api_users
+
+- name: include api_sources tasks
+  include_tasks: api_sources.yml
+  when: packetfence_install__sources is defined
+  loop: "{{ packetfence_install__sources }}"
+  loop_control:
+    loop_var: source
+  tags: api_sources

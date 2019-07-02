@@ -1,0 +1,76 @@
+---
+# Important: create_user and create_password variable
+# are overrided by each loop iteration
+
+# create user if it doesn't exist
+# don't fail if it already exist
+- name: create {{ user['body_user']['pid'] }} user through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_users }}"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+      - 409 # duplicate
+    body_format: json
+    headers:
+      Authorization: "{{ packetfence_install__api_token }}"
+    body: "{{ user['body_user'] | to_json }}"
+  register: packetfence_install__register_api_users_creation
+
+# update user only if it was already created (409 from previous task)
+- name: update {{ user['body_user']['pid'] }} user through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}"
+    method: PATCH
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+    body_format: json
+    headers:
+      Authorization: "{{ packetfence_install__api_token }}"
+    body: "{{ user['body_user'] | to_json }}"
+  when: packetfence_install__register_api_users_creation['status'] == 409
+
+
+# create password if it doesn't exist
+# don't fail if it already exist
+- name: create password for {{ user['body_user']['pid'] }} user through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}/password"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+      - 409 # duplicate
+    body_format: json
+    headers:
+      Authorization: "{{ packetfence_install__api_token }}"
+    body: "{{ user['body_user_password'] | to_json }}"
+  register: packetfence_install__register_api_users_pwd
+
+# update password entry only if it was already created (409 from previous task)
+- name: update password for {{ user['body_user']['pid'] }} user through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}/password"
+    method: PATCH
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+    body_format: json
+    headers:
+      Authorization: "{{ packetfence_install__api_token }}"
+    body: "{{ user['body_user_password'] | to_json }}"
+  when: packetfence_install__register_api_users_pwd['status'] == 409

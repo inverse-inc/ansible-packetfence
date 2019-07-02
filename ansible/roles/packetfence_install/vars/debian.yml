@@ -1,0 +1,2 @@
+---
+packetfence_install__database_socket: /var/run/mysqld/mysqld.sock
