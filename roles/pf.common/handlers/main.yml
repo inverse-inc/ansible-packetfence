@@ -1,5 +1,0 @@
----
-# handlers file for pf.common
-- name: print reboot warning
-  debug:
-    msg: "SELinux disabled, restart to apply change."

@@ -1,0 +1,52 @@
+---
+- name: install selinux package on hosts for next task
+  yum:
+    name:
+      - libselinux-python
+  when: ansible_selinux['status'] == 'enabled'
+
+- name: ensure SELinux is disabled
+  selinux:
+    state: disabled
+  notify: print reboot warning
+  when: ansible_selinux['status'] == 'enabled'
+
+- name: ensure /etc/sysconfig/network exists
+  stat:
+    path: /etc/sysconfig/network
+  register: packetfence_common__register_rhel_sysconfig
+
+- name: ensure NOZEROCONF is set to yes
+  lineinfile:
+    path: /etc/sysconfig/network
+    regexp: '^NOZEROCONF='
+    line: 'NOZEROCONF=yes'
+  when: packetfence_common__register_rhel_sysconfig.stat.exists == True
+
+- name: ensure firewalld is installed
+  stat:
+    path: /usr/lib/systemd/system/firewalld.service
+  register: packetfence_common__register_rhel_firewalld
+    
+# Stop firewalld and disabled at reboot
+- name: ensure firewalld is disabled
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+  when: packetfence_common__register_rhel_firewalld.stat.exists == True
+
+- name: ensure networkmanager is installed
+  stat:
+    path: /usr/lib/systemd/system/NetworkManager.service
+  register: packetfence_common__register_rhel_nm
+
+# Stop NetworkManager and disabled at reboot
+# could be replace by echo in NetworkManager.conf
+- name: ensure networkmanager is disabled
+  service:
+    name: NetworkManager
+    state: stopped
+    enabled: no
+  when: packetfence_common__register_rhel_nm.stat.exists == True
+

@@ -1,0 +1,58 @@
+---
+### RedHat specific
+packetfence_install__centos:
+  repo: packetfence
+
+packetfence_install__centos_release_pkg: packetfence-release
+packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/x86_64/RPMS/{{ packetfence_install__centos_release_pkg }}-1.2-7.el7.noarch.rpm"
+packetfence_install__centos_packages:
+  - packetfence
+  - packetfence-ntlm-wrapper
+
+packetfence_install__centos_python_mysql_pkg: python2-PyMySQL
+
+### Debian specific
+packetfence_install__deb:
+  repos:
+    - debian
+packetfence_install__deb_inverse_key_id: FE9E84327B18FF82B0378B6719CDA6A9810273C4
+packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
+packetfence_install__deb_packages:
+  - packetfence
+
+packetfence_install__shell_rc_file: /root/.bashrc
+
+### database
+packetfence_install__database_db: pf
+packetfence_install__database_root_user: root
+packetfence_install__database_root_pass: secret
+packetfence_install__database_pass: secret
+packetfence_install__database_users:
+  - name: pf
+    password: "{{ packetfence_install__database_pass }}"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
+    append_privs: no
+    host: "localhost"
+  - name: pf
+    password: "{{ packetfence_install__database_pass }}"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
+    append_privs: no
+    host: "%"
+
+### configurator
+# interfaces
+packetfence_install__mgmt_interface:
+  id: "{{ ansible_default_ipv4['interface'] }}"
+  ip: "{{ ansible_default_ipv4['address'] }}"
+  mask: "{{ ansible_default_ipv4['netmask'] }}"
+  type: management
+
+### users
+packetfence_install__admin_user:
+  pid: admin
+  password: secret
+
+# to use API
+packetfence_install__admin_credentials:
+  username: "{{ packetfence_install__admin_user['pid'] }}"
+  password: "{{ packetfence_install__admin_user['password'] }}"

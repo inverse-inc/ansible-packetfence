@@ -1,0 +1,35 @@
+---
+- name: POST {{ packetfence_install__api_login }}
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_login }}"
+    method: POST
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    body_format: json                     # automatically set Content-Type header to JSON
+    body: "{{ packetfence_install__admin_credentials | to_json }}"
+  register: packetfence_install__register_api_config_login
+
+- name: register token in a fact
+  set_fact:
+    packetfence_install__api_token: "{{ packetfence_install__register_api_config_login.json.token }}"
+
+# loop on {{ packetfence_install__api_calls }} vars
+- name: configure pf through API calls
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ item['route'] }}"
+    method: "{{ item['method'] }}"
+    follow_redirects: safe
+    validate_certs: no
+    return_content: yes
+    status_code:
+      - 200
+      - 201
+    body_format: json
+    headers:
+      Authorization: "{{ packetfence_install__api_token }}"
+    body: "{{ item['body'] | to_json }}"
+  loop: "{{ packetfence_install__api_calls }}"
+  # display only method and route on CLI for each call
+  loop_control:
+    label: "{{ item['method'] }} /{{ item['route'] }}"

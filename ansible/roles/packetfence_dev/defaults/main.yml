@@ -1,0 +1,48 @@
+---
+## Debian
+packetfence_dev__deb_build_pkgs:
+  - build-essential
+  - libipset-dev
+  - pkg-config
+  - gettext
+  - asciidoctor
+packetfence_dev__deb_apt_config_file: /etc/apt/apt.conf.d/99translations
+packetfence_dev__deb_locale_pkgs:
+  - locales-all
+packetfence_dev__deb_utils_pkgs:
+  - lnav
+  - jq
+  - httpie
+  - tmux
+  - tree
+  - mc
+  - unzip
+  - vim
+
+
+## CentOS
+packetfence_dev__centos_build_pkgs:
+  - "@Development tools"
+  - ipset-devel
+  - asciidoctor
+packetfence_dev__centos_epel_url: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/  
+packetfence_dev__centos_utils_pkgs:
+  - lnav
+  - jq
+  - python2-httpie
+  - tmux
+  - tree
+  - mc
+  - unzip
+  - vim
+
+
+## Common
+packetfence_dev__pfcmd: /usr/local/pf/bin/pfcmd
+packetfence_dev__services_unmanaged:
+  - packetfence-config
+  - packetfence-mariadb
+  - packetfence-redis-cache
+packetfence_dev__pf_pkg_dir: /usr/local/pf-pkg
+packetfence_dev__pf_dir: /usr/local/pf
+packetfence_dev__pf_deb_patch: "{{ packetfence_dev__pf_dir }}/debian/patches/debianize.patch"

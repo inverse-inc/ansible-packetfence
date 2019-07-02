@@ -1,0 +1,28 @@
+---
+# Configuration file used by Mazer to build a collection of Ansible artifacts.
+# Use 'mazer build' in this directory to create a collection
+
+namespace: "inverse_inc"
+name: "packetfence"
+version: "0.1.0"
+description: "Collections of Ansible roles to manage PacketFence installations."
+
+authors:
+    - "Inverse inc. <info@inverse.ca>"
+
+repository: "https://github.com/inverse-inc/ansible-packetfence"
+documentation: "https://github.com/inverse-inc/ansible-packetfence"
+homepage: "https://packetfence.org"
+issues: "https://github.com/inverse-inc/ansible-packetfence/issues"
+    
+dependencies: {}
+
+readme: "README.md"
+license:
+    - "GPL-3.0-only"
+    
+tags:
+    - "collection"
+    - "nac"
+    - "packetfence"
+    - "network"

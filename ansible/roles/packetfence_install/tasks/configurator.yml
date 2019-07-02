@@ -1,0 +1,106 @@
+---
+- name: set packetfence password in db in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: database
+    option: pass
+    value: "{{ packetfence_install__database_pass }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  register: packetfence_install__register_configurator_db_pwd
+
+- name: set packetfence password in db in pfconfig.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pfconfig.conf"
+    section: mysql
+    option: pass
+    value: "{{ packetfence_install__database_pass }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  register: packetfence_install__register_configurator_pfconfig_pwd
+  
+- name: define mgmt interface in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: "interface {{ packetfence_install__mgmt_interface['id'] }}"
+    option: "{{ item.name }}"
+    value: "{{ item.value }}"
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  loop:
+    - name: ip
+      value: "{{ packetfence_install__mgmt_interface['ip'] }}"
+    - name: mask
+      value: "{{ packetfence_install__mgmt_interface['mask'] }}"
+    - name: type
+      value: "{{ packetfence_install__mgmt_interface['type'] }}"
+    
+# to take new DB password into account
+- name: restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
+  when: (packetfence_install__register_configurator_db_pwd or packetfence_install__register_configurator_pfconfig_pwd) is changed
+  
+- name: update admin password in db through pfperl-api
+  command:
+  args:
+    argv:
+      - "{{ packetfence_install__perlapi_cmd }}"
+      - get
+      - "-M"
+      - PATCH
+      - "/{{ packetfence_install__api_user }}/{{ packetfence_install__admin_user['pid'] }}/password"
+      - "-c"
+      - "{{ packetfence_install__admin_user | to_json }}"
+  register: packetfence_install__register_configurator_admin_pwd
+  # failed when status is different from 200
+  # pfperl-api always return rc=0
+  failed_when: (packetfence_install__register_configurator_admin_pwd['stdout'] | from_json ).status != 200
+
+- name: fix permissions on pf files
+  command: "{{ packetfence_install__pfcmd }} fixpermissions"
+  when: packetfence_install__register_packages is changed
+
+- name: clear the backend of pfconfig
+  command: "{{ packetfence_install__pfcmd }} pfconfig clear_backend"
+  when: packetfence_install__register_packages is changed
+
+- name: restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
+  when: packetfence_install__register_packages is changed
+
+- name: restart pf services
+  command: "{{ packetfence_install__pfcmd }} service pf restart"
+  when: packetfence_install__register_packages is changed
+
+# copy pf-release to currently-at
+- name: ensure currently-at file is set
+  copy:
+    src: "{{ packetfence_install__conf_dir }}/pf-release"
+    remote_src: yes
+    dest: "{{ packetfence_install__conf_dir }}/currently-at"
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    mode: preserve
+
+- name: check end of configurator
+  uri:
+    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__webadmin_port }}"
+    return_content: yes
+    follow_redirects: safe
+    validate_certs: no
+  register: packetfence_install__register_configurator_homepage
+  until: "'Administrator - PacketFence' in packetfence_install__register_configurator_homepage['content']"
+  retries: 6
+  delay: 10
