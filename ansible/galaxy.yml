@@ -19,7 +19,7 @@ dependencies: {}
 
 readme: "README.md"
 license:
-    - "GPL-2.0-only"
+    - "GPL-3.0-only"
     
 tags:
     - "collection"
