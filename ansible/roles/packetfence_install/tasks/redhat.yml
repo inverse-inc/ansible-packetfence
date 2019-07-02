@@ -32,5 +32,3 @@
     state: present
     update_cache: yes
   register: packetfence_install__register_packages
-
-  

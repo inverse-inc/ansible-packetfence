@@ -4,3 +4,5 @@
 \#*\#
 .kitchen/
 .kitchen.local.yml
+# Mazer
+ansible/releases

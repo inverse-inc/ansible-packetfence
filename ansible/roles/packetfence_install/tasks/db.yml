@@ -77,4 +77,3 @@
     host: "{{ item.host }}"
     state: present
   loop: "{{ packetfence_install__database_users }}"
-  

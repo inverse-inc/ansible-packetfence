@@ -56,4 +56,3 @@ packetfence_install__admin_user:
 packetfence_install__admin_credentials:
   username: "{{ packetfence_install__admin_user['pid'] }}"
   password: "{{ packetfence_install__admin_user['password'] }}"
-  
