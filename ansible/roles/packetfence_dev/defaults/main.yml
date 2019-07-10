@@ -18,7 +18,7 @@ packetfence_dev__deb_utils_pkgs:
   - mc
   - unzip
   - vim
-
+packetfence_dev__pf_deb_patch: "{{ packetfence_dev__pf_dir }}/debian/patches/debianize.patch"
 
 ## CentOS
 packetfence_dev__centos_build_pkgs:
@@ -45,4 +45,4 @@ packetfence_dev__services_unmanaged:
   - packetfence-redis-cache
 packetfence_dev__pf_pkg_dir: /usr/local/pf-pkg
 packetfence_dev__pf_dir: /usr/local/pf
-packetfence_dev__pf_deb_patch: "{{ packetfence_dev__pf_dir }}/debian/patches/debianize.patch"
+packetfence_dev__pf_version: devel

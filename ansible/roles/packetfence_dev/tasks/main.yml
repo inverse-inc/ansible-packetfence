@@ -18,7 +18,7 @@
   git:
     repo: https://github.com/inverse-inc/packetfence.git
     dest: "{{ packetfence_dev__pf_dir }}"
-    version: feature/dev-ci-env
+    version: "{{ packetfence_dev__pf_version }}"
 
 - name: patch config files only for debian
   patch:
