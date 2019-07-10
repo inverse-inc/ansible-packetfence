@@ -6,25 +6,23 @@
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
 
-- name: ensure iproute package is installed for next task
+- name: ensure iproute package is installed to get network informations
   package:
     name: "{{ packetfence_common__iproute_pkg }}"
     state: present
   register: packetfence_common__register_pkg_iproute
 
-- name: recall setup module to refresh facts
+- name: recall setup module to refresh ansible_default_ipv4 facts
   setup:
     filter: ansible_default_ipv4*
+  when: packetfence_common__register_pkg_iproute is changed
+
+- name: recall setup module to refresh ansible_eth facts
+  setup:
+    filter: ansible_eth*
   when: packetfence_common__register_pkg_iproute is changed
 
 - name: ensure python-passlib package is installed for htpasswd sources
   package:
     name: "{{ packetfence_common__passlib_pkg }}"
     state: present
-    
-- name: ensure management IP is in /etc/hosts
-  lineinfile:
-    path: /etc/hosts
-    regexp: '^{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
-    line: '{{ ansible_default_ipv4.address }} {{ ansible_hostname }} {{ ansible_nodename }}'
-  when: ansible_virtualization_type != 'docker'
