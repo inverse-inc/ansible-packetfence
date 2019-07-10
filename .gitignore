@@ -5,4 +5,5 @@
 .kitchen/
 .kitchen.local.yml
 # Mazer
-ansible/releases
+packetfence/releases
+packetfence/meta
