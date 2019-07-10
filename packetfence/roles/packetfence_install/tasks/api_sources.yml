@@ -15,7 +15,7 @@
 # don't fail if it already exist
 - name: create {{ source['id'] }} source through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_config_endpoints['sources'] }}"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_config_endpoints['sources'] }}"
     method: POST
     follow_redirects: safe
     validate_certs: no
@@ -33,7 +33,7 @@
 # update source only if it was already created (409 from previous task)
 - name: update {{ source['id'] }} source through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_config_endpoints['source'] }}/{{ source['id'] }}"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_config_endpoints['source'] }}/{{ source['id'] }}"
     method: PATCH
     follow_redirects: safe
     validate_certs: no
