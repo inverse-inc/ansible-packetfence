@@ -10,8 +10,8 @@
 - name: ensure management IP is in /etc/hosts
   lineinfile:
     path: /etc/hosts
-    regexp: '^{{ packetfence_install__mgmt_interface['ip'] }} {{ ansible_hostname }} {{ ansible_nodename }}'
-    line: '{{ packetfence_install__mgmt_interface['ip'] }} {{ ansible_hostname }} {{ ansible_nodename }}'
+    regexp: "^{{ packetfence_install__mgmt_interface['ip'] }} {{ ansible_hostname }} {{ ansible_nodename }}"
+    line: "{{ packetfence_install__mgmt_interface['ip'] }} {{ ansible_hostname }} {{ ansible_nodename }}"
   when: ansible_virtualization_type != 'docker'
 
 - name: include utils tasks
