@@ -6,7 +6,7 @@
 # don't fail if it already exist
 - name: create {{ user['body_user']['pid'] }} user through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_users }}"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_users }}"
     method: POST
     follow_redirects: safe
     validate_certs: no
@@ -24,7 +24,7 @@
 # update user only if it was already created (409 from previous task)
 - name: update {{ user['body_user']['pid'] }} user through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}"
     method: PATCH
     follow_redirects: safe
     validate_certs: no
@@ -43,7 +43,7 @@
 # don't fail if it already exist
 - name: create password for {{ user['body_user']['pid'] }} user through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}/password"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}/password"
     method: POST
     follow_redirects: safe
     validate_certs: no
@@ -61,7 +61,7 @@
 # update password entry only if it was already created (409 from previous task)
 - name: update password for {{ user['body_user']['pid'] }} user through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}/password"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_user }}/{{ user['body_user']['pid'] }}/password"
     method: PATCH
     follow_redirects: safe
     validate_certs: no

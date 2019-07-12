@@ -1,7 +1,7 @@
 ---
 - name: POST {{ packetfence_install__api_login }}
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_login }}"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ packetfence_install__api_login }}"
     method: POST
     follow_redirects: safe
     validate_certs: no
@@ -17,7 +17,7 @@
 # loop on {{ packetfence_install__api_calls }} vars
 - name: configure pf through API calls
   uri:
-    url: "https://{{ ansible_default_ipv4['address'] }}:{{ packetfence_install__api_port }}/{{ item['route'] }}"
+    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__api_port }}/{{ item['route'] }}"
     method: "{{ item['method'] }}"
     follow_redirects: safe
     validate_certs: no
