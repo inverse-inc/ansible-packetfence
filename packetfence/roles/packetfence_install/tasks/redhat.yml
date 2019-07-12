@@ -12,6 +12,7 @@
     name: "{{ packetfence_install__centos_python_mysql_pkg }}"
     enablerepo: epel
     state: present
+    update_cache: yes
     
 - name: Install the PacketFence repo
   yum:
