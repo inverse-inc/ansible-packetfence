@@ -22,6 +22,12 @@ packetfence_install__deb_packages:
 
 packetfence_install__shell_rc_file: /root/.bashrc
 
+### devel repos
+packetfence_install__devel_repo: "{{ True
+                                     if (packetfence_install_centos['repo'] == 'packetfence-devel' or
+                                         'packetfence-devel' in packetfence_install__deb['repos'])
+                                     else False }}"
+
 ### database
 packetfence_install__database_db: pf
 packetfence_install__database_root_user: root
