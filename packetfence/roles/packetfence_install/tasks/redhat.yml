@@ -30,6 +30,8 @@
   yum:
     name: "{{ packetfence_install__centos_packages }}"
     enablerepo: "{{ packetfence_install__centos['repo'] }}"
-    state: present
+    state: '{{ "latest"
+               if packetfence_install__devel_repo|bool
+               else "present" }}'
     update_cache: yes
   register: packetfence_install__register_packages
