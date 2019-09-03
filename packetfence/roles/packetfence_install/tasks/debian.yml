@@ -19,5 +19,7 @@
 - name: Install PacketFence from the repo
   apt:
     name: "{{ packetfence_install__deb_packages }}"
-    state: present
+    state: '{{ "latest"
+               if packetfence_install__devel_repo|bool
+               else "present" }}'
   register: packetfence_install__register_packages
