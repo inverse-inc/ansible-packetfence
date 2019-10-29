@@ -14,7 +14,7 @@ packetfence_install__centos_python_mysql_pkg: python2-PyMySQL
 packetfence_install__deb:
   repos:
     - debian
-packetfence_install__deb_inverse_key_id: FE9E84327B18FF82B0378B6719CDA6A9810273C4
+packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2C
 packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
 packetfence_install__deb_packages:
   - packetfence
