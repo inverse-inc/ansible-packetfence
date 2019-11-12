@@ -1,5 +1,5 @@
 ---
-- name: Add Inverse apt key by id
+- name: Add Inverse GPG key by id
   apt_key:
     keyserver: keys.gnupg.net
     id: "{{ packetfence_install__deb_inverse_key_id }}"
