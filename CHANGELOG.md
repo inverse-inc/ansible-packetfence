@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Install latest packages if devel repos enabled (#12)
+
 ### Changed
 - Update defaults to reflect packaging changes introduced by PacketFence
   v9.2.0 (#13)
