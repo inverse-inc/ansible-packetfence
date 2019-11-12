@@ -1,5 +1,18 @@
 ---
-- name: set packetfence password in db in pf.conf
+- name: set database host in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: database
+    option: host
+    value: "{{ packetfence_install__database_host_pf }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  register: packetfence_install__register_min_config_db_host
+
+- name: set database password in pf.conf
   ini_file:
     path: "{{ packetfence_install__conf_dir }}/pf.conf"
     section: database
@@ -10,9 +23,22 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
     no_extra_spaces: yes
-  register: packetfence_install__register_configurator_db_pwd
+  register: packetfence_install__register_min_config_db_pwd
 
-- name: set packetfence password in db in pfconfig.conf
+- name: set database host in pfconfig.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pfconfig.conf"
+    section: mysql
+    option: host
+    value: "{{ packetfence_install__database_host_pfconfig }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  register: packetfence_install__register_min_config_pfconfig_host
+
+- name: set database password in pfconfig.conf
   ini_file:
     path: "{{ packetfence_install__conf_dir }}/pfconfig.conf"
     section: mysql
@@ -23,7 +49,7 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
     no_extra_spaces: yes
-  register: packetfence_install__register_configurator_pfconfig_pwd
+  register: packetfence_install__register_min_config_pfconfig_pwd
   
 - name: define mgmt interface in pf.conf
   ini_file:
@@ -43,9 +69,12 @@
     - name: type
       value: "{{ packetfence_install__mgmt_interface['type'] }}"
     
-# to take new DB password into account
+# to take previous changes into account
 - name: restart packetfence-config service
   service:
     name: packetfence-config
     state: restarted
-  when: (packetfence_install__register_configurator_db_pwd or packetfence_install__register_configurator_pfconfig_pwd) is changed
+  when: (packetfence_install__register_min_config_db_pwd or
+         packetfence_install__register_min_config_db_host or
+         packetfence_install__register_min_config_pfconfig_pwd or
+         packetfence_install__register_min_config_pfconfig_host) is changed
