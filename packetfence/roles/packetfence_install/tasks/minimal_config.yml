@@ -1,0 +1,51 @@
+---
+- name: set packetfence password in db in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: database
+    option: pass
+    value: "{{ packetfence_install__database_pass }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  register: packetfence_install__register_configurator_db_pwd
+
+- name: set packetfence password in db in pfconfig.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pfconfig.conf"
+    section: mysql
+    option: pass
+    value: "{{ packetfence_install__database_pass }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  register: packetfence_install__register_configurator_pfconfig_pwd
+  
+- name: define mgmt interface in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: "interface {{ packetfence_install__mgmt_interface['id'] }}"
+    option: "{{ item.name }}"
+    value: "{{ item.value }}"
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+  loop:
+    - name: ip
+      value: "{{ packetfence_install__mgmt_interface['ip'] }}"
+    - name: mask
+      value: "{{ packetfence_install__mgmt_interface['mask'] }}"
+    - name: type
+      value: "{{ packetfence_install__mgmt_interface['type'] }}"
+    
+# to take new DB password into account
+- name: restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
+  when: (packetfence_install__register_configurator_db_pwd or packetfence_install__register_configurator_pfconfig_pwd) is changed
