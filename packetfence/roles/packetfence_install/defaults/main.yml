@@ -44,11 +44,7 @@ packetfence_install__database_users:
     append_privs: no
     host: "%"
 
-### config
-# database
-packetfence_install__database_host_pf: localhost
-packetfence_install__database_host_pfconfig: localhost
-
+### configurator
 # interfaces
 packetfence_install__mgmt_interface:
   id: "{{ ansible_default_ipv4['interface'] }}"
