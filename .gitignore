@@ -4,6 +4,4 @@
 \#*\#
 .kitchen/
 .kitchen.local.yml
-# Mazer
-packetfence/releases
-packetfence/meta
+*.tar.gz
