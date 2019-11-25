@@ -19,12 +19,6 @@
     name: "{{ packetfence_install__centos_release_rpm }}"
     state: present
 
-- name: Update the PacketFence repo
-  yum:
-    name: "{{ packetfence_install__centos_release_pkg }}"
-    enablerepo: "{{ packetfence_install__centos['repo'] }}"
-    state: present
-
 - name: Install PacketFence package from the repo
   yum:
     name: "{{ packetfence_install__centos_packages }}"

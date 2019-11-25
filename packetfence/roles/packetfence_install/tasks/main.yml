@@ -22,9 +22,13 @@
   include_tasks: db.yml
   tags: db
   
-- name: include configurator tasks
-  include_tasks: configurator.yml
-  tags: configurator
+- name: include minimal_config tasks
+  include_tasks: minimal_config.yml
+  tags: min_config
+  
+- name: include post_config tasks
+  include_tasks: post_config.yml
+  tags: post_config
 
 - name: include api_config tasks
   include_tasks: api_config.yml
