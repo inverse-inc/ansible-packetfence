@@ -42,7 +42,21 @@
       value: "{{ packetfence_install__mgmt_interface['mask'] }}"
     - name: type
       value: "{{ packetfence_install__mgmt_interface['type'] }}"
-    
+
+- name: configure fingerbank API key
+  ini_file:
+    path: "{{ packetfence_install__fingerbank_conf_dir }}/fingerbank.conf"
+    section: 'upstream'
+    option: 'api_key'
+    value: "{{ packetfence_install__fingerbank_setting['upstream']['api_key'] }}"
+    mode: 0660
+    owner: "{{ packetfence_install__fingerbank_user }}"
+    group: "{{ packetfence_install__fingerbank_group }}"
+    no_extra_spaces: yes
+  when: packetfence_install__fingerbank_setting['upstream']['api_key']
+  notify: restart packetfence-fingerbank-collector service
+  no_log: True
+
 # to take new DB password into account
 - name: restart packetfence-config service
   service:

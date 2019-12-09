@@ -1,4 +1,4 @@
----  
+---
 - name: update admin password in db through pfperl-api
   command:
   args:
