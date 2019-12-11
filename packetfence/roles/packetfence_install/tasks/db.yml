@@ -79,4 +79,4 @@
   loop: "{{ packetfence_install__database_users }}"
   # avoid display password for each item of the loop
   loop_control:
-    label: "{{ item['name'] }} - {{ item['host'] }} - {{ item['priv'] }}"
+    label: "{{ host: {{ item['host'] }}, name: item['name'] }}, priv: {{ item['priv'] }}"
