@@ -77,3 +77,6 @@
     host: "{{ item.host }}"
     state: present
   loop: "{{ packetfence_install__database_users }}"
+  # avoid display password for each item of the loop
+  loop_control:
+    label: "{{ item['name'] }} - {{ item['host'] }} - {{ item['priv'] }}"
