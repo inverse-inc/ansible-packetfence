@@ -10,7 +10,7 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
     no_extra_spaces: yes
-  register: packetfence_install__register_configurator_db_pwd
+  register: packetfence_install__register_mininal_config_db_pwd
 
 - name: set packetfence password in db in pfconfig.conf
   ini_file:
@@ -23,7 +23,7 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
     no_extra_spaces: yes
-  register: packetfence_install__register_configurator_pfconfig_pwd
+  register: packetfence_install__register_mininal_config_pfconfig_pwd
   
 - name: define mgmt interface in pf.conf
   ini_file:
@@ -42,10 +42,24 @@
       value: "{{ packetfence_install__mgmt_interface['mask'] }}"
     - name: type
       value: "{{ packetfence_install__mgmt_interface['type'] }}"
-    
+
+- name: configure fingerbank API key
+  ini_file:
+    path: "{{ packetfence_install__fingerbank_conf_dir }}/fingerbank.conf"
+    section: 'upstream'
+    option: 'api_key'
+    value: "{{ packetfence_install__fingerbank_setting['upstream']['api_key'] }}"
+    mode: 0660
+    owner: "{{ packetfence_install__fingerbank_user }}"
+    group: "{{ packetfence_install__fingerbank_group }}"
+    no_extra_spaces: yes
+  when: packetfence_install__fingerbank_setting['upstream']['api_key']
+  notify: restart packetfence-fingerbank-collector service
+  no_log: True
+
 # to take new DB password into account
 - name: restart packetfence-config service
   service:
     name: packetfence-config
     state: restarted
-  when: (packetfence_install__register_configurator_db_pwd or packetfence_install__register_configurator_pfconfig_pwd) is changed
+  when: (packetfence_install__register_mininal_config_db_pwd or packetfence_install__register_mininal_config_pfconfig_pwd) is changed

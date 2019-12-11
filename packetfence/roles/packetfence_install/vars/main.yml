@@ -7,6 +7,10 @@ packetfence_install__bin_dir: "{{ packetfence_install__root_dir }}/bin"
 packetfence_install__sbin_dir: "{{ packetfence_install__root_dir }}/sbin"
 packetfence_install__db_dir: "{{ packetfence_install__root_dir }}/db"
 
+# fingerbank
+packetfence_install__fingerbank_dir: /usr/local/fingerbank
+packetfence_install__fingerbank_conf_dir: '{{ packetfence_install__fingerbank_dir }}/conf'
+
 ## files
 packetfence_install__currently_at_file: "{{ packetfence_install__conf_dir }}/currently-at"
 
@@ -17,6 +21,9 @@ packetfence_install__perlapi_cmd: "{{ packetfence_install__sbin_dir }}/pfperl-ap
 ## users
 packetfence_install__user: pf
 packetfence_install__group: pf
+packetfence_install__fingerbank_user: fingerbank
+packetfence_install__fingerbank_group: fingerbank
+
 
 ## ports
 packetfence_install__webadmin_port: 1443
@@ -52,5 +59,7 @@ packetfence_install__api_config_endpoints:
 
 packetfence_install__api_login: "{{ packetfence_install__api_base_path }}/login"
 packetfence_install__api_nodes: "{{ packetfence_install__api_base_path }}/nodes"
+
+# users
 packetfence_install__api_user: "{{ packetfence_install__api_base_path }}/user"
 packetfence_install__api_users: "{{ packetfence_install__api_base_path }}/users"

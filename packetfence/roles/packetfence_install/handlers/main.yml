@@ -1,0 +1,6 @@
+---
+- name: restart packetfence-fingerbank-collector service
+  service:
+    name: packetfence-fingerbank-collector
+    state: restarted
+    enabled: True

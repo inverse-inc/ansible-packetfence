@@ -52,6 +52,12 @@ packetfence_install__mgmt_interface:
   mask: "{{ ansible_default_ipv4['netmask'] }}"
   type: management
 
+
+# fingerbank settings
+packetfence_install__fingerbank_setting:
+  upstream:
+    api_key: ''
+
 ### users
 packetfence_install__admin_user:
   pid: admin
@@ -61,3 +67,4 @@ packetfence_install__admin_user:
 packetfence_install__admin_credentials:
   username: "{{ packetfence_install__admin_user['pid'] }}"
   password: "{{ packetfence_install__admin_user['password'] }}"
+

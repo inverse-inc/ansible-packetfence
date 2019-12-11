@@ -24,12 +24,4 @@
       alias authdbg='raddebug -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd.sock -t 300'
       alias acctdbg='raddebug -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd-acct.sock -t 300'
       alias radmin='radmin -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd.sock'
-
-- name: install pfsql in {{ packetfence_install__bin_dir }}
-  copy:
-    src: pfsql
-    dest: "{{ packetfence_install__bin_dir }}/pfsql"
-    mode: 0766
-    owner: "{{ packetfence_install__user }}"
-    group: "{{ packetfence_install__group }}"
     

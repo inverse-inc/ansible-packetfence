@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Configure Fingerbank API key through inventory
+- Hide password of `pf` user in DB
+
+### Changed
+
+### Removed
+- Installation of `pfsql` binary in `/usr/local/pf/bin`
+
 ## [0.3.0] - 2019-11-25
 
 ### Added
