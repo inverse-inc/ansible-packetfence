@@ -10,10 +10,10 @@
       - "/{{ packetfence_install__api_user }}/{{ packetfence_install__admin_user['pid'] }}/password"
       - "-c"
       - "{{ packetfence_install__admin_user | to_json }}"
-  register: packetfence_install__register_configurator_admin_pwd
+  register: packetfence_install__register_post_config_admin_pwd
   # failed when status is different from 200
   # pfperl-api always return rc=0
-  failed_when: (packetfence_install__register_configurator_admin_pwd['stdout'] | from_json ).status != 200
+  failed_when: (packetfence_install__register_post_config_admin_pwd['stdout'] | from_json ).status != 200
 
 - name: fix permissions on pf files
   command: "{{ packetfence_install__pfcmd }} fixpermissions"
@@ -49,7 +49,7 @@
     return_content: yes
     follow_redirects: safe
     validate_certs: no
-  register: packetfence_install__register_configurator_homepage
-  until: "'Administrator - PacketFence' in packetfence_install__register_configurator_homepage['content']"
+  register: packetfence_install__register_post_config_homepage
+  until: "'Administrator - PacketFence' in packetfence_install__register_post_config_homepage['content']"
   retries: 6
   delay: 10

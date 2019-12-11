@@ -10,7 +10,7 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
     no_extra_spaces: yes
-  register: packetfence_install__register_configurator_db_pwd
+  register: packetfence_install__register_mininal_config_db_pwd
 
 - name: set packetfence password in db in pfconfig.conf
   ini_file:
@@ -23,7 +23,7 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
     no_extra_spaces: yes
-  register: packetfence_install__register_configurator_pfconfig_pwd
+  register: packetfence_install__register_mininal_config_pfconfig_pwd
   
 - name: define mgmt interface in pf.conf
   ini_file:
@@ -62,4 +62,4 @@
   service:
     name: packetfence-config
     state: restarted
-  when: (packetfence_install__register_configurator_db_pwd or packetfence_install__register_configurator_pfconfig_pwd) is changed
+  when: (packetfence_install__register_mininal_config_db_pwd or packetfence_install__register_mininal_config_pfconfig_pwd) is changed
