@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Configure Fingerbank API key through inventory
 - Hide password of `pf` user in DB
+- `packetfence_go` role to install Golang prerequisites for unit tests
 
 ### Changed
 

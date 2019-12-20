@@ -1,0 +1,17 @@
+---
+## Debian
+packetfence_go__deb_requires:
+  - 'build-essential'
+  - 'libipset-dev'
+  - 'pkg-config'
+
+## CentOS
+packetfence_go__rpm_requires:
+  - '@Development tools'
+  - 'ipset-devel'
+
+
+## Common
+packetfence_go__go_script: '/usr/local/pf/addons/dev-helpers/setup-go-env.sh'
+packetfence_go__go_binary: '/usr/local/go/bin/go'
+
