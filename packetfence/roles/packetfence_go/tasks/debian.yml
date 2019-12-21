@@ -1,0 +1,6 @@
+---
+- name: install build requires for Golang test
+  apt:
+    name: '{{ packetfence_go__deb_requires }}'
+    state: present
+

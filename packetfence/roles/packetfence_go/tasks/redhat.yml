@@ -1,0 +1,8 @@
+---
+# necessary to install our version of ipset-devel
+- name: install build requires for Golang test
+  yum:
+    name: '{{ packetfence_go__rpm_requires }}'
+    state: present
+    enablerepo: "{{ packetfence_install__centos['repo'] }}"
+    

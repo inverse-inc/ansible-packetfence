@@ -1,0 +1,9 @@
+---
+- name: include distribution specific tasks
+  include_tasks: '{{ ansible_os_family|lower }}.yml'
+
+- name: configure Golang environment
+  command: '{{ packetfence_go__go_script }}'
+  args:
+    creates: '{{ packetfence_go__go_binary }}'
+
