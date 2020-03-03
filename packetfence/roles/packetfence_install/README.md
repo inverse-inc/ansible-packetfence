@@ -26,6 +26,7 @@ Role Variables
 | `packetfence_install__database_pass`           | `secret`                                                                                       | Default database password for first database users                      |
 | `packetfence_install__database_users`          | See `defaults/main.yml`                                                                        | Dict of database users with their privileges                            |
 | `packetfence_install__database_socket`         | Distribution specific, see `vars/` dir                                                         | Local socket to use                                                     |
+| `packetfence_install__configurator_status`     | `disabled`                                                                                     | Status of configurator setting                                          |
 | `packetfence_install__mgmt_interface`          | `ansible_default_ipv4` settings + `type: management`                                           | Dict with settings for management interface settings                    |
 | `packetfence_install__admin_user`              | `{pid: admin, password: secret }`                                                              | Dict with username and password for default admin user                  |
 | `packetfence_install__admin_credentials`       | Credentials of default admin user                                                              | Dict with username and password use to authenticate against API         |
