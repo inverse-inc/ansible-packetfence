@@ -45,6 +45,10 @@ packetfence_install__database_users:
     host: "%"
 
 ### configurator
+# default value is different from PF defaults
+# but we assume that when we use Ansible, we don't use configurator
+packetfence_install__configurator_status: 'disabled'
+
 # interfaces
 packetfence_install__mgmt_interface:
   id: "{{ ansible_default_ipv4['interface'] }}"

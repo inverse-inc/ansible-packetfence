@@ -33,15 +33,18 @@
   command: "{{ packetfence_install__pfcmd }} service pf restart"
   when: packetfence_install__register_packages is changed
 
-# copy pf-release to currently-at
-- name: ensure currently-at file is set
-  copy:
-    src: "{{ packetfence_install__conf_dir }}/pf-release"
-    remote_src: yes
-    dest: "{{ packetfence_install__conf_dir }}/currently-at"
+- name: disable configurator in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: advanced
+    option: configurator
+    value: "{{ packetfence_install__configurator_status }}"
+    state: present
+    mode: 0664
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
-    mode: preserve
+    no_extra_spaces: yes
+  register: packetfence_install__register_post_config_configurator
 
 - name: check end of configurator
   uri:
