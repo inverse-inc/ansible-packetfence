@@ -33,16 +33,6 @@
   command: "{{ packetfence_install__pfcmd }} service pf restart"
   when: packetfence_install__register_packages is changed
 
-# copy pf-release to currently-at
-- name: ensure currently-at file is set
-  copy:
-    src: "{{ packetfence_install__conf_dir }}/pf-release"
-    remote_src: yes
-    dest: "{{ packetfence_install__conf_dir }}/currently-at"
-    owner: "{{ packetfence_install__user }}"
-    group: "{{ packetfence_install__group }}"
-    mode: preserve
-
 - name: check end of configurator
   uri:
     url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__webadmin_port }}"

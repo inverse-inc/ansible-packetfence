@@ -57,6 +57,18 @@
   notify: restart packetfence-fingerbank-collector service
   no_log: True
 
+- name: disable configurator in pf.conf
+  ini_file:
+    path: "{{ packetfence_install__conf_dir }}/pf.conf"
+    section: advanced
+    option: configurator
+    value: "{{ packetfence_install__configurator_status }}"
+    state: present
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+    no_extra_spaces: yes
+
 # to take new DB password into account
 - name: restart packetfence-config service
   service:
