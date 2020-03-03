@@ -33,19 +33,6 @@
   command: "{{ packetfence_install__pfcmd }} service pf restart"
   when: packetfence_install__register_packages is changed
 
-- name: disable configurator in pf.conf
-  ini_file:
-    path: "{{ packetfence_install__conf_dir }}/pf.conf"
-    section: advanced
-    option: configurator
-    value: "{{ packetfence_install__configurator_status }}"
-    state: present
-    mode: 0664
-    owner: "{{ packetfence_install__user }}"
-    group: "{{ packetfence_install__group }}"
-    no_extra_spaces: yes
-  register: packetfence_install__register_post_config_configurator
-
 - name: check end of configurator
   uri:
     url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__webadmin_port }}"
