@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Disable configurator using new setting (#17)
 
+### Added
+- New wpasupplicant role (#18)
+
 ## [0.4.0] - 2019-12-23
 
 ### Added
