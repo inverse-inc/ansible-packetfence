@@ -9,4 +9,3 @@
 - name: deploy wpasupplicant config files
   include_tasks: deploy_configs.yml
   loop: '{{ wpasupplicant__configs }}'
-

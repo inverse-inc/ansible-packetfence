@@ -5,7 +5,7 @@ wpasupplicant__pkg_update_cache: 'no'
 wpasupplicant__conf_dir: '/etc/wpa_supplicant'
 
 wpasupplicant__configs:
-  
+
   - dir: '{{ wpasupplicant__conf_dir }}/eap_tls'
     filename: 'eap_tls.conf'
 
