@@ -1,0 +1,12 @@
+---
+# tasks file for wpasupplicant
+- name: ensure wpasupplicant installed
+  apt:
+    name: '{{ wpasupplicant__pkg_name }}'
+    state: present
+    update_cache: '{{ wpasupplicant__pkg_update_cache }}'
+
+- name: deploy wpasupplicant config files
+  include_tasks: deploy_configs.yml
+  loop: '{{ wpasupplicant__configs }}'
+
