@@ -1,0 +1,8 @@
+---
+- name: Download and install Venom binary
+  get_url:
+    url: 'https://github.com/ovh/venom/releases/download/{{ venom__version }}/venom.{{ venom__os }}-{{ venom__arch }}'
+    dest: "{{ venom__bin_path }}/venom"
+    mode: '0755'
+    owner: 'root'
+    group: 'root'
