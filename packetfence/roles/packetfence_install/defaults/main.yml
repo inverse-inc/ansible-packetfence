@@ -27,6 +27,7 @@ packetfence_install__devel_repo: "{{ True
                                          'packetfence-devel' in packetfence_install__deb['repos'])
                                      else False }}"
 
+
 ### database
 packetfence_install__database_db: pf
 packetfence_install__database_root_user: root
@@ -56,7 +57,6 @@ packetfence_install__mgmt_interface:
   mask: "{{ ansible_default_ipv4['netmask'] }}"
   type: management
 
-
 # fingerbank settings
 packetfence_install__fingerbank_setting:
   upstream:
@@ -72,3 +72,63 @@ packetfence_install__admin_credentials:
   username: "{{ packetfence_install__admin_user['pid'] }}"
   password: "{{ packetfence_install__admin_user['password'] }}"
 
+
+### PacketFence configuration
+packetfence_install__configuration:
+
+      - name: 'pf.conf'
+        sections:
+
+          - name: 'database'
+            settings:
+
+              - name: 'pass'
+                value: '{{ packetfence_install__database_pass }}'
+
+          - name: 'advanced'
+            settings:
+
+              - name: 'configurator'
+                value: '{{ packetfence_install__configurator_status }}'
+
+          - name: "interface {{ packetfence_install__mgmt_interface['id'] }}"
+            settings:
+
+              - name: 'ip'
+                value: "{{ packetfence_install__mgmt_interface['ip'] }}"
+
+              - name: 'mask'
+                value: "{{ packetfence_install__mgmt_interface['mask'] }}"
+
+              - name: 'type'
+                value: "{{ packetfence_install__mgmt_interface['type'] }}"
+
+      - name: 'pfconfig.conf'
+        sections:
+
+          - name: 'general'
+            settings:
+
+              - name: 'backend'
+                value: 'mysql'
+
+          - name: 'mysql'
+            settings:
+
+              - name: 'host'
+                value: 'localhost'
+
+              - name: 'user'
+                value: '{{ packetfence_install__database_user }}'
+
+              - name: 'pass'
+                value: '{{ packetfence_install__database_pass }}'
+
+              - name: 'db'
+                value: '{{ packetfence_install__database_db }}'
+
+              - name: 'port'
+                value: '3306'
+
+              - name: 'table'
+                value: 'keyed'

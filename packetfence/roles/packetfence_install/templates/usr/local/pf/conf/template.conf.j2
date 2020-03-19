@@ -1,0 +1,6 @@
+{% for section in item.sections %}
+[{{ section.name }}]
+{%    for setting in section.settings %}
+{{ setting.name }}={{ setting.value }}
+{%    endfor %}
+{% endfor %}
