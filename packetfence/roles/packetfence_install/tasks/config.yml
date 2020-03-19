@@ -7,7 +7,12 @@
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
   loop: '{{ packetfence_install__configuration }}'
+  register: packetfence_install__register_config_files
 
+- name: Reload config
+  command: "{{ packetfence_install__pfcmd }} configreload hard"
+  when: packetfence_install__register_config_files is changed
+    
 - name: configure fingerbank API key
   ini_file:
     path: "{{ packetfence_install__fingerbank_conf_dir }}/fingerbank.conf"
@@ -21,29 +26,6 @@
   when: packetfence_install__fingerbank_setting['upstream']['api_key']
   notify: restart packetfence-fingerbank-collector service
   no_log: True
-
-# to take new DB password into account
-- name: restart packetfence-config service
-  service:
-    name: packetfence-config
-    state: restarted
-  when: (packetfence_install__register_mininal_config_db_pwd or packetfence_install__register_mininal_config_pfconfig_pwd) is changed
-
-- name: update admin password in db through pfperl-api
-  command:
-  args:
-    argv:
-      - "{{ packetfence_install__perlapi_cmd }}"
-      - get
-      - "-M"
-      - PATCH
-      - "/{{ packetfence_install__api_user }}/{{ packetfence_install__admin_user['pid'] }}/password"
-      - "-c"
-      - "{{ packetfence_install__admin_user | to_json }}"
-  register: packetfence_install__register_post_config_admin_pwd
-  # failed when status is different from 200
-  # pfperl-api always return rc=0
-  failed_when: (packetfence_install__register_post_config_admin_pwd['stdout'] | from_json ).status != 200
 
 - name: fix permissions on pf files
   command: "{{ packetfence_install__pfcmd }} fixpermissions"
