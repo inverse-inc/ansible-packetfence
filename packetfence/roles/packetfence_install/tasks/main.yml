@@ -23,9 +23,5 @@
   tags: db
   
 - name: include minimal_config tasks
-  include_tasks: minimal_config.yml
-  tags: min_config
-  
-- name: include post_config tasks
-  include_tasks: post_config.yml
-  tags: post_config
+  include_tasks: config.yml
+  tags: config
