@@ -62,17 +62,6 @@ packetfence_install__fingerbank_setting:
   upstream:
     api_key: ''
 
-### users
-packetfence_install__admin_user:
-  pid: admin
-  password: secret
-
-# to use API
-packetfence_install__admin_credentials:
-  username: "{{ packetfence_install__admin_user['pid'] }}"
-  password: "{{ packetfence_install__admin_user['password'] }}"
-
-
 ### PacketFence configuration
 packetfence_install__configuration:
 

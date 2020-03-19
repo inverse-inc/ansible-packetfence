@@ -32,14 +32,3 @@
 - name: restart pf services
   command: "{{ packetfence_install__pfcmd }} service pf restart"
   when: packetfence_install__register_packages is changed
-
-- name: check end of configurator
-  uri:
-    url: "https://{{ packetfence_install__mgmt_interface['ip'] }}:{{ packetfence_install__webadmin_port }}"
-    return_content: yes
-    follow_redirects: safe
-    validate_certs: no
-  register: packetfence_install__register_post_config_homepage
-  until: "'Administrator - PacketFence' in packetfence_install__register_post_config_homepage['content']"
-  retries: 6
-  delay: 10
