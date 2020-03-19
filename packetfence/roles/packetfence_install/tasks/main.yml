@@ -22,6 +22,6 @@
   include_tasks: db.yml
   tags: db
   
-- name: include minimal_config tasks
+- name: include config tasks
   include_tasks: config.yml
   tags: config

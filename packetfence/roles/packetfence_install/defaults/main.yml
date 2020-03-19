@@ -33,13 +33,14 @@ packetfence_install__database_db: pf
 packetfence_install__database_root_user: root
 packetfence_install__database_root_pass: secret
 packetfence_install__database_pass: secret
+packetfence_install__database_default_user: 'pf'
 packetfence_install__database_users:
-  - name: pf
+  - name: '{{ packetfence_install__database_default_user }}'
     password: "{{ packetfence_install__database_pass }}"
     priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
     host: "localhost"
-  - name: pf
+  - name: '{{ packetfence_install__database_default_user }}'
     password: "{{ packetfence_install__database_pass }}"
     priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
@@ -108,7 +109,7 @@ packetfence_install__configuration:
                 value: 'localhost'
 
               - name: 'user'
-                value: '{{ packetfence_install__database_user }}'
+                value: '{{ packetfence_install__database_default_user }}'
 
               - name: 'pass'
                 value: '{{ packetfence_install__database_pass }}'
