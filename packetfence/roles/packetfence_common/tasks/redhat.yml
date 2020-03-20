@@ -49,4 +49,5 @@
     state: stopped
     enabled: no
   when: packetfence_common__register_rhel_nm.stat.exists == True
+  register: packetfence_common__register_rhel_nm_disabled
 
