@@ -11,9 +11,6 @@ packetfence_install__db_dir: "{{ packetfence_install__root_dir }}/db"
 packetfence_install__fingerbank_dir: /usr/local/fingerbank
 packetfence_install__fingerbank_conf_dir: '{{ packetfence_install__fingerbank_dir }}/conf'
 
-## files
-packetfence_install__currently_at_file: "{{ packetfence_install__conf_dir }}/currently-at"
-
 ## commands
 packetfence_install__pfcmd: "{{ packetfence_install__bin_dir }}/pfcmd"
 packetfence_install__perlapi_cmd: "{{ packetfence_install__sbin_dir }}/pfperl-api"
@@ -28,38 +25,3 @@ packetfence_install__fingerbank_group: fingerbank
 ## ports
 packetfence_install__webadmin_port: 1443
 packetfence_install__api_port: 9999
-
-## api routes
-packetfence_install__api_base_path: api/v1
-packetfence_install__api_config: "{{ packetfence_install__api_base_path }}/config"
-packetfence_install__api_config_endpoints:
-    base: "{{ packetfence_install__api_config }}/base"
-    certificate: "{{ packetfence_install__api_config }}/certificate"
-    connection_profile: "{{ packetfence_install__api_config }}/connection_profile"
-    device_registration: "{{ packetfence_install__api_config }}/device_registration"
-    domain: "{{ packetfence_install__api_config }}/domain"
-    fingerbank_setting: "{{ packetfence_install__api_config }}/fingerbank_setting"
-    firewall: "{{ packetfence_install__api_config }}/firewall"
-    floating_device: "{{ packetfence_install__api_config }}/floating_device"
-    interface: "{{ packetfence_install__api_config }}/interface"
-    maintenance_task: "{{ packetfence_install__api_config }}/maintenance_task"
-    pki_provider: "{{ packetfence_install__api_config }}/pki_provider"
-    portal_module: "{{ packetfence_install__api_config }}/portal_module"
-    provisioning: "{{ packetfence_install__api_config }}/provisioning"
-    realm: "{{ packetfence_install__api_config }}/realm"
-    role: "{{ packetfence_install__api_config }}/role"
-    scan: "{{ packetfence_install__api_config }}/scan"
-    source: "{{ packetfence_install__api_config }}/source"
-    sources: "{{ packetfence_install__api_config }}/sources"
-    switch: "{{ packetfence_install__api_config }}/switch"
-    switch_group: "{{ packetfence_install__api_config }}/switch_group"
-    syslog_parser: "{{ packetfence_install__api_config }}/syslog_parser"
-    traffic_shaping_policy: "{{ packetfence_install__api_config }}/traffic_shaping_policy"
-    wmi_rule: "{{ packetfence_install__api_config }}/wmi_rule"
-
-packetfence_install__api_login: "{{ packetfence_install__api_base_path }}/login"
-packetfence_install__api_nodes: "{{ packetfence_install__api_base_path }}/nodes"
-
-# users
-packetfence_install__api_user: "{{ packetfence_install__api_base_path }}/user"
-packetfence_install__api_users: "{{ packetfence_install__api_base_path }}/users"

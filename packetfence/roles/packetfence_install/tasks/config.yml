@@ -1,0 +1,46 @@
+---
+- name: Generate PacketFence config files
+  template:
+    src: 'usr/local/pf/conf/template.conf.j2'
+    dest: '{{ packetfence_install__conf_dir }}/{{ item.name }}'
+    mode: 0664
+    owner: "{{ packetfence_install__user }}"
+    group: "{{ packetfence_install__group }}"
+  loop: '{{ packetfence_install__configuration }}'
+  register: packetfence_install__register_config_files
+
+- name: Reload config
+  command: "{{ packetfence_install__pfcmd }} configreload hard"
+  when: packetfence_install__register_config_files is changed
+    
+- name: configure fingerbank API key
+  ini_file:
+    path: "{{ packetfence_install__fingerbank_conf_dir }}/fingerbank.conf"
+    section: 'upstream'
+    option: 'api_key'
+    value: "{{ packetfence_install__fingerbank_setting['upstream']['api_key'] }}"
+    mode: 0660
+    owner: "{{ packetfence_install__fingerbank_user }}"
+    group: "{{ packetfence_install__fingerbank_group }}"
+    no_extra_spaces: yes
+  when: packetfence_install__fingerbank_setting['upstream']['api_key']
+  notify: restart packetfence-fingerbank-collector service
+  no_log: True
+
+- name: fix permissions on pf files
+  command: "{{ packetfence_install__pfcmd }} fixpermissions"
+  when: packetfence_install__register_packages is changed
+
+- name: clear the backend of pfconfig
+  command: "{{ packetfence_install__pfcmd }} pfconfig clear_backend"
+  when: packetfence_install__register_packages is changed
+
+- name: restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
+  when: packetfence_install__register_packages is changed
+
+- name: restart pf services
+  command: "{{ packetfence_install__pfcmd }} service pf restart"
+  when: packetfence_install__register_packages is changed

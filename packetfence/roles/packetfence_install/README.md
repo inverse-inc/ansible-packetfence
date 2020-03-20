@@ -24,36 +24,17 @@ Role Variables
 | `packetfence_install__database_root_user`      | `root`                                                                                         | `root` user of DB                                                       |
 | `packetfence_install__database_root_pass`      | `secret`                                                                                       | Default database password for `packetfence_install__database_root_user` |
 | `packetfence_install__database_pass`           | `secret`                                                                                       | Default database password for first database users                      |
+| `packetfence_install__database_default_user`   | `pf`                                                                                           | Default database user                                                    |
 | `packetfence_install__database_users`          | See `defaults/main.yml`                                                                        | Dict of database users with their privileges                            |
 | `packetfence_install__database_socket`         | Distribution specific, see `vars/` dir                                                         | Local socket to use                                                     |
 | `packetfence_install__configurator_status`     | `disabled`                                                                                     | Status of configurator setting                                          |
 | `packetfence_install__mgmt_interface`          | `ansible_default_ipv4` settings + `type: management`                                           | Dict with settings for management interface settings                    |
-| `packetfence_install__admin_user`              | `{pid: admin, password: secret }`                                                              | Dict with username and password for default admin user                  |
-| `packetfence_install__admin_credentials`       | Credentials of default admin user                                                              | Dict with username and password use to authenticate against API         |
+| `packetfence_install__configuration`           | See `defaults/main.yml`                                                                        | List of INI config files with their configuration                       |
 
-### inventory variables ###
+### `packetfence_install__configuration` variable
 
-If this variables are not defined, this role will not fail.
-
-#### packetfence_install__api_calls ####
-
-List of API calls to make to configure PacketFence.
-
-With this variable, you can configure all API items that don't need an
-additional API call after, example: `/api/v1/config/base`
-
-#### packetfence_install__users ####
-
-List of users to create on PacketFence.
-
-#### packetfence_install__sources ####
-
-List of authentication sources to create on PacketFence.
-
-### vars/ dir ###
-
-Check <vars/> dir.
-
+This variable need to be overwrite **completely** in inventory if you want to
+add settings different than defaults.
 
 Example Playbook
 ----------------

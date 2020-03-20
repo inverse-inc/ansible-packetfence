@@ -12,6 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - New wpasupplicant role (#18)
 - New venom role (#19)
+- Configuration of any files under /usr/local/pf/conf using inventory (#20)
+
+### Removed
+- Ability to configure PacketFence using API calls, need to go in specific
+  Ansible modules ((#20)
+- Ability to modify admin password in DB (#20)
 
 ## [0.4.0] - 2019-12-23
 

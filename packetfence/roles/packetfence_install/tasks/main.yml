@@ -22,31 +22,6 @@
   include_tasks: db.yml
   tags: db
   
-- name: include minimal_config tasks
-  include_tasks: minimal_config.yml
-  tags: min_config
-  
-- name: include post_config tasks
-  include_tasks: post_config.yml
-  tags: post_config
-
-- name: include api_config tasks
-  include_tasks: api_config.yml
-  when: packetfence_install__api_calls is defined
-  tags: api_config
-
-- name: include api_users tasks
-  include_tasks: api_users.yml
-  when: packetfence_install__users is defined
-  loop: "{{ packetfence_install__users }}"
-  loop_control:
-    loop_var: user
-  tags: api_users
-
-- name: include api_sources tasks
-  include_tasks: api_sources.yml
-  when: packetfence_install__sources is defined
-  loop: "{{ packetfence_install__sources }}"
-  loop_control:
-    loop_var: source
-  tags: api_sources
+- name: include config tasks
+  include_tasks: config.yml
+  tags: config
