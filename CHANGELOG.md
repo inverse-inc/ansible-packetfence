@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - New venom role (#19)
 - Configuration of any files under /usr/local/pf/conf using inventory (#20)
 - Dedicated playbooks to easily use collections (#24)
+- New right for default user in DB needed by `pfacct`
 
 ### Removed
 - Ability to configure PacketFence using API calls, need to go in specific

@@ -37,12 +37,12 @@ packetfence_install__database_default_user: 'pf'
 packetfence_install__database_users:
   - name: '{{ packetfence_install__database_default_user }}'
     password: "{{ packetfence_install__database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE,CREATE TEMPORARY TABLES/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
     host: "localhost"
   - name: '{{ packetfence_install__database_default_user }}'
     password: "{{ packetfence_install__database_pass }}"
-    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE/mysql.proc:SELECT/pf.radius_nas:DROP"
+    priv: "pf.*:SELECT,INSERT,UPDATE,DELETE,LOCK TABLES,EXECUTE,CREATE TEMPORARY TABLES/mysql.proc:SELECT/pf.radius_nas:DROP"
     append_privs: no
     host: "%"
 
