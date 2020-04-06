@@ -36,18 +36,3 @@
     enabled: no
   when: packetfence_common__register_rhel_firewalld.stat.exists == True
 
-- name: ensure networkmanager is installed
-  stat:
-    path: /usr/lib/systemd/system/NetworkManager.service
-  register: packetfence_common__register_rhel_nm
-
-# Stop NetworkManager and disabled at reboot
-# could be replace by echo in NetworkManager.conf
-- name: ensure networkmanager is disabled
-  service:
-    name: NetworkManager
-    state: stopped
-    enabled: no
-  when: packetfence_common__register_rhel_nm.stat.exists == True
-  register: packetfence_common__register_rhel_nm_disabled
-
