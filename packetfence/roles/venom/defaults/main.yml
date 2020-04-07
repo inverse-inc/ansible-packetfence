@@ -3,4 +3,4 @@
 venom__version: 'v0.27.0'
 venom__os: 'linux'
 venom__arch: 'amd64'
-venom__bin_path: '/usr/local/bin'
+venom__bin_path: '/usr/bin'
