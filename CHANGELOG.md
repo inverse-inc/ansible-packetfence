@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dedicated playbooks to easily use collections (#24)
 - New right for default user in DB needed by `pfacct`
 - Disable systemd-resolved to let `pfdns` start (when using libvirt) (#25)
+- Install kernel development package to build Netflow kernel module (#27)
 
 ### Removed
 - Ability to configure PacketFence using API calls, need to go in specific

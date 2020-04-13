@@ -1,2 +1,3 @@
 ---
 packetfence_common__iproute_pkg: iproute2
+packetfence_common__kernel_devel_pkg: 'linux-headers-{{ ansible_kernel }}'
