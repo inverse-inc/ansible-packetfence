@@ -6,16 +6,16 @@
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
 
+- name: ensure kernel development package is installed to build Netflow kernel module
+  package:
+    name: "{{ packetfence_common__kernel_devel_pkg }}"
+    state: present
+  
 - name: ensure iproute package is installed to get network informations
   package:
     name: "{{ packetfence_common__iproute_pkg }}"
     state: present
   register: packetfence_common__register_pkg_iproute
-
-- name: ensure kernel development package is installed to build Netflow kernel module
-  package:
-    name: "{{ packetfence_common__kernel_devel_pkg }}"
-    state: present
 
 - name: recall setup module to refresh ansible_default_ipv4 facts
   setup:
