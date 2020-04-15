@@ -10,7 +10,7 @@ Role Variables
 
 | Variable                                       | Default                                                                                        | Comments (type)                                                         |
 | ---                                            | ---                                                                                            | ---                                                                     |
-| `packetfence_install__centos['repo']`          | `packetfence`                                                                                  | CentOS repo to use                                                      |
+| `packetfence_install__centos['repos']`          | `[packetfence]`                                                                               | List of CentOS repos to use                                                      |
 | `packetfence_install__centos_release_pkg`      | `packetfence-release`                                                                          | Package containing CentOS repo                                          |
 | `packetfence_install__centos_release_rpm`      | `"http://packetfence.org/downloads/PacketFence/RHEL7/packetfence-release-7.stable.noarch.rpm"` | URL to install `centos_release_pkg`                                     |
 | `packetfence_install__centos_packages`         | `[packetfence]`                                                                                | List of CentOS packages to install, `packetfence-8.3` syntax allowed    |

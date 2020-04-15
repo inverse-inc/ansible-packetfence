@@ -22,7 +22,7 @@
 - name: Install PacketFence package from the repo
   yum:
     name: "{{ packetfence_install__centos_packages }}"
-    enablerepo: "{{ packetfence_install__centos['repo'] }}"
+    enablerepo: "{{ packetfence_install__centos['repos'] }}"
     state: '{{ "latest"
                if packetfence_install__devel_repo|bool
                else "present" }}'
