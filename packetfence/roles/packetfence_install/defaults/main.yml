@@ -1,7 +1,8 @@
 ---
 ### RedHat specific
 packetfence_install__centos:
-  repo: packetfence
+  repos:
+    - packetfence
 
 packetfence_install__centos_release_pkg: packetfence-release
 packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/packetfence-release-7.stable.noarch.rpm"
@@ -23,7 +24,7 @@ packetfence_install__shell_rc_file: /root/.bashrc
 
 ### devel repos
 packetfence_install__devel_repo: "{{ True
-                                     if (packetfence_install__centos['repo'] == 'packetfence-devel' or
+                                     if ('packetfence-devel' in packetfence_install__centos['repos'] or
                                          'packetfence-devel' in packetfence_install__deb['repos'])
                                      else False }}"
 

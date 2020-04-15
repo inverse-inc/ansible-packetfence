@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Disable configurator using new setting (#17)
 - Start and restart services at end of package installation (#25)
+- CentOS repositories are now a list in place of a dict (#28)
 
 ### Added
 - New wpasupplicant role (#18)
