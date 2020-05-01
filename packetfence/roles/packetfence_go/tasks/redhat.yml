@@ -4,5 +4,5 @@
   yum:
     name: '{{ packetfence_go__rpm_requires }}'
     state: present
-    enablerepo: "{{ packetfence_install__centos['repo'] }}"
+    enablerepo: "{{ packetfence_install__centos['repos'] }}"
     

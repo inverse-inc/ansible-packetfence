@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2020-05-01
+
+### Changed
+- Use new variable for CentOS repositories in `packetfence_go`
+
 ## [1.0.1] - 2020-04-15
 
 ### Changed
@@ -48,7 +53,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update defaults to reflect packaging changes introduced by PacketFence
   v9.2.0 (#13)
 
-[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.1...HEAD
+[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/inverse-inc/ansible-packetfence/compare/v0.4.0...v1.0.1
 [0.4.0]: https://github.com/inverse-inc/ansible-packetfence/compare/v0.3.0...v0.4.0
 [0.3.0]: https://github.com/inverse-inc/ansible-packetfence/compare/v0.2.0...v0.3.0
