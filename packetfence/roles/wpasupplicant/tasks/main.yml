@@ -6,6 +6,12 @@
     state: present
     update_cache: '{{ wpasupplicant__pkg_update_cache }}'
 
+- name: Start and enable wpasupplicant daemon
+  service:
+    name: '{{ wpasupplicant__service }}'
+    state: '{{ wpasupplicant__state }}'
+    enabled: '{{ wpasupplicant__enabled }}'
+
 - name: deploy wpasupplicant config files
   include_tasks: deploy_configs.yml
   loop: '{{ wpasupplicant__configs }}'

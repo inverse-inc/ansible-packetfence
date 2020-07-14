@@ -4,6 +4,10 @@ wpasupplicant__pkg_name: 'wpasupplicant'
 wpasupplicant__pkg_update_cache: 'no'
 wpasupplicant__conf_dir: '/etc/wpa_supplicant'
 
+wpasupplicant__service: 'wpa_supplicant'
+wpasupplicant__enabled: True
+wpasupplicant__state: started
+
 wpasupplicant__configs:
 
   - dir: '{{ wpasupplicant__conf_dir }}/eap_tls'
