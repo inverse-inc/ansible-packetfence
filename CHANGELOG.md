@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Only manage DB and configuration when configurator is disabled
+- Manage network using ifupdown on Debian hosts
 
 ## [1.0.3] - 2020-07-21
 
