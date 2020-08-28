@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Only manage DB and configuration when configurator is disabled
+
 ## [1.0.3] - 2020-07-21
 
 ### Added
