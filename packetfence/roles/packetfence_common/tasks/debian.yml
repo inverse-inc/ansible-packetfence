@@ -8,6 +8,18 @@
     state: present
     update_cache: yes
 
+- name: ensure systemd-networkd is installed
+  stat:
+    path: /lib/systemd/system/systemd-networkd.service
+  register: packetfence_common__register_deb_systemd_networkd
+
+- name: ensure systemd-networkd is disabled to manage network with ifupdown
+  service:
+    name: systemd-networkd
+    state: stopped
+    enabled: no
+  when: packetfence_common__register_deb_systemd_networkd.stat.exists
+
 - name: ensure systemd-resolved is installed
   stat:
     path: /lib/systemd/system/systemd-resolved.service
