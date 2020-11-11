@@ -1,0 +1,36 @@
+---
+# Debian install
+- name: [Debian] install on Debian
+  block:
+    - name: Install wpa-supplicant
+      apt:
+        name: wpa_supplicant
+        state: latest
+        update_cache: yes
+  rescue:
+    - name: Print when errors
+      ansible.builtin.debug:
+        msg: 'I caught an error'
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+# Redhat install
+- name: [Redhat] Install on Redhat
+  block:
+    - name: Install epel-release
+      yum:
+        name:
+          - epel-release
+        state: latest
+        update_cache: yes
+
+    - name: Install wpa_supplicant
+      yum:
+        name: wpa_supplicant
+        state: latest
+        update_cache: yes
+  rescue:
+    - name: Print when errors
+      ansible.builtin.debug:
+        msg: 'I caught an error'
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+...

@@ -1,10 +1,7 @@
 ---
 # tasks file for wpasupplicant
-- name: ensure wpasupplicant installed
-  apt:
-    name: '{{ wpasupplicant__pkg_name }}'
-    state: present
-    update_cache: '{{ wpasupplicant__pkg_update_cache }}'
+- name: Ensure wpasupplicant installed
+  include_tasks: install.yml
 
 - name: Start and enable wpasupplicant daemon
   service:
@@ -12,6 +9,10 @@
     state: '{{ wpasupplicant__state }}'
     enabled: '{{ wpasupplicant__enabled }}'
 
-- name: deploy wpasupplicant config files
+- name: Reload systemctl
+  systemd:
+    daemon_reload: yes  
+
+- name: Deploy wpasupplicant config files
   include_tasks: deploy_configs.yml
   loop: '{{ wpasupplicant__configs }}'

@@ -1,0 +1,49 @@
+ctrl_interface="{{ item.ctrl_interface | default('/var/run/wpasupplicant') }}
+{% if item.ctrl_interface_group is defined and item.ctrl_interface_group | length %}
+ctrl_interface_group="{{ item.ctrl_interface_group }}"
+{% endif %}
+{% if item.eapol_version is defined and item.eapol_version | length %}
+eapol_version="{{ item.eapol_version }}"
+{% endif %}
+{% if item.ap_scan is defined and item.ap_scan | length %}
+ap_scan="{{ item.ap_scan }}"
+{% endif %}
+
+network={
+{% if item.ssid is defined and item.ssid | length %}
+    ssid="{{ item.ssid }}"
+{% endif %}
+{% if item.key_mgmt is defined and item.key_mgmt | length %}
+    key_mgmt="{{ item.key_mgmt }}"
+{% endif %}
+{% if item.priority is defined and item.priority | length %}
+    priority="{{ item.priority }}"
+{% endif %}
+{% if item.ca_cert is defined and item.ca_cert | length %}
+    ca_cert="{{ item.ca_cert }}
+{% endif %}
+{% if item.client_cert is defined and item.client_cert | length %}
+    client_cert="{{ item.client_cert }}"
+{% endif %}
+{% if item.private_key is defined and item.private_key | length %}
+    private_key="{{ item.private_key }}"
+{% endif %}
+{% if item.private_key_passwd is defined and item.private_key_passwd | length %}
+    private_key_passwd="{{ item.private_key_passwd }}"
+{% endif %}
+{% if item.eapol_flags is defined and item.eapol_flags | length %}
+    eapol_flags="{{ item.eapol_flags }}"
+{% endif %}
+{% if item.eap is defined and item.eap | length %}
+    eap="{{ item.eap }}"
+{% endif %}
+{% if item.phase2 is defined and item.phase2 | length %}
+    phase2="{{ item.phase2 }}"
+{% endif %}
+{% if item.identity is defined and item.identity | length %}
+    identity="{{ item.identity }}"
+{% endif %}
+{% if item.password is defined and item.password | length %}
+    password="{{ item.password }}"
+{% endif %}
+}

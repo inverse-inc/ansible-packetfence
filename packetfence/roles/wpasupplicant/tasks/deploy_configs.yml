@@ -9,7 +9,7 @@
 
 - name: generate config for wpasupplicant
   template:
-    src: '{{ item.filename }}.j2'
+    src: 'wpa_supplicant.conf.j2'
     dest: '{{ item.dir }}/{{ item.filename }}'
     owner: 'root'
     group: 'root'

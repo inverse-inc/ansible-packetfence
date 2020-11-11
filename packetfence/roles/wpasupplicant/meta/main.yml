@@ -10,6 +10,9 @@ galaxy_info:
     - name: Debian
       versions:
         - buster
+    - name: Centos
+      versions:
+        - 7.x
 
   galaxy_tags:
     - wpasupplicant
