@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Removed
+- wpasupplicant role has been moved to [utils collection](https://github.com/inverse-inc/ansible-utils)
+- Venom playbooks has been moved to [utils collection](https://github.com/inverse-inc/ansible-utils)
+
 ## [1.1.0] - 2020-09-22
 
 ### Changed
