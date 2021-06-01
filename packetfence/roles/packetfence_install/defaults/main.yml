@@ -1,11 +1,17 @@
 ---
+### Generic
+# we always want latest package to get:
+# - latest nightly builds (devel)
+# - latest maintenance patches (stable)
+packetfence_install__pkg_state: latest
+
 ### RedHat specific
 packetfence_install__centos:
   repos:
     - packetfence
 
 packetfence_install__centos_release_pkg: packetfence-release
-packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/packetfence-release-7.stable.noarch.rpm"
+packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/packetfence-release-el7.stable.noarch.rpm"
 packetfence_install__centos_packages:
   - packetfence
 
@@ -14,7 +20,7 @@ packetfence_install__centos_python_mysql_pkg: python2-PyMySQL
 ### Debian specific
 packetfence_install__deb:
   repos:
-    - debian
+    - debian/11.0
 
 packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2C
 packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
@@ -22,13 +28,6 @@ packetfence_install__deb_packages:
   - packetfence
 
 packetfence_install__shell_rc_file: /root/.bashrc
-
-### devel repos
-packetfence_install__devel_repo: "{{ True
-                                     if ('packetfence-devel' in packetfence_install__centos['repos'] or
-                                         'packetfence-devel' in packetfence_install__deb['repos'])
-                                     else False }}"
-
 
 ### database
 packetfence_install__database_db: pf
