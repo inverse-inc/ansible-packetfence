@@ -26,8 +26,3 @@
   setup:
     filter: ansible_eth*
   when: packetfence_common__register_pkg_iproute is changed
-
-- name: ensure python-passlib package is installed for htpasswd sources
-  package:
-    name: "{{ packetfence_common__passlib_pkg }}"
-    state: present

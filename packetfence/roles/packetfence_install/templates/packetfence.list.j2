@@ -1,4 +1,4 @@
 {{ ansible_managed | comment }}
 {% for repo in packetfence_install__deb['repos'] %}
-deb http://inverse.ca/downloads/PacketFence/{{ repo }} {{ ansible_distribution_release }} {{ ansible_distribution_release }}
+deb [arch=amd64] http://inverse.ca/downloads/PacketFence/{{ repo }} {{ ansible_distribution_release }} {{ ansible_distribution_release }}
 {% endfor %}
