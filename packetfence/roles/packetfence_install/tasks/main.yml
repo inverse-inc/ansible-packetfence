@@ -16,14 +16,11 @@
 
 - name: include utils tasks
   include_tasks: utils.yml
-  tags: utils
 
 - name: include database tasks
   include_tasks: db.yml
-  tags: db
   when: packetfence_install__configurator_status == 'disabled'
   
 - name: include config tasks
   include_tasks: config.yml
-  tags: config
   when: packetfence_install__configurator_status == 'disabled'
