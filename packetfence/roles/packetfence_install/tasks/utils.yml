@@ -18,7 +18,6 @@
       alias pfrestart='$PFBIN/pfcmd service pf restart'
       alias pfstop='$PFBIN/pfcmd service pf stop'
       alias pfreload='$PFBIN/pfcmd configreload hard'
-      alias pfmaint='$PF/addons/pf-maint.pl'
       alias pfsync='$PFBIN/cluster/sync --as-master'
       alias clstate='mysql -u root -p -e "show status like 'wsrep%'"'
       alias authdbg='raddebug -d /usr/local/pf/raddb -f /usr/local/pf/var/run/radiusd.sock -t 300'
