@@ -8,9 +8,16 @@
     group: "{{ packetfence_install__group }}"
   loop: '{{ packetfence_install__configuration }}'
   register: packetfence_install__register_config_files
+  no_log: True
 
 - name: Reload config
   command: "{{ packetfence_install__pfcmd }} configreload hard"
+  when: packetfence_install__register_config_files is changed
+
+- name: Restart packetfence-config service
+  service:
+    name: packetfence-config
+    state: restarted
   when: packetfence_install__register_config_files is changed
     
 - name: configure fingerbank API key
