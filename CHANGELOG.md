@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Use new repository layout
 
+## [1.1.1] - 2021-06-24
+
+### Changed
+- Don't display content of config files
+- Always restart packetfence-config service when a change is detected
+
 ## [1.1.0] - 2020-09-22
 
 ### Changed
@@ -70,7 +76,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update defaults to reflect packaging changes introduced by PacketFence
   v9.2.0 (#13)
 
-[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.1.1...HEAD
+[1.1.1]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.1...v1.0.2
