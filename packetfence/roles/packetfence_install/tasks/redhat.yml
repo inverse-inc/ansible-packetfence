@@ -1,11 +1,18 @@
 ---
-- name: add epel repository disabled
-  yum_repository:
-     name: epel
-     description: EPEL YUM repo
-     baseurl: https://download.fedoraproject.org/pub/epel/$releasever/$basearch/
-     enabled: no
-     gpgcheck: no
+- name: Get packages installed
+  package_facts:
+    manager: 'rpm'
+
+- name: Disable EPEL repositories enabled if epel-release installed
+  ini_file:
+     path: '/etc/yum.repos.d/{{ item }}.repo'
+     section: '{{ item }}'
+     option: 'enabled'
+     value: '0'
+  loop:
+    - epel
+    - epel-modular
+  when: "'epel-release' in ansible_facts.packages"
      
 - name: install package to use ansible mysql_user module
   yum:
