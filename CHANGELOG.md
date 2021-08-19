@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Use new repository layout
 - Support for RHEL8
+- Improve wpasupplicant config files
 
 ## [1.1.1] - 2021-06-24
 
