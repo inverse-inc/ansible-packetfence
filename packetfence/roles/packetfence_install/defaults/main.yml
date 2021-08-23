@@ -1,5 +1,7 @@
 ---
 ### Generic
+packetfence_install__deb_inverse_key_server: keys.openpgp.org
+
 # we always want latest package to get:
 # - latest nightly builds (devel)
 # - latest maintenance patches (stable)
