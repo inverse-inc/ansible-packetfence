@@ -11,11 +11,11 @@ packetfence_install__centos:
     - packetfence
 
 packetfence_install__centos_release_pkg: packetfence-release
-packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL7/packetfence-release-el7.stable.noarch.rpm"
+packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL8/packetfence-release-11.0.el8.noarch.rpm"
 packetfence_install__centos_packages:
   - packetfence
 
-packetfence_install__centos_python_mysql_pkg: python2-PyMySQL
+packetfence_install__centos_python_mysql_pkg: python3-PyMySQL
 
 ### Debian specific
 packetfence_install__deb:
