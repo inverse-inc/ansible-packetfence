@@ -1,7 +1,5 @@
 ---
 ### Generic
-packetfence_install__deb_inverse_key_server: keys.openpgp.org
-
 # we always want latest package to get:
 # - latest nightly builds (devel)
 # - latest maintenance patches (stable)
@@ -24,6 +22,7 @@ packetfence_install__deb:
   repos:
     - debian/11.0
 
+packetfence_install__deb_inverse_key_server: keys.openpgp.org
 packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2C
 packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
 packetfence_install__deb_packages:
