@@ -17,18 +17,50 @@ packetfence_install__centos_packages:
 
 packetfence_install__centos_python_mysql_pkg: python3-PyMySQL
 
+# we install packetfence-release package here to:
+# - install packetfence repos (for install dependencies)
+# - test packetfence-release RPM built in pipeline (available in packetfence-ppa directory)
+packetfence_install__rpm_pkgs:
+  - packetfence-release
+
+
 ### Debian specific
+packetfence_install__ppa_enabled: True
+
 packetfence_install__deb:
   repos:
     - debian/11.0
 
-packetfence_install__deb_inverse_key_server: keys.openpgp.org
-packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2C
 packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
 packetfence_install__deb_packages:
   - packetfence
 
 packetfence_install__shell_rc_file: /root/.bashrc
+
+#ansible_distribution_release: bullseye
+
+# redefine this variables to avoid confusion with official "packetfence" repositories
+packetfence_install__deb_ppa:
+  - name: 'packetfence-ppa'
+    gpgkey: 'http://inverse.ca/downloads/GPG_PUBLIC_KEY'
+
+packetfence_install__deb_keys: []
+packetfence_install__deb_combined_keys: "{{ packetfence_install__deb_keys +
+                                              ([ packetfence_install__deb_ppa[0]['gpgkey'] ]
+                                               if packetfence_install__ppa_enabled|bool
+                                               else []) }}"
+packetfence_install__deb_deps_repos: []
+packetfence_install__deb_combined_repos: '{{ packetfence_install__deb_deps_repos +
+                                               (packetfence_install__deb_ppa
+                                                if packetfence_install__ppa_enabled|bool
+                                                else []) }}'
+
+# we only install repos at this step
+packetfence_install__deb_pkgs: []
+
+packetfence_install__deb_deps_pkgs:
+  - apt-transport-https
+  - gnupg
 
 ### database
 packetfence_install__database_db: pf
