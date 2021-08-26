@@ -1,27 +1,23 @@
 ---
-- name: install dependencies to install packages from repos
-  apt:
-    name: "{{ packetfence_install__deb_deps_pkgs }}"
-    state: present
-    update_cache: yes
-
 - name: add public keys
   apt_key:
-    url: "{{ item }}"
+    url: "{{ packetfence_install__apt_key_url }}"
     state: present
-  loop: '{{ packetfence_install__deb_combined_keys }}'
-
-- name: install repos
+    
+# Add packefence repo into sources list dir using specified filename.
+- name: install packetfence.list in {{ packetfence_install__deb_sources_dir }}
   template:
     src: packetfence.list.j2
-    dest: "{{ packetfence_install__deb_sources_dir }}/{{ item['name'] }}.list"
-  loop: "{{ packetfence_install__deb_combined_repos }}"
-  loop_control:
-    label: "{{ item['name'] }}"
+    dest: "{{ packetfence_install__deb_sources_dir }}/packetfence.list"
 
-# update_cache to take new key(s) and repo(s) into account
-- name: install packages from Debian repos
+# to take new key and repo(s) into account
+- name: Update apt-cache
   apt:
-    name: "{{ packetfence_install__deb_pkgs }}"
     update_cache: yes
-    state: present
+
+# Only one package
+- name: Install PacketFence from the repo
+  apt:
+    name: "{{ packetfence_install__deb_packages }}"
+    state: "{{ packetfence_install__pkg_state }}"
+  register: packetfence_install__register_packages
