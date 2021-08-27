@@ -1,9 +1,9 @@
 ---
-- name: Add Inverse GPG key by id
+- name: add public keys
   apt_key:
-    keyserver: keys.gnupg.net
-    id: "{{ packetfence_install__deb_inverse_key_id }}"
-
+    url: "{{ packetfence_install__apt_key_url }}"
+    state: present
+    
 # Add packefence repo into sources list dir using specified filename.
 - name: install packetfence.list in {{ packetfence_install__deb_sources_dir }}
   template:

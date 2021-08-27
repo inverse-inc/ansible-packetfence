@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use new repository layout
 - Support for RHEL8
 - Improve wpasupplicant config files
+- Change PF key installation for Debian
 
 ## [1.1.1] - 2021-06-24
 
