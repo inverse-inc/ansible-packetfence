@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2021-09-06
+
 ### Changed
 - Use new repository layout
 - Support for RHEL8
@@ -79,7 +81,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update defaults to reflect packaging changes introduced by PacketFence
   v9.2.0 (#13)
 
-[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.1.1...1.2.0
 [1.1.1]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.0.2...v1.0.3
