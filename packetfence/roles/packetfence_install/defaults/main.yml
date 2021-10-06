@@ -31,6 +31,7 @@ packetfence_install__deb_packages:
 packetfence_install__shell_rc_file: /root/.bashrc
 
 ### database
+packetfence_install__database_host: localhost
 packetfence_install__database_db: pf
 packetfence_install__database_root_user: root
 packetfence_install__database_root_pass: secret
