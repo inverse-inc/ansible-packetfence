@@ -4,7 +4,7 @@
   mysql_user:
     login_user: "{{ packetfence_install__database_root_user }}"
     login_password: "{{ packetfence_install__database_root_pass }}"
-    login_unix_socket: "{{ packetfence_install__database_socket }}"
+    login_host: "{{ packetfence_install__database_host }}"
     name: ""
     state: absent
   ignore_errors: yes
@@ -14,7 +14,7 @@
     name: test
     login_user: "{{ packetfence_install__database_root_user }}"
     login_password: "{{ packetfence_install__database_root_pass }}"
-    login_unix_socket: "{{ packetfence_install__database_socket }}"
+    login_host: "{{ packetfence_install__database_host }}"
     state: absent
   ignore_errors: yes
 
