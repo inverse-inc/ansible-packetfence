@@ -26,7 +26,7 @@
     section: "upstream"
     option: "api_key"
     value: "{{ packetfence_install__fingerbank_setting['upstream']['api_key'] }}"
-    mode: 0660
+    mode: 0664
     owner: "{{ packetfence_install__fingerbank_user }}"
     group: "{{ packetfence_install__fingerbank_group }}"
     no_extra_spaces: yes
