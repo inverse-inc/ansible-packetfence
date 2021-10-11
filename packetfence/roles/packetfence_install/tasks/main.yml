@@ -2,22 +2,35 @@
 # tasks file for pf.install
 - name: import distribution specific variables
   include_vars: "{{ ansible_os_family|lower }}.yml"
+  tags:
+    - install
 
 # include in place of import (dynamic evaluation)
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
+  tags:
+    - install
 
 - name: include utils tasks
   include_tasks: utils.yml
+  tags:
+    - install
+    - config
 
 - name: include internal database tasks
   include_tasks: db_local.yml
   when: packetfence_install__configurator_status == 'disabled' and packetfence_install__database_host == 'localhost'
+  tags:
+    - config
 
 - name: include external database tasks
   include_tasks: db_external.yml
   when: packetfence_install__configurator_status == 'disabled' and packetfence_install__database_host != 'localhost'
+  tags:
+    - config
   
 - name: include config tasks
   include_tasks: config.yml
   when: packetfence_install__configurator_status == 'disabled'
+  tags:
+    - config
