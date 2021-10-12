@@ -2,9 +2,8 @@
 # tasks file for pf.install
 - name: import distribution specific variables
   include_vars: "{{ ansible_os_family|lower }}.yml"
-  apply:
-    tags:
-      - install
+  tags:
+    - install
 
 # include in place of import (dynamic evaluation)
 - name: include distribution specific tasks
