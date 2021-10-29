@@ -46,18 +46,18 @@
   service:
     name: packetfence-config
     state: restarted
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
 
 - name: restart haproxy-admin service
   command: "{{ packetfence_install__pfcmd }} service haproxy-admin restart"
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
 
 - name: start pf services
   command: "{{ packetfence_install__pfcmd }} service pf start"
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
 
 # to be sure all changes made in pf.conf have been taken into account
 # after we start services for the first time
 - name: restart pf services
   command: "{{ packetfence_install__pfcmd }} service pf restart"
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
