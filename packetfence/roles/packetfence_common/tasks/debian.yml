@@ -1,10 +1,7 @@
 ---
-# equals to yum update -y
-- name: install aptitude and apt-utils on hosts for next task and update cache
+- name: install dependencies for next tasks and PacketFence install
   apt:
-    name:
-      - aptitude
-      - apt-utils
+    name: '{{ packetfence_common__deb_deps_pkgs }}'
     state: present
     update_cache: yes
 
