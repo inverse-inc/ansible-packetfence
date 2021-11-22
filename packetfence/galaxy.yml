@@ -4,7 +4,7 @@
 
 namespace: "inverse_inc"
 name: "packetfence"
-version: "1.2.1"
+version: "1.2.1-1"
 description: "Collections of Ansible roles to manage PacketFence installations."
 
 authors:

@@ -1,8 +1,7 @@
 ---
-- name: install selinux package on hosts for next task
+- name: install packages for next tasks and PacketFence install
   yum:
-    name:
-      - python3-libselinux
+    name: '{{ packetfence_common__rpm_deps_pkgs }}'
   when: ansible_selinux['status'] == 'enabled'
 
 - name: ensure SELinux is disabled

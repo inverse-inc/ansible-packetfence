@@ -1,0 +1,12 @@
+---
+### EL specific
+packetfence_common__rpm_deps_pkgs:
+  - python3-libselinux
+  - gnupg2
+
+### Debian specific
+packetfence_common__deb_deps_pkgs:
+  - aptitude
+  - apt-utils
+  - apt-transport-https
+  - gnupg 
