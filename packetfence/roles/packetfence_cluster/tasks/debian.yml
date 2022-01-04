@@ -1,0 +1,5 @@
+---
+- name: Install replication tools
+  ansible.builtin.apt:
+    name: "{{ packetfence_cluster__deb_replication_pkgs }}"
+    state: "{{ packetfence_cluster__pkg_state }}"

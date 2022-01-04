@@ -1,0 +1,6 @@
+---
+- name: Install replication tools
+  ansible.builtin.yum:
+    name: "{{ packetfence_cluster__rpm_replication_pkgs }}"
+    enablerepo: "{{ packetfence_cluster__rpm_repos | omit }}"
+    state: "{{ packetfence_cluster__pkg_state }}"

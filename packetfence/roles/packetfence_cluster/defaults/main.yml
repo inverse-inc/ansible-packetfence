@@ -1,0 +1,14 @@
+---
+# we always want latest package to get:
+# - latest nightly builds (devel)
+# - latest maintenance patches (stable)
+packetfence_cluster__pkg_state: latest
+
+packetfence_cluster__rpm_replication_pkgs:
+  - MariaDB-backup
+  - socat
+
+packetfence_cluster__rpm_repos: []
+
+packetfence_cluster__deb_replication_pkgs:
+  - mariadb-backup
