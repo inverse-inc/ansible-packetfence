@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Install packages necessary to install PacketFence
 - Install GPG key for EL
+- Set up cluster requirements
 
 ## [1.2.1] - 2021-10-29
 ### Changed

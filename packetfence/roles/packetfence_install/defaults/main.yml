@@ -5,6 +5,9 @@
 # - latest maintenance patches (stable)
 packetfence_install__pkg_state: latest
 
+# default deployment is standalone
+packetfence_install__cluster: False
+
 ### RedHat specific
 packetfence_install__centos:
   repos:
@@ -15,6 +18,10 @@ packetfence_install__centos_release_pkg: packetfence-release
 packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL8/packetfence-release-11.0.el8.noarch.rpm"
 packetfence_install__centos_packages:
   - packetfence
+
+packetfence_install__rpm_replication_pkgs:
+  - MariaDB-backup
+  - socat
 
 packetfence_install__centos_python_mysql_pkg: python3-PyMySQL
 
@@ -28,6 +35,9 @@ packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2
 packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
 packetfence_install__deb_packages:
   - packetfence
+
+packetfence_install__deb_replication_pkgs:
+  - mariadb-backup
 
 packetfence_install__shell_rc_file: /root/.bashrc
 

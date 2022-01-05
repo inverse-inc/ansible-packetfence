@@ -1,0 +1,17 @@
+---
+- name: Disable IPv6
+  ansible.posix.sysctl:
+    name: 'net.ipv6.conf.all.disable_ipv6'
+    value: '1'
+    state: 'present'
+  register: packetfence_install__cluster_disable_ipv6
+
+- name: Enable non local bind on IPv4
+  ansible.posix.sysctl:
+    name: 'net.ipv4.ip_nonlocal_bind'
+    value: '1'
+    state: 'present'
+
+- name: Reboot to completely disable IPv6
+  ansible.builtin.reboot:
+  when: packetfence_install__cluster_disable_ipv6 is changed

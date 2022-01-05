@@ -21,3 +21,9 @@
     name: "{{ packetfence_install__deb_packages }}"
     state: "{{ packetfence_install__pkg_state }}"
   register: packetfence_install__register_packages
+
+- name: Install replication tools
+  ansible.builtin.apt:
+    name: "{{ packetfence_install__deb_replication_pkgs }}"
+    state: "{{ packetfence_install__pkg_state }}"
+  when: packetfence_install__cluster
