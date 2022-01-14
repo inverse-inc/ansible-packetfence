@@ -38,3 +38,10 @@
     state: "{{ packetfence_install__pkg_state }}"
     update_cache: yes
   register: packetfence_install__register_packages
+
+- name: Install replication tools
+  ansible.builtin.yum:
+    name: "{{ packetfence_install__rpm_replication_pkgs }}"
+    enablerepo: "{{ packetfence_install__centos['repos'] | omit }}"
+    state: "{{ packetfence_install__pkg_state }}"
+  when: packetfence_install__cluster

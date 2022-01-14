@@ -7,6 +7,10 @@
 - name: include distribution specific tasks
   include_tasks: "{{ ansible_os_family|lower }}.yml"
 
+- name: include cluster tasks
+  include_tasks: cluster_requirements.yml
+  when: packetfence_install__cluster
+
 - name: include utils tasks
   include_tasks: utils.yml
 
