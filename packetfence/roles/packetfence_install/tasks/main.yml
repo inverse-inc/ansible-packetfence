@@ -14,10 +14,14 @@
 - name: include utils tasks
   include_tasks: utils.yml
 
-- name: include database tasks
-  include_tasks: db.yml
-  when: packetfence_install__configurator_status == 'disabled'
-  
+- name: include internal database tasks
+  include_tasks: db_local.yml
+  when: packetfence_install__configurator_status == 'disabled' and packetfence_install__database_host == 'localhost'
+
+- name: include external database tasks
+  include_tasks: db_external.yml
+  when: packetfence_install__configurator_status == 'disabled' and packetfence_install__database_host != 'localhost'
+
 - name: include config tasks
   include_tasks: config.yml
   when: packetfence_install__configurator_status == 'disabled'

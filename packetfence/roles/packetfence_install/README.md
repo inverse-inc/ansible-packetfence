@@ -20,6 +20,7 @@ Role Variables
 | `packetfence_install__deb_sources_dir`         | `/etc/apt/sources.list.d`                                                                      | Directory to store packetfence.list                                     |
 | `packetfence_install__deb_packages`            | `[packetfence]`                                                                                | List of Debian packages to install, `packetfence=8.3` syntax allowed    |
 | `packetfence_install__shell_rc_file`           | `/root/.bashrc`                                                                                | File where to add common PacketFence aliases                            |
+| `packetfence_install__database_host`           | `localhost`                                                                                    | Database host, if external to Packetfence server
 | `packetfence_install__database_db`             | `pf`                                                                                           | Database name                                                           |
 | `packetfence_install__database_root_user`      | `root`                                                                                         | `root` user of DB                                                       |
 | `packetfence_install__database_root_pass`      | `secret`                                                                                       | Default database password for `packetfence_install__database_root_user` |

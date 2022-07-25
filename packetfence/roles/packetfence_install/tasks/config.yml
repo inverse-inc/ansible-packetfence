@@ -1,12 +1,12 @@
 ---
 - name: Generate PacketFence config files
   template:
-    src: 'usr/local/pf/conf/template.conf.j2'
-    dest: '{{ packetfence_install__conf_dir }}/{{ item.name }}'
+    src: "usr/local/pf/conf/template.conf.j2"
+    dest: "{{ packetfence_install__conf_dir }}/{{ item.name }}"
     mode: 0664
     owner: "{{ packetfence_install__user }}"
     group: "{{ packetfence_install__group }}"
-  loop: '{{ packetfence_install__configuration }}'
+  loop: "{{ packetfence_install__configuration }}"
   register: packetfence_install__register_config_files
   no_log: True
 
@@ -19,12 +19,12 @@
     name: packetfence-config
     state: restarted
   when: packetfence_install__register_config_files is changed
-    
+
 - name: configure fingerbank API key
   ini_file:
     path: "{{ packetfence_install__fingerbank_conf_dir }}/fingerbank.conf"
-    section: 'upstream'
-    option: 'api_key'
+    section: "upstream"
+    option: "api_key"
     value: "{{ packetfence_install__fingerbank_setting['upstream']['api_key'] }}"
     mode: 0664
     owner: "{{ packetfence_install__fingerbank_user }}"
@@ -46,18 +46,18 @@
   service:
     name: packetfence-config
     state: restarted
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
 
 - name: restart haproxy-admin service
   command: "{{ packetfence_install__pfcmd }} service haproxy-admin restart"
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
 
 - name: start pf services
   command: "{{ packetfence_install__pfcmd }} service pf start"
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed
 
 # to be sure all changes made in pf.conf have been taken into account
 # after we start services for the first time
 - name: restart pf services
   command: "{{ packetfence_install__pfcmd }} service pf restart"
-  when: packetfence_install__register_packages is changed
+  when: packetfence_install__register_config_files is changed

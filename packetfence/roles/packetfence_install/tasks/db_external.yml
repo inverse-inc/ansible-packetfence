@@ -1,0 +1,56 @@
+---
+# code from ansible-role-openio-galera (secure_install.yml)
+- name: delete anonymous connections
+  mysql_user:
+    login_user: "{{ packetfence_install__database_root_user }}"
+    login_password: "{{ packetfence_install__database_root_pass }}"
+    login_host: "{{ packetfence_install__database_host }}"
+    name: ""
+    state: absent
+  ignore_errors: yes
+
+- name: remove the mariadb test database
+  mysql_db:
+    name: test
+    login_user: "{{ packetfence_install__database_root_user }}"
+    login_password: "{{ packetfence_install__database_root_pass }}"
+    login_host: "{{ packetfence_install__database_host }}"
+    state: absent
+  ignore_errors: yes
+
+- name: ensure pf db is present
+  mysql_db:
+    name: "{{ packetfence_install__database_db }}"
+    login_user: "{{ packetfence_install__database_root_user }}"
+    login_password: "{{ packetfence_install__database_root_pass }}"
+    login_host: "{{ packetfence_install__database_host }}"
+    state: present
+  register: packetfence_install__register_db_database
+
+- name: ensure pf tables are present
+  mysql_db:
+    name: "{{ packetfence_install__database_db }}"
+    login_user: "{{ packetfence_install__database_root_user }}"
+    login_password: "{{ packetfence_install__database_root_pass }}"
+    login_host: "{{ packetfence_install__database_host }}"
+    state: import
+    target: "{{ packetfence_install__db_dir }}/pf-schema.sql"
+  when: packetfence_install__register_db_database is changed
+
+    
+# user need to be create after tables
+- name: ensure pf user created with rights on db
+  mysql_user:
+    login_user: "{{ packetfence_install__database_root_user }}"
+    login_password: "{{ packetfence_install__database_root_pass }}"
+    login_host: "{{ packetfence_install__database_host }}"
+    name: "{{ item.name }}"
+    password: "{{ item.password }}"
+    priv: "{{ item.priv }}"
+    append_privs: "{{ item.append_privs }}"
+    host: "{{ item.host }}"
+    state: present
+  loop: "{{ packetfence_install__database_users }}"
+  # avoid display password for each item of the loop
+  loop_control:
+    label: "host: {{ item['host'] }}, name: {{ item['name'] }}, priv: {{ item['priv'] }}"
