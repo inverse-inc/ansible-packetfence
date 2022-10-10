@@ -15,7 +15,7 @@ packetfence_install__centos:
 
 packetfence_install__rpm_key_url: http://inverse.ca/downloads/GPG_PUBLIC_KEY
 packetfence_install__centos_release_pkg: packetfence-release
-packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL8/packetfence-release-11.0.el8.noarch.rpm"
+packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL8/packetfence-release-12.0.el8.noarch.rpm"
 packetfence_install__centos_packages:
   - packetfence
 
@@ -28,7 +28,7 @@ packetfence_install__centos_python_mysql_pkg: python3-PyMySQL
 ### Debian specific
 packetfence_install__deb:
   repos:
-    - debian/11.0
+    - debian/12.0
 
 packetfence_install__apt_key_url: http://inverse.ca/downloads/GPG_PUBLIC_KEY
 packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2C
