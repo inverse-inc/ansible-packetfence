@@ -42,6 +42,7 @@ packetfence_install__deb_replication_pkgs:
 packetfence_install__shell_rc_file: /root/.bashrc
 
 ### database
+packetfence_install__database_socket: /var/lib/mysql/mysql.sock
 packetfence_install__database_db: pf
 packetfence_install__database_root_user: root
 packetfence_install__database_root_pass: secret
