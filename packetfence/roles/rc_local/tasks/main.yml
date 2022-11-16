@@ -1,0 +1,35 @@
+# tasks file
+---
+- name: include variables
+  include_vars: "{{ item }}"
+  with_first_found:
+    - "_{{ ansible_distribution_release }}.yml"
+    - "_{{ ansible_distribution | lower }}.yml"
+    - _default.yml
+  tags:
+    - configuration
+    - rc-local
+    - rc-local-include-variables
+
+- name: update init script
+  template:
+    src: etc/rc.local.j2
+    dest: /etc/rc.local
+    owner: root
+    group: root
+    mode: 0755
+    validate: '/usr/bin/env sh -n %s'
+  tags:
+    - configuration
+    - rc-local
+    - rc-local-init
+
+- name: enable service
+  service:
+    name: "{{ rc_local_service_name }}"
+    enabled: true
+  when: ansible_service_mgr == 'systemd'
+  tags:
+    - configuration
+    - rc-local
+    - rc-local-enable-service
