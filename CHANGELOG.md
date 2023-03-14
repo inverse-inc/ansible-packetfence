@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.2.4] - 2023-03-14
 ### Added
 - New rc_local role to manage ZEN builds
 
@@ -97,7 +99,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update defaults to reflect packaging changes introduced by PacketFence
   v9.2.0 (#13)
 
-[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.3...HEAD
+[Unreleased]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.4...HEAD
+[1.2.4]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.3...v1.2.4
 [1.2.3]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.2...v1.2.3
 [1.2.2]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/inverse-inc/ansible-packetfence/compare/v1.2.0...v1.2.1
