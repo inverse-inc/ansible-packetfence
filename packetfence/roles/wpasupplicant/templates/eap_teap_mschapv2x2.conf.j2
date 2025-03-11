@@ -1,0 +1,15 @@
+ctrl_interface=/var/run/wpa_supplicant
+ctrl_interface_group=0
+eapol_version=2
+ap_scan=0
+    network={
+    key_mgmt=IEEE8021X
+    eap=TEAP
+    identity="{{ wpasupplicant__eap_teap_mschapv2x2_identity }}"
+    password="{{ wpasupplicant__eap_teap_mschapv2x2_password }}"
+    phase2="auth=MSCHAPV2"
+    machine_phase2="auth=MSCHAPV2"
+    machine_identity="{{ wpasupplicant__eap_teap_mschapv2x2_machine_identity }}"
+    machine_password="{{ wpasupplicant__eap_teap_mschapv2x2_machine_password }}"
+    eapol_flags=3
+}

@@ -19,6 +19,8 @@ wpasupplicant__configs:
   - dir: '{{ wpasupplicant__conf_dir }}/eap_ttls'
     filename: 'eap_ttls_pap.conf'
 
+  - dir: '{{ wpasupplicant__conf_dir }}/eap_teap'
+    filename: 'eap_teap_mschapv2x2.conf'
 
 ### eap_tls template variables
 wpasupplicant__eap_tls_identity: 'inverse'
@@ -31,3 +33,8 @@ wpasupplicant__eap_peap_mschapv2_password: 'secret'
 ### eap_ttls_pap template variables
 wpasupplicant__eap_ttls_pap_identity: 'inverse'
 wpasupplicant__eap_ttls_pap_password: 'secret'
+
+wpasupplicant__eap_teap_mschapv2x2_identity: 'inverse'
+wpasupplicant__eap_teap_mschapv2x2_password: 'secret'
+wpasupplicant__eap_teap_mschapv2x2_machine_identity: 'inverse'
+wpasupplicant__eap_teap_mschapv2x2_machine_password: 'secret'
