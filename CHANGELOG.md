@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.5] - 2026-07-08
+### Fixed
+- `packetfence_install`: drop invalid `| omit` on the EL replication-tools `enablerepo` (broke cluster installs on EL8)
+
 ## [1.2.4] - 2023-03-14
 ### Added
 - New rc_local role to manage ZEN builds
