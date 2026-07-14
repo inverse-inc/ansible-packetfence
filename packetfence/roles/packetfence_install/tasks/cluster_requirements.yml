@@ -14,4 +14,6 @@
 
 - name: Reboot to completely disable IPv6
   ansible.builtin.reboot:
+    post_reboot_delay: 15
+    reboot_timeout: 900
   when: packetfence_install__cluster_disable_ipv6 is changed
