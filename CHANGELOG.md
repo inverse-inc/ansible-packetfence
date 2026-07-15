@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.6] - 2026-07-15
+### Fixed
+- `packetfence_install`: harden the IPv6-disable reboot with `post_reboot_delay`/`reboot_timeout` so nodes don't fail on slow SSH reconnect during parallel cluster installs
+
 ## [1.2.5] - 2026-07-08
 ### Fixed
 - `packetfence_install`: drop invalid `| omit` on the EL replication-tools `enablerepo` (broke cluster installs on EL8)
