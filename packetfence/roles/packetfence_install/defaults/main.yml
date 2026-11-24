@@ -8,14 +8,19 @@ packetfence_install__pkg_state: latest
 # default deployment is standalone
 packetfence_install__cluster: False
 
+# Where PacketFence packages and the signing key are downloaded from: the packaging server
+# (a mirror or an internal copy can be set here; the paths below it stay the same).
+packetfence_install__package_origin: https://packages.packetfence.com
+packetfence_install__download_url: "{{ packetfence_install__package_origin }}/downloads"
+
 ### RedHat specific
 packetfence_install__centos:
   repos:
     - packetfence
 
-packetfence_install__rpm_key_url: http://inverse.ca/downloads/GPG_PUBLIC_KEY
+packetfence_install__rpm_key_url: "{{ packetfence_install__download_url }}/GPG_PUBLIC_KEY"
 packetfence_install__centos_release_pkg: packetfence-release
-packetfence_install__centos_release_rpm: "http://packetfence.org/downloads/PacketFence/RHEL8/packetfence-release-12.0.el8.noarch.rpm"
+packetfence_install__centos_release_rpm: "{{ packetfence_install__download_url }}/PacketFence/RHEL8/packetfence-release-12.0.el8.noarch.rpm"
 packetfence_install__centos_packages:
   - packetfence
 
@@ -26,11 +31,15 @@ packetfence_install__rpm_replication_pkgs:
 packetfence_install__centos_python_mysql_pkg: python3-PyMySQL
 
 ### Debian specific
+# Each repo: a path under {{ packetfence_install__deb_base_url }} (suite and component: the
+# distribution codename), or a mapping {path, suite, component} for a repo laid out otherwise
+# (e.g. a CI pipeline tree: component main).
+packetfence_install__deb_base_url: "{{ packetfence_install__download_url }}/PacketFence"
 packetfence_install__deb:
   repos:
     - debian/12.0
 
-packetfence_install__apt_key_url: http://inverse.ca/downloads/GPG_PUBLIC_KEY
+packetfence_install__apt_key_url: "{{ packetfence_install__download_url }}/GPG_PUBLIC_KEY"
 packetfence_install__deb_inverse_key_id: B022C48D3D6373D7FC256A8CCB2D3A2AA0030E2C
 packetfence_install__deb_sources_dir: /etc/apt/sources.list.d
 packetfence_install__deb_packages:

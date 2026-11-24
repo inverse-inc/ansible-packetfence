@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-11-24
+### Changed
+- `packetfence_install`: packages and keys come from `https://packages.packetfence.com` by default, set once in
+  `packetfence_install__package_origin` (was `http://inverse.ca` and `http://packetfence.org`, hardcoded in the apt template)
+### Added
+- `packetfence_install`: `packetfence_install__deb_base_url`, and Debian repos given as `{path, suite, component}`
+  (e.g. a CI pipeline tree whose component is `main`)
+
 ## [1.2.6] - 2026-07-15
 ### Fixed
 - `packetfence_install`: harden the IPv6-disable reboot with `post_reboot_delay`/`reboot_timeout` so nodes don't fail on slow SSH reconnect during parallel cluster installs
